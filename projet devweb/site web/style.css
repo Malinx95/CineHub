@@ -1,3 +1,18 @@
-body {
-    background-color: aqua;
+footer{
+    background-color: #292220;
+}
+
+.left{
+    float: left;
+}
+
+.right{
+    float: right;
+}
+
+.center{
+    position: absolute;
+    text-align: center;
+    left: 50%;
+    transform: translate(-50%, 0);
 }
