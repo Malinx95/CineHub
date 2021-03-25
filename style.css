@@ -1,0 +1,37 @@
+body {
+    background-color: #fedb63;
+}
+
+.navbar{
+    background-color: #f28d4a;
+    display: inline-block;
+    vertical-align: middle;
+    width: 100%;
+}
+
+.navbar img{
+    height: 5%;
+    width: 5%;
+    vertical-align: middle;
+    padding: 5px;
+}
+
+.navbar ul{
+    padding: 0px;
+    margin: 0px;
+    text-align: center;
+    display:inline-block;
+    vertical-align:top;
+
+}
+
+.navbar li{
+    list-style-type: none;
+    display: inline;
+    float: left;
+}
+
+.navbar a{
+    display: block;
+    text-decoration: none;
+}
