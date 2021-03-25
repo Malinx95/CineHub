@@ -10,7 +10,7 @@
         <nav class="navbar">
             <img src="ressources/logo/logo.png" alt="logo"/>
             <ul>
-                <li><a>page 1</a></li>
+                <li><a class="active" href="index.php">HOME</a></li>
                 <li><a>page 2</a></li>
                 <li><a>page 3</a></li>
                 <li><a>page 4</a></li>
