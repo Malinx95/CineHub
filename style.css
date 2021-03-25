@@ -1,56 +1,84 @@
+@font-face{
+    font-family: "rubik";
+    src: url("ressources/font/Rubik-VariableFont_wght.ttf") format("ttf");
+}
+
 body {
     background-color: #fedb63;
+    font-family: "rubik", Arial, Helvetica, sans-serif;
+    margin: 0%;
 }
 
 .navbar{
     background-color: #f28d4a;
-    display: inline-block;
-    vertical-align: middle;
+    display: flex;
+    align-items: stretch;
     width: 100%;
 }
 
 .navbar img{
     height: 5%;
     width: 5%;
-    vertical-align: middle;
     padding: 5px;
+    filter: drop-shadow(0px 0px 1px black);
 }
 
 .navbar ul{
     padding: 0px;
     margin: 0px;
-    text-align: center;
     display:inline-block;
-    vertical-align:top;
-
 }
 
 .navbar li{
     list-style-type: none;
-    display: inline;
+    display: table;
     float: left;
+    height: 100%;
 }
 
 .navbar a{
-    display: block;
+    display: table-cell;
+    vertical-align: middle;
     text-decoration: none;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: large;
+    font-weight: bold;
+    color: #fedb63;
+    text-shadow: 0px 0px 2px black;
+}
+
+.navbar a:not(.active){
+    border: 1px solid #f28d4a;
+}
+
+.navbar a:hover{
+    border: 1px solid #615350;
+}
+
+.active{
+    border: 1px solid #615350;
+}
+
+
+h1{
+    padding: 0px 8px;
 }
 
 footer{
-    background-color: #292220;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding-left: 8px;
+    padding-right: 8px;
+    background-color: #f28d4a;
+    color: #fedb63;
 }
 
-.left{
-    float: left;
+footer a{
+    color: #fedb63;
 }
 
 .right{
-    float: right;
-}
-
-.center{
-    position: absolute;
-    text-align: center;
-    left: 50%;
-    transform: translate(-50%, 0);
+    padding-right: 16px;
 }
