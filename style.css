@@ -74,6 +74,10 @@ header{
     border: 1px solid #615350;
 }
 
+#more{
+    text-align: center;
+}
+
 
 h1{
     padding: 0px 8px;
