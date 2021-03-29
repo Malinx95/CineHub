@@ -20,8 +20,6 @@ include 'include/functions.inc.php';
             <p>Présentation Présentation Présentation Présentation Présentation Présentation Présentation </p>
         </div>
         <img src="<?php echo nasa()?>" width="500" alt="image nasa">
-
-
     </section>
 
 <?php
