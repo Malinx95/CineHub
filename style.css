@@ -99,7 +99,7 @@ h1{
     padding: 0px 8px;
 }
 
-footer{
+#footer{
     display: flex;
     justify-content: space-between;
     padding-left: 8px;
@@ -108,7 +108,7 @@ footer{
     color: #fedb63;
 }
 
-footer a{
+#footer a{
     color: #fedb63;
 }
 
