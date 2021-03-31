@@ -9,48 +9,53 @@ body {
     margin: 0%;
 }
 
-.card{
+#card, #more{
     width: 100%;
-    height: 95vh;
     display: flex;
+    height: 100vh;
     flex-direction: column;
     align-items: center;
 }
 
-header{
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0;
+#more{
+    height: 95vh;
 }
 
-.navbar{
+#more h2, h1{
+    padding-top: 3% !important;
+    text-align: center;
+}
+
+#header nav{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+    box-shadow: 0 1px 5px black;
+}
+
+#header nav{
     background-color: #f28d4a;
     display: flex;
     align-items: stretch;
     width: 100%;
-}
-
-.navbar img{
     height: 5%;
-    width: 5%;
-    padding: 5px;
-    filter: drop-shadow(0px 0px 1px black);
 }
 
-.navbar ul{
+#header nav ul{
     padding: 0px;
     margin: 0px;
     display:inline-block;
 }
 
-.navbar li{
+#header nav li{
     list-style-type: none;
     display: table;
     float: left;
     height: 100%;
 }
 
-.navbar a{
+#header nav a{
     display: table-cell;
     vertical-align: middle;
     text-decoration: none;
@@ -62,22 +67,33 @@ header{
     text-shadow: 0px 0px 2px black;
 }
 
-.navbar a:not(.active){
+#header nav a:not(.active){
     border: 1px solid #f28d4a;
 }
 
-.navbar a:hover{
+#header nav a:hover{
     border: 1px solid #615350;
+}
+
+.biglogo{
+    box-shadow: 10px 10px 10px black;
+    margin-top: 2%;
+    margin-bottom: 3%;
+}
+
+.smalllogo{
+    width: 3%;
+    margin: 5px;
+    box-shadow: 0px 0px 5px black;
+}
+
+.biglogo, .smalllogo{
+    border-radius: 25%;
 }
 
 .active{
     border: 1px solid #615350;
 }
-
-#more{
-    text-align: center;
-}
-
 
 h1{
     padding: 0px 8px;
@@ -94,4 +110,29 @@ footer{
 
 footer a{
     color: #fedb63;
+}
+
+.morebutton{
+    position: absolute;
+    bottom: 3%;
+}
+
+.up{
+    position: fixed;
+    bottom: 5%;
+    right: 5%;
+    color: black;
+}
+
+button{
+    background-color: transparent;
+    border: 1px solid #f28d4a;
+    border-radius: 25px;
+    height: 2em;
+    outline: none;
+}
+
+button:hover{
+    background-color: #f28d4a;
+    border: thin solid;
 }

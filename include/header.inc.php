@@ -8,16 +8,18 @@
     <meta name='date' content='28/03/2021'/>
     <meta name='keywords' content='CineHub'/>
     <link rel="stylesheet" href="style.css"/>
+    <link rel="icon" href="ressources/logo/logo.png">
 </head>
 <body>
-    <header>
-        <nav class="navbar">
-            <img src="ressources/logo/logo.png" alt="logo"/>
+    <header id="header">
+        <h1>CineHub</h1>
+        <nav>
+            <img class="roundedcorner smalllogo" src="ressources/logo/logo.png" alt="logo"/>
             <ul>
-                <li><a class="active" href="index.php">HOME</a></li>
-                <li><a>page 2</a></li>
-                <li><a>page 3</a></li>
-                <li><a>page 4</a></li>
+                <li><a class="active" href="index.php">Accueil</a></li>
+                <li><a>Voir films/séries</a></li>
+                <li><a>A propos</a></li>
+                <li><a>Statistiques</a></li>
             </ul>
         </nav>
     </header>
