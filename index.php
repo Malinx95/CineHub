@@ -1,9 +1,11 @@
 <?php
+$title = "Accueil";
+$current = 1;
 include_once 'include/header.inc.php';
 include 'include/functions.inc.php';
 ?>
     <section id="card">
-        <h2>Accueil</h2>
+        <h2>Introduction</h2>
         <img class="roundedcorner biglogo" src="ressources/logo/logo.png" alt="logo cinehub"/>
         <p>Bienvenue sur CineHub ! Le site pour les passionés de films et séries en tout genre !</p>
         <p>Cliquez sur le bouton ci-dessous pour commencer !</p>

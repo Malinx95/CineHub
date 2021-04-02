@@ -4,7 +4,8 @@
 }
 
 body {
-    background-color: #fedb63;
+    background: #fedb63;
+    background: linear-gradient(180deg, rgba(254,219,99,1) 0%, rgba(254,219,99,1) 98%, rgba(41,34,32,1) 100%);
     font-family: "rubik", Arial, Helvetica, sans-serif;
     margin: 0%;
 }
@@ -67,12 +68,10 @@ body {
     text-shadow: 0px 0px 2px black;
 }
 
-#header nav a:not(.active){
-    border: 1px solid #f28d4a;
-}
 
-#header nav a:hover{
-    border: 1px solid #615350;
+
+#header nav a:hover, button:hover{
+    transform: scale(1.1);
 }
 
 .biglogo{
@@ -91,7 +90,7 @@ body {
 }
 
 .active{
-    border: 1px solid #615350;
+    color: white !important;
 }
 
 h1{
@@ -103,12 +102,12 @@ h1{
     justify-content: space-between;
     padding-left: 8px;
     padding-right: 8px;
-    background-color: #f28d4a;
-    color: #fedb63;
+    color: white;
 }
 
 #footer a{
-    color: #fedb63;
+    color: white;
+    text-decoration: none;
 }
 
 .morebutton{
@@ -131,7 +130,50 @@ button{
     outline: none;
 }
 
-button:hover{
-    background-color: #f28d4a;
+.center{
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    align-items: center;
+}
+
+.searchbar{
+    width: 30em;
+    height: 3em;
+}
+
+.searchbutton{
+    margin-top: 5%;
+    width: 10em;
+    height: 2em;
+}
+
+.filtres fieldset{
+    text-align: center;
+    border-radius: 25px;
     border: thin solid;
+}
+
+.results{
+    margin-top: 2%;
+    margin-bottom: 2%;
+    width: 95%;
+    height: 100%;
+    text-align: center;
+    border: thin solid;
+    border-radius: 25px;
+}
+.results fieldset{
+    border-radius: 25px;
+    border: thin solid;
+    height: auto;
+}
+
+.backbutton{
+    position: fixed;
+    top: 5%;
+    left: 5%;
 }

@@ -20,4 +20,5 @@ function geo(){ //retourne geolocalisation
     }
     return $out;
 }
+
 ?>
