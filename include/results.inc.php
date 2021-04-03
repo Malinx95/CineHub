@@ -18,6 +18,20 @@
             <legend>Résultat</legend>
             <fieldset>
                 <legend>Films</legend>
+                <?php
+                    include_once 'include/functions.inc.php';
+                    $type = "movie";
+                    $query = $_POST["q"];
+                    $results = tmdb($type, $query);
+                    foreach($results as $key => $value){
+                        echo "\t\t\t\t<fieldset>\n";
+                        $result = $value;
+                        echo "\t\t\t\t\t<legend>", $result["original_title"], "</legend>\n";
+                        echo "\t\t\t\t\t<p>Resume : ", $result["overview"], "</p>\n";
+                        echo "\t\t\t\t</fieldset>\n";
+                    }
+                    
+                ?>
             </fieldset>
             <fieldset>
                 <legend>Séries</legend>
