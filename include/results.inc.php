@@ -27,7 +27,7 @@
                     $results = tmdb($type, $query);
                     foreach($results as $key => $value){
                         $result = $value;
-                        echo "\t\t\t\t\t<a href='voir.php?id=", $result["id"], "'>\n";
+                        echo "\t\t\t\t\t<a href='voir.php?id=", $result["id"], "&type=movie'>\n";
                         echo "\t\t\t\t\t\t<article>\n";
                         echo "\t\t\t\t\t\t\t<h3>", $result["original_title"], "</h3>\n";
                         echo "\t\t\t\t\t\t\t<img src='https://image.tmdb.org/t/p/original", $result["poster_path"], "' width='150' alt='poster ", $result["original_title"], "'/>\n";
@@ -48,7 +48,7 @@
                     $results = tmdb($type, $query);
                     foreach($results as $key => $value){
                         $result = $value;
-                        echo "\t\t\t\t\t\t<a href=''>\n";
+                        echo "\t\t\t\t\t<a href='voir.php?id=", $result["id"], "&type=tv'>\n";
                         echo "\t\t\t\t\t\t<article>\n";
                         echo "\t\t\t\t\t\t\t<h3>", $result["original_name"], "</h3>\n";
                         echo "\t\t\t\t\t\t\t<img src='https://image.tmdb.org/t/p/original", $result["poster_path"], "' width='150' alt='poster ", $result["original_name"], "'/>\n";
