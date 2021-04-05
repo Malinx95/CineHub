@@ -9,7 +9,7 @@ include 'include/functions.inc.php';
         <img class="roundedcorner biglogo" src="ressources/logo/logo.png" alt="logo cinehub"/>
         <p>Bienvenue sur CineHub ! Le site pour les passionés de films et séries en tout genre !</p>
         <p>Cliquez sur le bouton ci-dessous pour commencer !</p>
-        <a><button>Voir les films et séries</button></a>
+        <a href="rechercher.php"><button>Voir les films et séries</button></a>
         <a class="morebutton" href="#more"><button>Voir plus</button></a>
     </section>
     <section id="more">

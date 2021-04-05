@@ -18,23 +18,46 @@
             <legend>Résultat</legend>
             <fieldset>
                 <legend>Films</legend>
-                <?php
+                <div class="scroll">
+                    <?php
                     include_once 'include/functions.inc.php';
+                    define("NUMBER", 10);
                     $type = "movie";
-                    $query = $_POST["q"];
+                    $query = $_GET["search"];
                     $results = tmdb($type, $query);
                     foreach($results as $key => $value){
-                        echo "\t\t\t\t<fieldset>\n";
                         $result = $value;
-                        echo "\t\t\t\t\t<legend>", $result["original_title"], "</legend>\n";
-                        echo "\t\t\t\t\t<p>Resume : ", $result["overview"], "</p>\n";
-                        echo "\t\t\t\t</fieldset>\n";
+                        echo "\t\t\t\t\t<a href='voir.php?id=", $result["id"], "'>\n";
+                        echo "\t\t\t\t\t\t<article>\n";
+                        echo "\t\t\t\t\t\t\t<h3>", $result["original_title"], "</h3>\n";
+                        echo "\t\t\t\t\t\t\t<img src='https://image.tmdb.org/t/p/original", $result["poster_path"], "' width='150' alt='poster ", $result["original_title"], "'/>\n";
+                        echo "\t\t\t\t\t\t\t<p>", $result["release_date"], "</p>\n";
+                        echo "\t\t\t\t\t\t</article>\n";
+                        echo "\t\t\t\t\t</a>\n";
                     }
-                    
-                ?>
+                    ?>
+                </div>
             </fieldset>
             <fieldset>
                 <legend>Séries</legend>
+                <div class="scroll">
+                    <?php
+                    include_once 'include/functions.inc.php';
+                    $type = "tv";
+                    $query = $_GET["search"];
+                    $results = tmdb($type, $query);
+                    foreach($results as $key => $value){
+                        $result = $value;
+                        echo "\t\t\t\t\t\t<a href=''>\n";
+                        echo "\t\t\t\t\t\t<article>\n";
+                        echo "\t\t\t\t\t\t\t<h3>", $result["original_name"], "</h3>\n";
+                        echo "\t\t\t\t\t\t\t<img src='https://image.tmdb.org/t/p/original", $result["poster_path"], "' width='150' alt='poster ", $result["original_name"], "'/>\n";
+                        echo "\t\t\t\t\t\t\t<p>", $result["first_air_date"], "</p>\n";
+                        echo "\t\t\t\t\t\t</article>\n";
+                        echo "\t\t\t\t\t</a>\n";
+                    }
+                    ?>
+                </div>
             </fieldset>
         </fieldset>
     </section>

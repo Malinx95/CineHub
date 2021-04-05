@@ -33,4 +33,12 @@ function tmdb($type, $query) { //requete api the movie database
     return $result;
 }
 
+function details($id){
+    $key = "?api_key=a22fd943c9bbecd346f31c75d2bd3969";
+    $url = "https://api.themoviedb.org/3/movie/" . $id . $key . "&language=fr";
+    $json = file_get_contents($url);
+    $obj = json_decode($json, true);
+    return $obj;
+}
+
 ?>

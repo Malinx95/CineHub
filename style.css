@@ -160,7 +160,6 @@ button{
 .results{
     margin-top: 2%;
     margin-bottom: 2%;
-    width: 95%;
     height: 100%;
     text-align: center;
     border: thin solid;
@@ -176,4 +175,17 @@ button{
     position: fixed;
     top: 5%;
     left: 5%;
+}
+
+.scroll{
+    width: 95vw;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+}
+
+.scroll a{
+    display: inline-block;
+    text-decoration: none;
+    color: black;
 }
