@@ -49,34 +49,35 @@ function details($id, $movie = true){
 function hits(){
     $id = $_GET["id"];
     if($_GET["type"] == "movie"){
-        $fichier = "stats/movie_hits.csv";
+        $fichier = "stats/movie_hits.txt";
     }
     else{
-        $fichier = "stats/tv_hits.csv";
+        $fichier = "stats/tv_hits.txt";
     }
     if(!file_exists($fichier)){ 
         $compteur=fopen($fichier,"w");
-        $hit = array($id, "1");
+        $hit = array($id, "1", "");
         fputcsv($compteur, $hit, ";");
-        setcookie("id",$id,time()+10);
+        setcookie($id,$id,time()+30*60);
     }
     else{
         $compteur=fopen($fichier,"r+");
-        if(empty($_COOKIE["id"])){
-            setcookie("id",$id,time()+10);
+        if(empty($_COOKIE[$id])){
+            setcookie($id,$id,time()+30*60);
+            $content = fread($compteur,filesize($fichier));
+            $content = explode(";", $content);
+            $key = array_search($id, $content);
+            if($key !== false){
+                $key++;
+                $content[$key] = intval($content[$key]) + 1;
+            }
+            else{
+                array_push($content, $id, "1");
+            }
+            $content = implode(";", $content);
+            $compteur=fopen($fichier,"w");
+            fwrite($compteur, $content);
         }
-    }
-    $found = false;
-    while(($hit=fgetcsv($compteur, 10, ';')) !== false){
-        if($hit[0] == $id){
-            $hit[1]++;
-            fputcsv($compteur, $hit, ";");
-            $found = true;
-        }
-    }
-    if($found == false){
-       $hit = array($id, "1");
-       fputcsv($compteur, $hit, ";");
     }
     fclose($compteur);
 }
