@@ -5,7 +5,7 @@
 
 body {
     background: #fedb63;
-    background: linear-gradient(180deg, rgba(254,219,99,1) 0%, rgba(254,219,99,1) 98%, rgba(41,34,32,1) 100%);
+    /* background: linear-gradient(180deg, rgba(254,219,99,1) 0%, rgba(254,219,99,1) 98%, rgba(41,34,32,1) 100%); */
     font-family: "rubik", Arial, Helvetica, sans-serif;
     margin: 0%;
 }
@@ -19,7 +19,7 @@ body {
 }
 
 #more{
-    height: 95vh;
+    
 }
 
 #more h2, h1{
@@ -103,6 +103,8 @@ h1{
     padding-left: 8px;
     padding-right: 8px;
     color: white;
+    margin-top: 5%;
+    background-color: #f28d4a;
 }
 
 #footer a{

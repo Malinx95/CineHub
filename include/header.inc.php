@@ -1,3 +1,21 @@
+<?php
+    if(!file_exists("stats/hits.txt")){ 
+        $compteur=fopen("stats/hits.txt","w");
+        $hit=1;
+        setcookie("visit","ok",time()+60*30);
+    }
+    else{
+        $compteur=fopen("stats/hits.txt","r+");
+        $hit=fgets($compteur,255);
+        if(empty($_COOKIE["visit"])){
+            setcookie("visit","ok",time()+60*30);
+            $hit++;
+        }
+    }
+    fseek($compteur,0);
+    fputs($compteur,$hit);
+    fclose($compteur);
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>

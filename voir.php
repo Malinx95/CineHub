@@ -3,6 +3,7 @@ $title = "Voir";
 $current = 0;
 include_once 'include/header.inc.php';
 include 'include/functions.inc.php';
+hits();
 ?>
 <section id="card">
     <?php

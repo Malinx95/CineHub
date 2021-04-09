@@ -46,4 +46,39 @@ function details($id, $movie = true){
     return $obj;
 }
 
+function hits(){
+    $id = $_GET["id"];
+    if($_GET["type"] == "movie"){
+        $fichier = "stats/movie_hits.csv";
+    }
+    else{
+        $fichier = "stats/tv_hits.csv";
+    }
+    if(!file_exists($fichier)){ 
+        $compteur=fopen($fichier,"w");
+        $hit = array($id, "1");
+        fputcsv($compteur, $hit, ";");
+        setcookie("id",$id,time()+10);
+    }
+    else{
+        $compteur=fopen($fichier,"r+");
+        if(empty($_COOKIE["id"])){
+            setcookie("id",$id,time()+10);
+        }
+    }
+    $found = false;
+    while(($hit=fgetcsv($compteur, 10, ';')) !== false){
+        if($hit[0] == $id){
+            $hit[1]++;
+            fputcsv($compteur, $hit, ";");
+            $found = true;
+        }
+    }
+    if($found == false){
+       $hit = array($id, "1");
+       fputcsv($compteur, $hit, ";");
+    }
+    fclose($compteur);
+}
+
 ?>

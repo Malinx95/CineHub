@@ -5,6 +5,9 @@ include_once 'include/header.inc.php';
 include 'include/functions.inc.php';
 ?>
     <section id="card">
+        <?php
+            echo "<p>Nombre de magnifique visiteur : $hit</p>\n"
+        ?>
         <a class="morebutton" href="#more"><button>Voir plus</button></a>
     </section>
     <section id="more">
