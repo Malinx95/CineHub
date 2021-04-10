@@ -35,6 +35,7 @@ include 'include/functions.inc.php';
                 <li><p>API APOD</p></li>
                 <li><p>API Geoplugin</p></li>
                 <li><p>Prof?</p></li>
+                <div>Icons made by <a href="https://www.flaticon.com/authors/those-icons" title="Those Icons">Those Icons</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
             </ul>
         </div>
         <div>

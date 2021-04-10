@@ -30,7 +30,12 @@
                         echo "\t\t\t\t\t<a href='voir.php?id=", $result["id"], "&type=movie'>\n";
                         echo "\t\t\t\t\t\t<article>\n";
                         echo "\t\t\t\t\t\t\t<h3>", $result["original_title"], "</h3>\n";
-                        echo "\t\t\t\t\t\t\t<img src='https://image.tmdb.org/t/p/original", $result["poster_path"], "' width='150' alt='poster ", $result["original_title"], "'/>\n";
+                        if(isset($result["poster_path"])){
+                            echo "\t\t\t\t\t\t\t<img src='https://image.tmdb.org/t/p/original", $result["poster_path"], "' width='150' height='225' alt='poster ", $result["original_name"], "'/>\n";
+                        }
+                        else{
+                            echo "\t\t\t\t\t\t\t<img src='ressources/images/no-image.png' width='150' height='225' alt='no-image'/>\n";
+                        }
                         echo "\t\t\t\t\t\t\t<p>", $result["release_date"], "</p>\n";
                         echo "\t\t\t\t\t\t</article>\n";
                         echo "\t\t\t\t\t</a>\n";
@@ -51,8 +56,18 @@
                         echo "\t\t\t\t\t<a href='voir.php?id=", $result["id"], "&type=tv'>\n";
                         echo "\t\t\t\t\t\t<article>\n";
                         echo "\t\t\t\t\t\t\t<h3>", $result["original_name"], "</h3>\n";
-                        echo "\t\t\t\t\t\t\t<img src='https://image.tmdb.org/t/p/original", $result["poster_path"], "' width='150' alt='poster ", $result["original_name"], "'/>\n";
-                        echo "\t\t\t\t\t\t\t<p>", $result["first_air_date"], "</p>\n";
+                        if(isset($result["poster_path"])){
+                            echo "\t\t\t\t\t\t\t<img src='https://image.tmdb.org/t/p/original", $result["poster_path"], "' width='150' height='225' alt='poster ", $result["original_name"], "'/>\n";
+                        }
+                        else{
+                            echo "\t\t\t\t\t\t\t<img src='ressources/images/no-image.png' width='150' height='225' alt='no-image'/>\n";
+                        }
+                        if(isset($result["first_air_date"])){
+                            echo "\t\t\t\t\t\t\t<p>", $result["first_air_date"], "</p>\n";
+                        }
+                        else{
+                            echo "\t\t\t\t\t\t\t<p>date unknown</p>\n";
+                        }
                         echo "\t\t\t\t\t\t</article>\n";
                         echo "\t\t\t\t\t</a>\n";
                     }

@@ -10,16 +10,22 @@ body {
     margin: 0%;
 }
 
-#card, #more{
+#card{
     width: 100%;
     display: flex;
-    height: 100vh;
+    height: 90vh;
     flex-direction: column;
     align-items: center;
 }
 
 #more{
-    
+    width: 100%;
+    display: flex;
+    height: auto;
+    min-height: 90vh;
+    max-height: fit-content;
+    flex-direction: column;
+    align-items: center;
 }
 
 #more h2, h1{
@@ -78,6 +84,7 @@ body {
     box-shadow: 10px 10px 10px black;
     margin-top: 2%;
     margin-bottom: 3%;
+    height: 55%;
 }
 
 .smalllogo{
@@ -103,7 +110,6 @@ h1{
     padding-left: 8px;
     padding-right: 8px;
     color: white;
-    margin-top: 5%;
     background-color: #f28d4a;
 }
 
@@ -130,6 +136,7 @@ button{
     border-radius: 25px;
     height: 2em;
     outline: none;
+    font-family: "rubik", Arial, Helvetica, sans-serif;
 }
 
 .center{
@@ -190,4 +197,13 @@ button{
     display: inline-block;
     text-decoration: none;
     color: black;
+    width: 250px;
+    height: 350px;
+    border: black solid thin;
+    vertical-align: middle;
+}
+
+.scroll h3{
+    white-space: initial;
+    height: 44px;
 }
