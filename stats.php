@@ -22,7 +22,7 @@ include 'include/functions.inc.php';
                 ?>
             </fieldset>
         </div>
-        <a class="morebutton" href="#more"><button>Voir plus</button></a>
+        <a class="morebutton button" href="#more">Voir plus</a>
     </section>
     <section id="more">
 

@@ -6,7 +6,7 @@ include 'include/functions.inc.php';
 ?>
     <section id="card">
         <h2>Auteurs</h2>
-        <a class="morebutton" href="#more"><button>Voir plus</button></a>
+        <a class="morebutton button" href="#more">Voir plus</a>
         <div>
             <h3>Maxime Grodet</h3>
             <figure>

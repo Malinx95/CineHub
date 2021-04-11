@@ -12,14 +12,14 @@ if(isset($_GET["search"]) && !empty($_GET["search"])) {
             <h2>Rechercher</h2>
             <form method="get" action="#more">
                 <div>
-                    <input class="searchbar" type="text" name="search" placeholder="rechercher un film ou une série"/>
+                    <input class="searchbar" type="text" name="search" placeholder="rechercher un film ou une série" <?php if(isset($_GET["search"]) && !empty($_GET["search"])){echo "value='", $_GET['search'], "'";} ?>/>
                 </div>
                 <div>
                     <input class="searchbutton" type="submit" value="Rechercher">
                 </div>
             </form>
         </div>
-        <?php if(isset($_GET["search"]) && !empty($_GET["search"])){echo"<a class='morebutton' href='#more'><button>Voir plus</button></a>\n";}?>
+        <?php if(isset($_GET["search"]) && !empty($_GET["search"])){echo"<a class='morebutton button' href='#more'>Voir plus</a>\n";}?>
     </section>
     <?php
     if(isset($_GET["search"]) && !empty($_GET["search"])){
