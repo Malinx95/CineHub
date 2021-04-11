@@ -243,6 +243,37 @@ button:hover{
     height: 225px;
 }
 
+.thumbnailtop{
+    width: 100px;
+    height: 150px;
+}
+
 .poster{
     height: 40%;
+}
+
+.ranking{
+    width: 100%;
+    height: 65vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.ranking fieldset{
+    border-radius: 25px;
+    border: thin solid;
+    width: 30%;
+    text-align: center;
+}
+
+.top {
+    height: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.top fieldset{
+    width: 45%;
 }

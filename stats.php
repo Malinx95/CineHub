@@ -8,6 +8,20 @@ include 'include/functions.inc.php';
         <?php
             echo "<p>Nombre de magnifique visiteur : $hit</p>\n"
         ?>
+        <div class="ranking">
+            <fieldset>
+                <legend>Top des films les plus consultés</legend>
+                <?php
+                    echo rankingTop("stats/movie_hits.csv", "movie");
+                ?>
+            </fieldset>
+            <fieldset>
+                <legend>Top des series les plus consultés</legend>
+                <?php
+                    echo rankingTop("stats/tv_hits.csv", "tv");
+                ?>
+            </fieldset>
+        </div>
         <a class="morebutton" href="#more"><button>Voir plus</button></a>
     </section>
     <section id="more">
