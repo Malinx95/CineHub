@@ -8,7 +8,7 @@ include 'include/functions.inc.php';
         <?php
             echo "<p>Nombre de magnifique visiteur : $hit</p>\n"
         ?>
-        <a class="morebutton" href="#more"><button>Voir plus</button></a>
+        <a class="morebutton button" href="#more">Voir plus</a>
     </section>
     <section id="more">
 
