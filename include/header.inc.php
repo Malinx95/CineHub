@@ -36,7 +36,8 @@
             <ul>
                 <?php
                 if($current==0){
-                    echo "<li><a class='active' href='rechercher.php'>Retour</a></li>\n";}
+                    echo "<li><a class='active' href='rechercher.php?search=", $_COOKIE["last"], "#more'>Retour</a></li>\n";
+                }
                 else{
                     echo "<li><a ";
                     if($current == 1){

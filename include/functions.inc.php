@@ -41,6 +41,7 @@ function details($id, $movie = true){
     if($_GET["type"] == "tv"){
         $url = "https://api.themoviedb.org/3/tv/" . $id . $key . "&language=fr";
     }
+    //echo $url;
     $json = file_get_contents($url);
     $obj = json_decode($json, true);
     return $obj;
@@ -87,4 +88,25 @@ function hits(){
     fclose($compteur);
 }
 
+function getInfo($json, $name, $notfoundmsg="Information indisponible."){
+    if(isset($json[$name]) && !empty($json[$name])){
+        return $json[$name];
+    }
+    else{
+        return $notfoundmsg;
+    }
+}
+
+function getList($json, $name, $subname, $notfoundmsg="Information indisponible."){
+    if(isset($json[$name]) && !empty($json[$name])){
+        $out = "";
+        foreach ($json[$name] as $val){
+            $out .= $val[$subname].", ";
+        }
+        return substr($out, 0, strlen($out)-2);
+    }
+    else{
+        return $notfoundmsg;
+    }
+}
 ?>
