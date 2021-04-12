@@ -1,6 +1,4 @@
 <?php
-include 'ressources/jpgraph/jpgraph.php';
-
 function nasa() { //retourne img
     $url = "https://api.nasa.gov/planetary/apod?api_key=5aX68ZvOKjY5HvFA4IQbZ6QVnkcUOvhQMc8bEfbs&date=";//.date('Y-m-d');
     $json = file_get_contents($url);
@@ -220,5 +218,16 @@ function svgGraph($fichier){
     return $str;
 }
 
+function jpgraphBar($fichier){
+    $csv = getTop($fichier, 10);
+    $x = array();
+    $y = array();
+    foreach ($csv as $key => $value) {
+        array_push($x, $value[0]);
+        array_push($y, $value[1]);
+    }
+    $width = 500;
+    $height = 200;
+}
 
 ?>
