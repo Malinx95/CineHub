@@ -25,7 +25,10 @@ include 'include/functions.inc.php';
         <a class="morebutton button" href="#more">Voir plus</a>
     </section>
     <section id="more">
-
+        <?php
+            echo svgGraph("stats/movie_hits.csv");
+            echo svgGraph("stats/tv_hits.csv");
+        ?>
     </section>
 <?php
 include_once 'include/footer.inc.php';

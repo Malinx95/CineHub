@@ -1,4 +1,6 @@
 <?php
+include 'ressources/jpgraph/jpgraph.php';
+
 function nasa() { //retourne img
     $url = "https://api.nasa.gov/planetary/apod?api_key=5aX68ZvOKjY5HvFA4IQbZ6QVnkcUOvhQMc8bEfbs&date=";//.date('Y-m-d');
     $json = file_get_contents($url);
@@ -125,7 +127,7 @@ function getList($json, $name, $subname, $notfoundmsg="Information indisponible.
 }
 
 function rankingTop($fichier, $type){
-    $csv = getTop($fichier);
+    $csv = getTop($fichier, 3);
     
     $str = "\t\t\t\t<div class=\"top\">\n";
     $str .= "\t\t\t\t\t<fieldset>\n";
@@ -146,7 +148,7 @@ function rankingTop($fichier, $type){
     return $str;
 }
 
-function getTop($fichier){
+function getTop($fichier, $size){
     $csv = array_chunk(str_getcsv(substr(str_replace("\n", ";", file_get_contents($fichier)), 0, -1) , ";"), 2); // recupere le contenue du fichier sous forme de tableau
     if(isset($csv[0][1])){
         $keys = array();
@@ -154,7 +156,7 @@ function getTop($fichier){
         array_push($keys, $value[1]);
     }
     array_multisort($keys, SORT_DESC, $csv, SORT_DESC);
-    return(array_slice($csv, 0, 3));
+    return(array_slice($csv, 0, $size));
     }
     else{
         return null;
@@ -181,7 +183,7 @@ function generateTopText($csv, $i, $type){
         else{
             $str .= "\t\t\t\t\t\t<img class='thumbnailtop' src='ressources/images/no-image.png' alt='no-image'/>\n";
         }
-        $str .= "\t\t\t\t\t\t<p> Avec " . $csv[$i][1] . "consultations !</p>";
+        $str .= "\t\t\t\t\t\t<p> Avec " . $csv[$i][1] . " consultations !</p>";
         return $str;
     }
     else{
@@ -193,5 +195,30 @@ function generateTopText($csv, $i, $type){
         }
     }
 }
+
+function svgGraph($fichier){
+    $csv = getTop($fichier, 10);
+    $ligne = 15;
+    $str = "\t<figure>\n";
+    if(stripos($fichier, "movie") != false){
+        $str = "<figcaption>Top film</figcaption>\n";
+    }
+    else{
+        $str = "\t\t<figcaption>Top serie</figcaption>\n";
+    }
+    $str .= "\t\t<svg style=\"height: 200px; width: 500px\">\n";
+    $str .= "\t\t\t<rect width=\"500\" height=\"200\" stroke=\"black\" stroke-width=\"5\" style=\"fill:rgb(255,255,255)\" />\n";
+    $str .= "\t\t\t<line x1=\"" . $ligne . "%\" y1=\"0%\" x2=\"" . $ligne . "%\" y2=\"100%\" stroke=\"black\" stroke-width=\"2\" />\n";
+    $max = $csv[0][1];
+    foreach ($csv as $key => $value) {
+        $str .= "\t\t\t<text x=\"2%\" y=\"" . ((($key+1)*8)+3.5) . "%\">" . $csv[$key][0] . "</text>\n";
+        $str .= "\t\t\t<text x=\"" . ((80/$max*$csv[$key][1])+$ligne) . "%\" y=\"" . ((($key+1)*8)+3.5) . "%\">" . $csv[$key][1] . "</text>\n";
+        $str.= "\t\t\t<rect x=\"" . $ligne . "%\" y=\"" . ($key+1)*8 . "%\" width=\"" . 80/$max*$csv[$key][1] . "%\" height=\"2%\" style=\"fill:rgb(255,0,0)\" />\n";
+    }
+    $str .= "\t\t</svg>\n";
+    $str .= "\t</figure>\n";
+    return $str;
+}
+
 
 ?>
