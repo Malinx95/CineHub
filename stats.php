@@ -26,11 +26,10 @@ include 'include/functions.inc.php';
     </section>
     <section id="more">
         <?php
-            // echo svgGraph("stats/movie_hits.csv");
-            // echo svgGraph("stats/tv_hits.csv");
-        ?>
-        <?php
-            echo "<img src='include/graph2.php' />\n"
+            echo svgGraph("stats/movie_hits.csv");
+            echo svgGraph("stats/tv_hits.csv");
+            echo "<img src='include/graph1.php' />\n";
+            echo "<img src='include/graph2.php' />\n";
         ?>
     </section>
 <?php

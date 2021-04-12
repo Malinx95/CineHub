@@ -1,17 +1,26 @@
 <?php
-    include_once 'ressources/jpgraph/jpgraph.php';
-    include_once 'ressources/jpgraph/jpgraph_bar.php';
-    include_once 'include/functions.inc.php';
-    jpgraphBar("stats/movie_hits.csv");
-    echo $height;
+    include_once '../ressources/jpgraph/jpgraph.php';
+    include_once '../ressources/jpgraph/jpgraph_bar.php';
+    include_once '../include/functions.inc.php';
+
+    $csv = getTop('../stats/movie_hits.csv', 10);
+    $x = array();
+    $y = array();
+    foreach ($csv as $key => $value) {
+        array_push($x, $value[0]);
+        array_push($y, $value[1]);
+    }
+    $width = 500;
+    $height = 200;
+
     $graph = new Graph($width, $height, 'auto');
     $graph -> SetScale('textlin');
     $graph->Set90AndMargin(50,20,50,30);
     $graph->SetShadow();
     $graph->title->Set('movie');
-    $graph->title->SetFont(FF_VERDANA,FS_BOLD,14);
+    //$graph->title->SetFont(FF_VERDANA,FS_BOLD,14);
     $graph->xaxis->SetTickLabels($x);
-    $graph->xaxis->SetFont(FF_VERDANA,FS_NORMAL,12);
+    //$graph->xaxis->SetFont(FF_VERDANA,FS_NORMAL,12);
     $graph->xaxis->SetLabelMargin(10);
     $graph->xaxis->SetLabelAlign('right','center');
     $graph->yaxis->scale->SetGrace(20);

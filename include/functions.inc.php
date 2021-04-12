@@ -217,7 +217,7 @@ function svgGraph($fichier){
     $str .= "\t</figure>\n";
     return $str;
 }
-
+/*
 function jpgraphBar($fichier){
     $csv = getTop($fichier, 10);
     $x = array();
@@ -229,5 +229,6 @@ function jpgraphBar($fichier){
     $width = 500;
     $height = 200;
 }
+*/
 
 ?>
