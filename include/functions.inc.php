@@ -126,22 +126,33 @@ function getList($json, $name, $subname, $notfoundmsg="Information indisponible.
 
 function rankingTop($fichier, $type){
     $csv = getTop($fichier, 3);
-    
-    $str = "\t\t\t\t<div class=\"top\">\n";
-    $str .= "\t\t\t\t\t<fieldset>\n";
-    $str .= "\t\t\t\t\t\t<legend>Top 1</legend>\n";
+
+    $str = "\t<div class=\"top\">\n";
+    $str .= "\t\t\t\t\t\t<a href =\"voir.php?id=" . $csv[0][0] . "&type=" . $type . "&from=stats\">\n";
+    $str .= "\t\t\t\t\t\t\t<fieldset>\n";
+    $str .= "\t\t\t\t\t\t\t\t<legend>Top 1</legend>\n";
     $str .= generateTopText($csv, 0, $type);
-    $str .= "\t\t\t\t\t</fieldset>\n";
+    $str .= "\t\t\t\t\t\t\t</fieldset>\n";
+    $str .= "\t\t\t\t\t\t</a>\n";
+
     $str .= "\t\t\t\t</div>\n";
     $str .= "\t\t\t\t<div class=\"top\">\n";
-    $str .= "\t\t\t\t\t<fieldset>\n";
-    $str .= "\t\t\t\t\t\t<legend>Top 2</legend>\n";
+    $str .= "\t\t\t\t\t<a href =\"voir.php?id=" . $csv[1][0] . "&type=" . $type . "&from=stats\">\n";
+
+    $str .= "\t\t\t\t\t\t<fieldset>\n";
+    $str .= "\t\t\t\t\t\t\t<legend>Top 2</legend>\n";
     $str .= generateTopText($csv, 1, $type);
-    $str .= "\t\t\t\t\t</fieldset>\n";
-    $str .= "\t\t\t\t\t<fieldset>\n";
-    $str .= "\t\t\t\t\t\t<legend>Top 3</legend>\n";
+    $str .= "\t\t\t\t\t\t</fieldset>\n";
+    $str .= "\t\t\t\t\t</a>\n";
+
+    $str .= "\t\t\t\t\t<a href =\"voir.php?id=" . $csv[2][0] . "&type=" . $type . "&from=stats\">\n";
+
+    $str .= "\t\t\t\t\t\t<fieldset>\n";
+    $str .= "\t\t\t\t\t\t\t<legend>Top 3</legend>\n";
     $str .= generateTopText($csv, 2, $type);
-    $str .= "\t\t\t\t\t</fieldset>\n";
+    $str .= "\t\t\t\t\t\t</fieldset>\n";
+    $str .= "\t\t\t\t\t</a>\n";
+
     $str .= "\t\t\t\t</div>\n";
     return $str;
 }
@@ -165,23 +176,23 @@ function generateTopText($csv, $i, $type){
     if(isset($csv[$i])){
         $details = detailsTop($csv[$i][0], $type);
         if($type == "tv"){
-            $str = "\t\t\t\t\t\t<p>" . $details["original_name"] . "</p>\n";
+            $str = "\t\t\t\t\t\t\t<p>" . $details["original_name"] . "</p>\n";
         }
         else{
-            $str = "\t\t\t\t\t\t<p>" . $details["original_title"] . "</p>\n";
+            $str = "\t\t\t\t\t\t\t<p>" . $details["original_title"] . "</p>\n";
         }
         if(isset($details["poster_path"])){
             if($type == "tv"){
-                $str .= "\t\t\t\t\t\t<img class='thumbnailtop' src='https://image.tmdb.org/t/p/original" . $details["poster_path"] . "' alt='poster " . $details["original_name"] . "'/>\n";
+                $str .= "\t\t\t\t\t\t\t<img class='thumbnailtop' src='https://image.tmdb.org/t/p/original" . $details["poster_path"] . "' alt='poster " . $details["original_name"] . "'/>\n";
             }
             else{
-                $str .= "\t\t\t\t\t\t<img class='thumbnailtop' src='https://image.tmdb.org/t/p/original" . $details["poster_path"] . "' alt='poster " . $details["original_title"] . "'/>\n";
+                $str .= "\t\t\t\t\t\t\t<img class='thumbnailtop' src='https://image.tmdb.org/t/p/original" . $details["poster_path"] . "' alt='poster " . $details["original_title"] . "'/>\n";
             }
         }
         else{
-            $str .= "\t\t\t\t\t\t<img class='thumbnailtop' src='ressources/images/no-image.png' alt='no-image'/>\n";
+            $str .= "\t\t\t\t\t\t\t<img class='thumbnailtop' src='ressources/images/no-image.png' alt='no-image'/>\n";
         }
-        $str .= "\t\t\t\t\t\t<p> Avec " . $csv[$i][1] . " consultations !</p>";
+        $str .= "\t\t\t\t\t\t\t<p> Avec " . $csv[$i][1] . " consultations !</p>\n";
         return $str;
     }
     else{

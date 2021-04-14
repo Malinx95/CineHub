@@ -270,5 +270,20 @@ h1{
 }
 
 .top fieldset{
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.top a{
     width: 45%;
+    height: 95%;
+    text-decoration: none;
+    color: black;
+    transition: 0.25s;
+}
+
+.top a:hover{
+    transform: scale(1.05);
+    transition: 0.25s;
 }
