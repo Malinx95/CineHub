@@ -239,8 +239,8 @@ h1{
 }
 
 .thumbnailtop{
-    width: 100px;
-    height: 150px;
+    width: 80%;
+    height: 80%;
 }
 
 .poster{
@@ -286,4 +286,9 @@ h1{
 .top a:hover{
     transform: scale(1.05);
     transition: 0.25s;
+}
+
+.top a p{
+    margin: 0;
+    height: 10%;
 }
