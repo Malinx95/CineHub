@@ -7,9 +7,9 @@ if(isset($_GET["search"]) && !empty($_GET["search"])) {
     setcookie("last", $_GET["search"], time() + 60*60*24*365);
 }
 ?>
-    <section id="card" <?php if(empty($_GET["search"])){echo "style=\"height: 80vh\"";} ?>>
+    <section id="card">
+        <h2>Rechercher</h2>
         <div class="center">
-            <h2>Rechercher</h2>
             <form method="get" action="#more">
                 <div>
                     <input class="searchbar" type="text" name="search" placeholder="rechercher un film ou une série" <?php if(isset($_GET["search"]) && !empty($_GET["search"])){echo "value='", $_GET['search'], "'";} ?>/>

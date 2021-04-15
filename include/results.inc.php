@@ -1,4 +1,4 @@
-<section id='more'>
+<section id='more' class="long">
         <h2>Votre recherche</h2>
         <form method='post' action='#more' class='filtres'>
             <fieldset>
