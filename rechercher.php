@@ -20,6 +20,7 @@ if(isset($_GET["search"]) && !empty($_GET["search"])) {
             </form>
         </div>
         <?php if(isset($_GET["search"]) && !empty($_GET["search"])){echo"<a class='morebutton button' href='#more'>Voir plus</a>\n";}?>
+        <img class="bg" src="https://stationf.co/wp-content/uploads/2019/06/hero-home-page.jpg" alt="bg"/>
     </section>
     <?php
     if(isset($_GET["search"]) && !empty($_GET["search"])){

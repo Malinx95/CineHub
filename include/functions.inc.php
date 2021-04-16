@@ -3,7 +3,13 @@ function nasa() { //retourne img
     $url = "https://api.nasa.gov/planetary/apod?api_key=5aX68ZvOKjY5HvFA4IQbZ6QVnkcUOvhQMc8bEfbs&date=";//.date('Y-m-d');
     $json = file_get_contents($url);
     $obj = json_decode($json);
-    return $obj->{'url'};
+    $url = $obj->{'url'};
+    if(strpos($url, "youtube") != false){
+        return "<embed class='nasa' type=\"video/webm\" src='$url' autoplay/>";
+    }
+    else{
+        return "<img class=\"nasa\" src=\"$url\" alt=\"image nasa\"/>";
+    }
 }
 
 function geo() { //retourne geolocalisation

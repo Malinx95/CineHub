@@ -24,6 +24,7 @@ include 'include/functions.inc.php';
         echo "<p>Nombre de magnifique visiteur : $hit</p>\n"
         ?>
         <a class="morebutton button" href="#more">Voir plus</a>
+        <img class="bg" src="https://stationf.co/wp-content/uploads/2019/06/hero-home-page.jpg" alt="bg"/>
     </section>
     <section id="more">
         <h2>Graphiques</h2>

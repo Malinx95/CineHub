@@ -23,6 +23,7 @@ include 'include/functions.inc.php';
             </div>
         </div>
         <a class="morebutton button" href="#more">Voir plus</a>
+        <img class="bg" src="https://stationf.co/wp-content/uploads/2019/06/hero-home-page.jpg" alt="bg"/>
     </section>
     <section id="more">
         <h2>Plus</h2>

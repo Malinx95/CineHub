@@ -16,6 +16,7 @@ body {
     width: 100%;
     height: 100vh;
     text-align: center;
+    color: white;
 }
 
 #card h2{
@@ -29,6 +30,7 @@ body {
     width: 100%;
     height: 95vh;
     text-align: center;
+    background: #E1E2E1;
 }
 
 #more h2{
@@ -40,6 +42,7 @@ h1{
     top: 5vh;
     left: 50%;
     transform: translateX(-50%);
+    color: white;
 }
 
 #header nav{
@@ -52,9 +55,6 @@ h1{
 
 #header nav{
     background-color: #f28d4a;
-    display: flex;
-    align-items: stretch;
-    width: 100%;
     height: 5%;
 }
 
@@ -62,6 +62,9 @@ h1{
     padding: 0px;
     margin: 0px;
     display:inline-block;
+    height: 5vh;
+    float: right;
+    margin-right: 1%;
 }
 
 #header nav li{
@@ -71,7 +74,7 @@ h1{
     height: 100%;
 }
 
-#header nav a{
+#header nav ul li a{
     display: table-cell;
     vertical-align: middle;
     text-decoration: none;
@@ -79,12 +82,12 @@ h1{
     padding-right: 10px;
     font-size: large;
     font-weight: bold;
-    color: #fedb63;
+    color: black;
     text-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
     transition: 0.25s;
 }
 
-#header nav a:hover{
+#header nav ul li a:hover{
     text-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
     transition: 0.25s;
 }
@@ -94,16 +97,60 @@ h1{
 }
 
 .smalllogo{
-    margin: 5px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    height: 5vh;
+    display: inline-flex;
+    text-decoration: none;
+    color: black;
+    width: 0;
 }
 
-.biglogo, .smalllogo{
+.smalllogo img{
+    filter: drop-shadow(0 1px 3px rgba(0,0,0,0.12)) drop-shadow(0 1px 2px rgba(0,0,0,0.24));
+    transition: 0.25s;
+}
+
+.smalllogo img:hover{
+    filter: drop-shadow(0 14px 28px rgba(0,0,0,0.25)) drop-shadow(0 10px 10px rgba(0,0,0,0.22));
+    animation: roll 0.75s infinite;
+
+    transition: 0.25s;
+}
+
+@keyframes roll {
+    0% {
+        transform: rotate(0);
+    }
+    33%{
+        transform: rotate(-10deg);
+    }
+    66%{
+        transform: rotate(10deg);
+    }
+    100% {
+        transform: rotate(0);
+    }
+}
+
+.smalllogo p{
+    font-size: 150%;
+    font-weight: bold;
+    margin-top: auto;
+    margin-bottom: auto;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: 0.25s;
+}
+
+.smalllogo p:hover{
+    text-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    transition: 0.25s;
+}
+
+.biglogo{
     border-radius: 25%;
 }
 
 .active{
-    color: white !important;
+    color: #fedb63 !important;
 }
 
 #footer{
@@ -291,8 +338,7 @@ h1{
     width: 30%;
     text-align: center;
     border: none;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-
+    /* box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); */
 }
 
 .top {
@@ -309,6 +355,7 @@ h1{
     border: none;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
     transition: 0.25s;
+    background: white;
 }
 
 .top a{
@@ -338,6 +385,7 @@ h1{
 
 .long{
     height: auto !important;
+    padding-bottom: 1vh;
 }
 
 .credits{
@@ -353,4 +401,18 @@ h1{
 .credits:hover{
     text-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
     transition: 0.25s;
+}
+
+.bg{
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    filter: blur(5px) brightness(0.5);
+}
+
+.title{
+    position: relative;
 }

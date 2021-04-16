@@ -13,6 +13,7 @@ include 'include/functions.inc.php';
             <a class="voir button" href="rechercher.php">Voir les films et séries</a>
         </div>
         <a class="morebutton button" href="#more">Voir plus</a>
+        <img class="bg" src="https://stationf.co/wp-content/uploads/2019/06/hero-home-page.jpg" alt="bg"/>
     </section>
     <section id="more">
         <h2>Informations</h2>
@@ -22,7 +23,7 @@ include 'include/functions.inc.php';
             <p>Réalisé par Maxime Grodet &amp; Antoine Qiu en L2 Informatique, groupe C.</p>
             <p>Sur notre site vous pourrez trouver une large sélection de films et séries que vous pouvez explorer et trier !</p>
             <h3>Image du jour</h3>
-            <img class="nasa" src="<?php echo nasa()?>" alt="image nasa">
+            <?php echo nasa()?>
             <h3>Votre Géolocalisation</h3>
             <?php echo "<p>".geo()."</p>\n";?>
         </div>

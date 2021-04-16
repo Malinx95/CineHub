@@ -32,7 +32,10 @@
     <header id="header">
         <h1><?php echo$title?></h1>
         <nav>
-            <img class="roundedcorner smalllogo" src="ressources/logo/logo.png" alt="logo"/>
+            <a class="smalllogo" href="index.php">
+                <img src="ressources/logo/logo2.png" alt="logo"/>
+                <p>CineHub</p>
+            </a>
             <ul>
                 <?php
                 if($current==0){
