@@ -15,7 +15,7 @@ if(isset($_GET["search"]) && !empty($_GET["search"])) {
                     <input class="searchbar" type="text" name="search" placeholder="rechercher un film ou une série" <?php if(isset($_GET["search"]) && !empty($_GET["search"])){echo "value='", $_GET['search'], "'";} ?>/>
                 </div>
                 <div>
-                    <input class="searchbutton" type="submit" value="Rechercher">
+                    <input class="searchbutton button" type="submit" value="Rechercher">
                 </div>
             </form>
         </div>

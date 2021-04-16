@@ -13,8 +13,6 @@ body {
 }
 
 #card{
-    position: absolute;
-    top: 0;
     width: 100%;
     height: 100vh;
     text-align: center;
@@ -28,16 +26,13 @@ body {
 }
 
 #more{
-    position: absolute;
-    top: 100%;
     width: 100%;
-    height: 100vh;
+    height: 95vh;
     text-align: center;
 }
 
 #more h2{
-    margin-top: 7vh;
-    height: 3vh;
+    padding-top: 5vh;
 }
 
 h1{
@@ -85,14 +80,12 @@ h1{
     font-size: large;
     font-weight: bold;
     color: #fedb63;
-    text-shadow: 0px 0px 2px black;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
     transition: 0.25s;
 }
 
-
-
 #header nav a:hover{
-    transform: scale(1.1);
+    text-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
     transition: 0.25s;
 }
 
@@ -102,7 +95,7 @@ h1{
 
 .smalllogo{
     margin: 5px;
-    box-shadow: 0px 0px 5px black;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 
 .biglogo, .smalllogo{
@@ -114,27 +107,16 @@ h1{
 }
 
 #footer{
-    position: absolute;
-    bottom: -100%;
     width: 100%;
     display: flex;
     justify-content: space-between;
-    /* padding-left: 8px; */
-    /* padding-right: 8px; */
     color: black;
     background-color: #f28d4a;
 }
 
 #footer p{
-    /* margin-top: auto; */
-    /* margin-bottom: auto; */
     margin-left: 1%;
     margin-right: 1%;
-}
-
-#footer a{
-    color: black;
-    text-decoration: none;
 }
 
 .morebutton{
@@ -148,17 +130,19 @@ h1{
     position: fixed;
     bottom: 5%;
     right: 5%;
+    background: white;
 }
 
 .button{
     color: black;
     text-decoration: none;
-    background-color: transparent;
     border-radius: 25px;
     padding: 10px;
     font-family: "rubik", Arial, Helvetica, sans-serif;
     box-shadow:0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
     transition: 0.25s;
+    border: none;
+    background: white;
 }
 
 .button:hover{
@@ -167,7 +151,7 @@ h1{
 }
 
 .center{
-    position: absolute;
+    position: relative;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -176,24 +160,31 @@ h1{
 .center p{
     margin: 2%
 }
+#more .center{
+    top: 40%;
+}
 
 .searchbar{
-    width: 30em;
+    width: 25vw;
     height: 3em;
+    border-radius: 25px;
+    border: none;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    padding-left: 1%;
+    padding-right: 1%;
 }
 
 .searchbutton{
-    margin-top: 5%;
+    font-size: 125%;
+    margin-top: 1%;
     width: 10em;
     height: 2em;
 }
 
 .filtres fieldset{
-    /* text-align: center; */
     border-radius: 25px;
     border: none;
     box-shadow:0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-    /* height: 5vh; */
 }
 
 .filtres {
@@ -202,12 +193,26 @@ h1{
     height: 15vh;
 }
 
+.filtres div div{
+    display: inline-block;
+    width: 5vw;
+    padding: 1%;
+    border-radius: 25px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    text-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: 0.25s;
+}
+
+.filtres div div:hover{
+    text-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    transition: 0.25s;
+}
+
 .results{
-    margin-left: 2vw;
-    margin-right: 2vw;
-    margin-bottom: 6vw;
-    /* text-align: center; */
-    height: auto;
+    width: 90vw;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5vh;
     border: none;
     border-radius: 25px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
@@ -215,15 +220,11 @@ h1{
 .results fieldset{
     border-radius: 25px;
     border: none;
-    height: auto;
-    /* margin-top: 1%; */
+    margin-top: 1%;
 }
 
 .scroll{
-    width: 90vw;
-    /* margin-top: 1%; */
-    /* margin-bottom: 1%; */
-    /* height: 95%; */
+    width: 88vw;
     overflow-x: scroll;
     overflow-y: hidden;
     white-space: nowrap;
@@ -236,9 +237,7 @@ h1{
     color: black;
     width: 250px;
     height: 350px;
-    /* border: black solid thin; */
     border-radius:  25px;
-    /* vertical-align: middle; */
     transition: 0.25s;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
     margin-left: 1%;
@@ -253,12 +252,6 @@ h1{
 .scroll h3{
     white-space: initial;
     height: 44px;
-    /* font-size: 50%; */
-}
-
-.scroll p{
-    /* font-size: 50%; */
-    /* margin-bottom: 0; */
 }
 
 .scroll::-webkit-scrollbar {
@@ -276,12 +269,12 @@ h1{
 }
 
 .thumbnailtop{
-    width: 80%;
-    height: 80%;
+    width: 150px;
+    height: 225px;
 }
 
 .poster{
-    height: 40%;
+    height: 50vh;
 }
 
 .ranking{
@@ -297,6 +290,9 @@ h1{
     border: thin solid;
     width: 30%;
     text-align: center;
+    border: none;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+
 }
 
 .top {
@@ -310,6 +306,9 @@ h1{
     padding: 0;
     width: 100%;
     height: 100%;
+    border: none;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: 0.25s;
 }
 
 .top a{
@@ -317,11 +316,10 @@ h1{
     height: 95%;
     text-decoration: none;
     color: black;
-    transition: 0.25s;
 }
 
-.top a:hover{
-    transform: scale(1.05);
+.top fieldset:hover{
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
     transition: 0.25s;
 }
 
@@ -338,11 +336,21 @@ h1{
     font-size: 125%;
 }
 
-.long {
-    display: flex;
+.long{
     height: auto !important;
-    min-height: 90vh;
-    max-height: fit-content;
-    flex-direction: column;
-    align-items: center;
+}
+
+.credits{
+    color: black;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    text-decoration: none;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: 0.25s;
+}
+
+.credits:hover{
+    text-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    transition: 0.25s;
 }

@@ -4,13 +4,17 @@
             <fieldset>
                 <legend>Filtres</legend>
                 <div>
-                    <label>option 1</label>
-                    <input type='checkbox'>
-                    <label>option 2</label>
-                    <input type='checkbox'>
+                    <div>
+                        <label>option 1</label>
+                        <input type='checkbox'>
+                    </div>
+                    <div>
+                        <label>option 2</label>
+                        <input type='checkbox'>
+                    </div>
                 </div>
                 <div>
-                    <input type="submit" value="Appliquer les filtres">
+                    <input class="button" type="submit" value="Appliquer les filtres">
                 </div>
             </fieldset>
         </form>
