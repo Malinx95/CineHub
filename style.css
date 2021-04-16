@@ -30,7 +30,7 @@ body {
     width: 100%;
     height: 95vh;
     text-align: center;
-    background: #E1E2E1;
+    background: #fedb63;
 }
 
 #more h2{
@@ -338,7 +338,6 @@ h1{
     width: 30%;
     text-align: center;
     border: none;
-    /* box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); */
 }
 
 .top {
