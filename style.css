@@ -479,6 +479,10 @@ legend{
     grid-column-gap: 5vh;
 }
 
+.cv h2{
+    padding-top: initial !important;
+}
+
 .left{
     grid-column: 1;
     margin-left: 5vh;
