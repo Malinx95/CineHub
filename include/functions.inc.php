@@ -28,6 +28,7 @@ function geo() { //retourne geolocalisation
     return $out;
 }
 
+/*
 function tmdb($type, $query) { //requete api the movie database
     $query = str_replace(" ", "+", $query);
     $key = "?api_key=a22fd943c9bbecd346f31c75d2bd3969";
@@ -38,7 +39,33 @@ function tmdb($type, $query) { //requete api the movie database
     $result = $obj["results"];
     return $result;
 }
+*/
 
+function search_results($query, $type){
+
+    $query = str_replace(" ", "+", $query);
+    $key = "?api_key=a22fd943c9bbecd346f31c75d2bd3969";
+    $url = "https://api.themoviedb.org/3/search/" . $type . $key . "&query=" . $query;
+    //echo "<a href=\"", $url, "\">request</a>\n";
+    $json = file_get_contents($url);
+    $obj = json_decode($json, true);
+    $results = $obj["results"];
+
+    $out = "";
+    foreach ($results as $key => $value) {
+        $result = $value;
+        $out .= "<a href='voir.php?id=" . $result["id"] . "&type=$type&from=search&query=" . $query . "'>\n";
+        $out .= "\t\t\t\t\t\t<article>\n";
+        $out .= "\t\t\t\t\t\t\t<h3>" . getInfo($result["id"], "title", $type) . "</h3>\n";
+        $out .= "\t\t\t\t\t\t\t<img class='thumbnail' src='" . getInfo($result["id"], "poster", $type) . "' alt='poster " . getInfo($result["id"], "title", $type) . "'/>\n";
+        $out .= "\t\t\t\t\t\t\t<p>" . getInfo($result["id"], "date", $type) . "</p>\n";
+        $out .= "\t\t\t\t\t\t</article>\n";
+        $out .= "\t\t\t\t\t</a>\n";
+    }
+    return $out;
+}
+
+/*
 function details($id, $movie = true){
     $key = "?api_key=a22fd943c9bbecd346f31c75d2bd3969";
     if($_GET["type"] == "movie"){
@@ -66,27 +93,26 @@ function detailsTop($id, $movie){
     $obj = json_decode($json, true);
     return $obj;
 }
+*/
 
 function hits(){
     $id = $_GET["id"];
-    if($_GET["type"] == "movie"){
+    if ($_GET["type"] == "movie") {
         $fichier = "stats/movie_hits.csv";
-    }
-    else{
+    } else {
         $fichier = "stats/tv_hits.csv";
     }
-    if(!file_exists($fichier)){ 
-        $compteur=fopen($fichier,"w");
+    if (!file_exists($fichier)) {
+        $compteur = fopen($fichier, "w");
         $hit = array($id, "1");
         fputcsv($compteur, $hit, ";");
-        setcookie($id,$id,time()+30*60);
-    }
-    else{
-        $compteur=fopen($fichier,"r+");
+        setcookie($id, $id, time() + 30 * 60);
+    } else {
+        $compteur = fopen($fichier, "r+");
         $c = 0;
         $found = false;
-        while($line = fgetcsv($compteur, 0, ";")){
-            if($line[0] == $id){
+        while ($line = fgetcsv($compteur, 0, ";")) {
+            if ($line[0] == $id) {
                 $line[1]++;
                 $found = true;
             }
@@ -95,38 +121,155 @@ function hits(){
             $array[$c] = $line[1];
             $c++;
         }
-        if(!$found){
+        if (!$found) {
             $array[$c] = $id;
-            $array[$c+1] = 1;
+            $array[$c + 1] = 1;
         }
         fclose($compteur);
-        $compteur=fopen($fichier,"w");
-        for($i=0 ; $i<sizeof($array) ; $i = $i+2){
-            fputcsv($compteur, Array($array[$i], $array[$i+1]), ";");
+        $compteur = fopen($fichier, "w");
+        for ($i = 0; $i < sizeof($array); $i = $i + 2) {
+            fputcsv($compteur, array($array[$i], $array[$i + 1]), ";");
         }
     }
     fclose($compteur);
 }
 
-function getInfo($json, $name, $notfoundmsg="Information indisponible."){
-    if(isset($json[$name]) && !empty($json[$name])){
-        return $json[$name];
-    }
-    else{
-        return $notfoundmsg;
-    }
+function getJSON($url){
+    $json = file_get_contents($url);
+    return json_decode($json, true);
 }
 
-function getList($json, $name, $subname, $notfoundmsg="Information indisponible."){
-    if(isset($json[$name]) && !empty($json[$name])){
-        $out = "";
-        foreach($json[$name] as $val) {
-            $out .= $val[$subname].", ";
-        }
-        return substr($out, 0, strlen($out)-2);
-    }
-    else{
-        return $notfoundmsg;
+function getInfo($id, $info, $type="movie"){
+    $api = "a22fd943c9bbecd346f31c75d2bd3969";
+    switch ($info){
+        case "backdrop":
+            $url = "https://api.themoviedb.org/3/$type/$id?api_key=$api&language=fr";
+            $json = getJSON($url);
+            $backdrop = $json["backdrop_path"];
+            if(!empty($backdrop)){
+                return "https://image.tmdb.org/t/p/original$backdrop";
+            }
+            else{
+                return "ressources/images/no-image.png";
+            }
+        case "title":
+            $url = "https://api.themoviedb.org/3/$type/$id?api_key=$api&language=fr";
+            $json = getJSON($url);
+            if($type == "movie"){
+                return $json["original_title"];
+            }
+            else{
+                return $json["original_name"];
+            }
+
+        case "poster":
+            $url = "https://api.themoviedb.org/3/$type/$id?api_key=$api&language=fr";
+            $json = getJSON($url);
+            $poster = $json["poster_path"];
+            if(!empty($poster)){
+                return "https://image.tmdb.org/t/p/original$poster";
+            }
+            else{
+                return "ressources/images/no-image.png";
+            }
+
+        case "overview":
+            $url = "https://api.themoviedb.org/3/$type/$id?api_key=$api&language=fr";
+            $json = getJSON($url);
+            return $json["overview"];
+
+        case "rating":
+            $url = "https://api.themoviedb.org/3/$type/$id?api_key=$api&language=fr";
+            $json = getJSON($url);
+            return $json["vote_average"] . "/10 (" . $json["vote_count"] . " votes)";
+
+        case "origin":
+            $url = "https://api.themoviedb.org/3/$type/$id?api_key=$api&language=fr";
+            $json = getJSON($url);
+            return $json["original_language"];
+
+        case "directors":
+            $url = "https://api.themoviedb.org/3/$type/$id/credits?api_key=$api&language=fr";
+            $json = getJSON($url);
+            $out = "";
+            foreach($json["crew"] as $crew){
+                if($crew["job"] == "Director"){
+                    $out .= $crew["name"] . ", ";
+                }
+            }
+            return substr($out, 0, strlen($out)-2);
+
+        case "time":
+            $url = "https://api.themoviedb.org/3/$type/$id?api_key=$api&language=fr";
+            $json = getJSON($url);
+            if($type == "movie"){
+                $time = $json["runtime"];
+                $h = explode(".", $time/60)[0];
+                $m = $time - $h*60;
+                return $h . "h" . $m . "m";
+            }
+            else{
+                $out = "";
+                foreach($json["episode_run_time"] as $time){
+                    $out .= $time . "m, ";
+                }
+                return substr($out, 0, strlen($out)-2);
+            }
+
+
+        case "actors":
+            $url = "https://api.themoviedb.org/3/$type/$id/credits?api_key=$api&language=fr";
+            $json = getJSON($url);
+            $out = "";
+            foreach($json["cast"] as $crew){
+                if($crew["known_for_department"] == "Acting"){
+                    $out .= $crew["name"] . ", ";
+                }
+            }
+            return substr($out, 0, strlen($out)-2);
+
+        case "genres":
+            $url = "https://api.themoviedb.org/3/$type/$id?api_key=$api&language=fr";
+            $json = getJSON($url);
+            $out = "";
+            foreach($json["genres"] as $genre){
+                $out .= $genre["name"] . ", ";
+            }
+            return substr($out, 0, strlen($out)-2);
+
+        case "date":
+            $url = "https://api.themoviedb.org/3/$type/$id?api_key=$api&language=fr";
+            $json = getJSON($url);
+            if($type == "movie"){
+                $date = $json["release_date"];
+            }
+            else{
+                $date = $json["first_air_date"];
+            }
+            if(empty($date)){
+                return "Date indisponible.";
+            }
+            return $date;
+
+        case "producers":
+            $url = "https://api.themoviedb.org/3/$type/$id?api_key=$api&language=fr";
+            $json = getJSON($url);
+            $out = "";
+            foreach($json["production_companies"] as $producer){
+                $out .= $producer["name"] . ", ";
+            }
+            return substr($out, 0, strlen($out)-2);
+
+        case "site":
+            $url = "https://api.themoviedb.org/3/$type/$id?api_key=$api&language=fr";
+            $json = getJSON($url);
+            $homepage = $json["homepage"];
+            if(!empty($homepage)){
+                return "<a href=\"$homepage\">$homepage</a>";
+            }
+            else{
+                return "Information indisponible.";
+            }
     }
 }
 
@@ -180,24 +323,8 @@ function getTop($fichier, $size){
 
 function generateTopText($csv, $i, $type){
     if(isset($csv[$i])){
-        $details = detailsTop($csv[$i][0], $type);
-        if($type == "tv"){
-            $str = "\t\t\t\t\t\t\t<p>" . $details["original_name"] . "</p>\n";
-        }
-        else{
-            $str = "\t\t\t\t\t\t\t<p>" . $details["original_title"] . "</p>\n";
-        }
-        if(isset($details["poster_path"])){
-            if($type == "tv"){
-                $str .= "\t\t\t\t\t\t\t<img class='thumbnailtop' src='https://image.tmdb.org/t/p/original" . $details["poster_path"] . "' alt='poster " . $details["original_name"] . "'/>\n";
-            }
-            else{
-                $str .= "\t\t\t\t\t\t\t<img class='thumbnailtop' src='https://image.tmdb.org/t/p/original" . $details["poster_path"] . "' alt='poster " . $details["original_title"] . "'/>\n";
-            }
-        }
-        else{
-            $str .= "\t\t\t\t\t\t\t<img class='thumbnailtop' src='ressources/images/no-image.png' alt='no-image'/>\n";
-        }
+        $str = "\t\t\t\t\t\t\t<p>" . getInfo($csv[$i][0], "title", $type) . "</p>\n";
+        $str .= "\t\t\t\t\t\t\t<img class='thumbnailtop' src='" . getInfo($csv[$i][0], "poster", $type) . "' alt='poster " . getInfo($csv[$i][0], "title", $type) . "'/>\n";
         $str .= "\t\t\t\t\t\t\t<p> Avec " . $csv[$i][1] . " consultations !</p>\n";
         return $str;
     }
@@ -247,5 +374,6 @@ function jpgraphBar($fichier){
     $height = 200;
 }
 */
+
 
 ?>

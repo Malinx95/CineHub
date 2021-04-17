@@ -40,11 +40,18 @@
                 <?php
                 if($current==0){
                     if(isset($_GET["from"]) && !empty($_GET["from"])){
-                        echo "<li><a class='active' href='stats.php'>Retour</a></li>\n";
+                        if($_GET["from"] == "stats"){
+                            echo "<li><a class='active' href='stats.php'>Retour</a></li>\n";
+                        }
+                        else if($_GET["from"] == "search"){
+                            echo "<li><a class='active' href='rechercher.php?search=", $_GET["query"], "#more'>Retour</a></li>\n";
+                        }
                     }
+                    /*
                     else if(isset($_COOKIE["last"]) && !empty($_COOKIE["last"])){
                         echo "<li><a class='active' href='rechercher.php?search=", $_COOKIE["last"], "#more'>Retour</a></li>\n";
                     }
+                    */
                     else{
                         echo "<li><a class='active' href='rechercher.php'>Retour</a></li>\n";
                     }
