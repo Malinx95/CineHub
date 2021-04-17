@@ -232,17 +232,14 @@ h1{
     border-radius: 25px;
     border: none;
     box-shadow:0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-}
-
-.filtres {
-    margin-left: 40vw;
-    margin-right: 40vw;
-    height: 15vh;
+    width: 90vw;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .filtres div div{
     display: inline-block;
-    width: 5vw;
+    /* width: 5vw; */
     padding: 1%;
     border-radius: 25px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
@@ -259,6 +256,7 @@ h1{
     width: 90vw;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 5vh;
     margin-bottom: 5vh;
     border: none;
     border-radius: 25px;
@@ -270,6 +268,9 @@ h1{
     margin-top: 1%;
 }
 
+legend{
+    font-weight: bold;
+}
 .scroll{
     width: 88vw;
     overflow-x: scroll;
@@ -303,6 +304,7 @@ h1{
 
 .scroll::-webkit-scrollbar {
     height: 10px;
+    width: 10px;
 }
 
 .scroll::-webkit-scrollbar-thumb {
@@ -334,7 +336,6 @@ h1{
 
 .ranking fieldset{
     border-radius: 25px;
-    border: thin solid;
     width: 30%;
     text-align: center;
     border: none;
@@ -409,9 +410,17 @@ h1{
     left: 0;
     top: 0;
     z-index: -1;
-    filter: blur(5px) brightness(0.5);
+    filter: /*blur(5px)*/ brightness(0.5);
 }
 
 .title{
     position: relative;
+}
+
+.expand{
+    height: 700px;
+    overflow-x: initial;
+    overflow-y: scroll;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 }
