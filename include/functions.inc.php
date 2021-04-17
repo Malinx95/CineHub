@@ -42,23 +42,45 @@ function tmdb($type, $query) { //requete api the movie database
 */
 
 function search_results($query, $type){
-
     $query = str_replace(" ", "+", $query);
     $key = "?api_key=a22fd943c9bbecd346f31c75d2bd3969";
     $url = "https://api.themoviedb.org/3/search/" . $type . $key . "&query=" . $query;
-    //echo "<a href=\"", $url, "\">request</a>\n";
     $json = file_get_contents($url);
     $obj = json_decode($json, true);
     $results = $obj["results"];
 
     $out = "";
-    foreach ($results as $key => $value) {
-        $result = $value;
+    foreach ($results as $result) {
+        if($type == "movie"){
+            $title = $result["original_title"];
+            if(empty($result["release_date"])){
+                $date = "Date indisponible";
+            }
+            else{
+                $date = $result["release_date"];
+            }
+        }
+        else{
+            $title = $result["original_name"];
+            if(empty($result["first_air_date"])){
+                $date = "Date indisponible";
+            }
+            else{
+                $date = $result["first_air_date"];
+            }
+        }
+        $poster = $result["poster_path"];
+        if(empty($poster)){
+            $poster = "ressources/images/no-image.png";
+        }
+        else{
+            $poster = "https://image.tmdb.org/t/p/original" . $poster;
+        }
         $out .= "<a href='voir.php?id=" . $result["id"] . "&type=$type&from=search&query=" . $query . "'>\n";
         $out .= "\t\t\t\t\t\t<article>\n";
-        $out .= "\t\t\t\t\t\t\t<h3>" . getInfo($result["id"], "title", $type) . "</h3>\n";
-        $out .= "\t\t\t\t\t\t\t<img class='thumbnail' src='" . getInfo($result["id"], "poster", $type) . "' alt='poster " . getInfo($result["id"], "title", $type) . "'/>\n";
-        $out .= "\t\t\t\t\t\t\t<p>" . getInfo($result["id"], "date", $type) . "</p>\n";
+        $out .= "\t\t\t\t\t\t\t<h3>" . $title . "</h3>\n";
+        $out .= "\t\t\t\t\t\t\t<img class='thumbnail' src='$poster' alt='poster " . $title . "'/>\n";
+        $out .= "\t\t\t\t\t\t\t<p>" . $date . "</p>\n";
         $out .= "\t\t\t\t\t\t</article>\n";
         $out .= "\t\t\t\t\t</a>\n";
     }
@@ -156,11 +178,15 @@ function getInfo($id, $info, $type="movie"){
             $url = "https://api.themoviedb.org/3/$type/$id?api_key=$api&language=fr";
             $json = getJSON($url);
             if($type == "movie"){
-                return $json["original_title"];
+                $title = $json["original_title"];
             }
             else{
-                return $json["original_name"];
+                $title = $json["original_name"];
             }
+            if(empty($title)){
+                return "Titre indisponible";
+            }
+            return $title;
 
         case "poster":
             $url = "https://api.themoviedb.org/3/$type/$id?api_key=$api&language=fr";
@@ -176,21 +202,37 @@ function getInfo($id, $info, $type="movie"){
         case "overview":
             $url = "https://api.themoviedb.org/3/$type/$id?api_key=$api&language=fr";
             $json = getJSON($url);
-            return $json["overview"];
+            $overview = $json["overview"];
+            if(empty($overview)){
+                return "Synopsys indisponible";
+            }
+            return $overview;
 
         case "rating":
             $url = "https://api.themoviedb.org/3/$type/$id?api_key=$api&language=fr";
             $json = getJSON($url);
-            return $json["vote_average"] . "/10 (" . $json["vote_count"] . " votes)";
+            $average = $json["vote_average"];
+            $count = $json["vote_count"];
+            if(empty($average) || empty($count)){
+                return "Note indisponible";
+            }
+            return $average . "/10 (" . $count . " votes)";
 
         case "origin":
             $url = "https://api.themoviedb.org/3/$type/$id?api_key=$api&language=fr";
             $json = getJSON($url);
-            return $json["original_language"];
+            $origin = $json["original_language"];
+            if(empty($origin)){
+                return "Origine indisponible";
+            }
+            return $origin;
 
         case "directors":
             $url = "https://api.themoviedb.org/3/$type/$id/credits?api_key=$api&language=fr";
             $json = getJSON($url);
+            if(empty($json["crew"])){
+                return "Réalisateurs indisponibles";
+            }
             $out = "";
             foreach($json["crew"] as $crew){
                 if($crew["job"] == "Director"){
@@ -204,11 +246,17 @@ function getInfo($id, $info, $type="movie"){
             $json = getJSON($url);
             if($type == "movie"){
                 $time = $json["runtime"];
+                if(empty($time)){
+                    return "Durée indisponible";
+                }
                 $h = explode(".", $time/60)[0];
                 $m = $time - $h*60;
                 return $h . "h" . $m . "m";
             }
             else{
+                if(empty($json["episode_run_time"])){
+                    return "Durée indisponible";
+                }
                 $out = "";
                 foreach($json["episode_run_time"] as $time){
                     $out .= $time . "m, ";
@@ -220,6 +268,9 @@ function getInfo($id, $info, $type="movie"){
         case "actors":
             $url = "https://api.themoviedb.org/3/$type/$id/credits?api_key=$api&language=fr";
             $json = getJSON($url);
+            if(empty($json["cast"])){
+                return "Acteurs indisponibles";
+            }
             $out = "";
             foreach($json["cast"] as $crew){
                 if($crew["known_for_department"] == "Acting"){
@@ -231,6 +282,9 @@ function getInfo($id, $info, $type="movie"){
         case "genres":
             $url = "https://api.themoviedb.org/3/$type/$id?api_key=$api&language=fr";
             $json = getJSON($url);
+            if(empty($json["genres"])){
+                return "Genres indisponibles";
+            }
             $out = "";
             foreach($json["genres"] as $genre){
                 $out .= $genre["name"] . ", ";
@@ -247,13 +301,16 @@ function getInfo($id, $info, $type="movie"){
                 $date = $json["first_air_date"];
             }
             if(empty($date)){
-                return "Date indisponible.";
+                return "Date indisponible";
             }
             return $date;
 
         case "producers":
             $url = "https://api.themoviedb.org/3/$type/$id?api_key=$api&language=fr";
             $json = getJSON($url);
+            if(empty($json["production_companies"])){
+                return "Producteurs indisponibles";
+            }
             $out = "";
             foreach($json["production_companies"] as $producer){
                 $out .= $producer["name"] . ", ";
@@ -268,7 +325,7 @@ function getInfo($id, $info, $type="movie"){
                 return "<a href=\"$homepage\">$homepage</a>";
             }
             else{
-                return "Information indisponible.";
+                return "Page officielle indisponible";
             }
     }
 }
