@@ -1,4 +1,13 @@
 <?php
+    if(empty($_COOKIE["theme"])){
+        setcookie("theme", "light", time()+60*60*24*30, $_SERVER['PHP_SELF']);
+    }
+    if(isset($_GET["theme"])){
+        setcookie("theme", $_GET["theme"], time()+60*60*24*30, $_SERVER['PHP_SELF']);
+        $page = basename($_SERVER['PHP_SELF']);
+        header("Location: $page");
+    }
+
     if(!file_exists("stats/hits.txt")){ 
         $compteur=fopen("stats/hits.txt","w");
         $hit=1;
@@ -25,7 +34,18 @@
     <meta name='author' content='Maxime Grodet &amp; Antoine Qiu'/>
     <meta name='date' content='28/03/2021'/>
     <meta name='keywords' content='CineHub'/>
-    <link rel="stylesheet" href="style.css"/>
+    <?php
+    if(isset($_GET["theme"])){
+        echo "<link rel=\"stylesheet\" href=\"" . $_GET["theme"] . ".css\"/>";
+    }
+    elseif(isset($_COOKIE["theme"])) {
+        echo "<link rel=\"stylesheet\" href=\"" . $_COOKIE["theme"] . ".css\"/>";
+    }
+    else {
+        echo "<link rel=\"stylesheet\" href=\"light.css\"/>";
+    }
+    ?>
+    <link rel="stylesheet" href="dark.css"/>
     <link rel="icon" href="ressources/logo/logo.png">
 </head>
 <body>
@@ -36,6 +56,16 @@
                 <img src="ressources/logo/logo2.png" alt="logo"/>
                 <p>CineHub</p>
             </a>
+            <?php
+            echo "<form method=\"get\">\n";
+            if($_COOKIE["theme"] == "light"){
+                echo "\t\t<input type=\"submit\" name=\"theme\" value=\"dark\"/>\n";
+            }
+            else{
+                echo "\t\t<input type=\"submit\" name=\"theme\" value=\"light\"/>\n";
+            }
+            echo "\t</form>\n";
+            ?>
             <ul>
                 <?php
                 if($current==0){
