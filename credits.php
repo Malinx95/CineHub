@@ -7,19 +7,29 @@ include 'include/functions.inc.php';
     <section id="card">
         <h2>Auteurs</h2>
         <div class="center">
-            <div>
-                <h3>Maxime Grodet</h3>
+            <div class="minicv maxime">
                 <figure>
-                    <figcaption>Mini cv Maxime</figcaption>
-                    <img src="" alt="photo Maxime"/>
+                    <figcaption>Photo Maxime</figcaption>
+                    <img src="ressources/images/no-image.png" alt="photo Maxime"/>
                 </figure>
+
+                <div>
+                    <h3>Maxime Grodet</h3>
+                    <p>Petite intro blabla blabla blabla blabla blabla blabla blabla blabla blabla blabla blabla blabla blabla blabla blabla</p>
+                </div>
             </div>
-            <div>
-                <h3>Antoine Qiu</h3>
+            <div class="minicv antoine">
+
                 <figure>
-                    <figcaption>Mini cv Antoine</figcaption>
-                    <img src="" alt="photo Antoine"/>
+                    <figcaption>Photo Antoine</figcaption>
+                    <img src="ressources/images/no-image.png" alt="photo Antoine"/>
                 </figure>
+                <div>
+                    <h3>Antoine Qiu</h3>
+                    <p>Petite intro blabla blabla blabla blabla blabla blabla blabla blabla blabla blabla blabla blabla blabla blabla blabla</p>
+                </div>
+
+
             </div>
         </div>
         <a class="morebutton button" href="#more">Voir plus</a>
@@ -27,24 +37,34 @@ include 'include/functions.inc.php';
     </section>
     <section id="more">
         <h2>Plus</h2>
-        <div class="center">
-            <div>
+        <div class="center cv">
+            <div class="left">
                 <h3>CV</h3>
-                <p>Présentation</p>
+                <h2>Parcours scolaire</h2>
+                <p>blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla </p>
+                <h2>Expériences</h2>
+                <p>blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla </p>
+                <h2>Compétences</h2>
+                <p>blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla </p>
             </div>
-            <div>
+            <div class="middle">
                 <h3>Crédits</h3>
                 <ul>
                     <li><p>API TMDB</p></li>
                     <li><p>API APOD</p></li>
                     <li><p>API Geoplugin</p></li>
                     <li><p>Prof?</p></li>
-                    <div>Icons made by <a href="https://www.flaticon.com/authors/those-icons" title="Those Icons">Those Icons</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+                    <p>Icons made by <a href="https://www.flaticon.com/authors/those-icons" title="Those Icons">Those Icons</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></p>
                 </ul>
             </div>
-            <div>
+            <div class="right">
                 <h3>CV</h3>
-                <p>Présentation</p>
+                <h2>Parcours scolaire</h2>
+                <p>blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla </p>
+                <h2>Expériences</h2>
+                <p>blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla </p>
+                <h2>Compétences</h2>
+                <p>blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla blablabla </p>
             </div>
         </div>
     </section>
