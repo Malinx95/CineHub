@@ -6,7 +6,7 @@ include 'include/functions.inc.php';
 ?>
     <section id="card">
         <h2>Introduction</h2>
-        <div class="center">
+        <div class="center accueil">
             <img class="roundedcorner biglogo" src="ressources/logo/logo.png" alt="logo cinehub"/>
             <p>Bienvenue sur CineHub ! Le site pour les passionés de films et séries en tout genre !</p>
             <p>Cliquez sur le bouton ci-dessous pour commencer !</p>
