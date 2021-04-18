@@ -7,7 +7,7 @@
     $x = array();
     $y = array();
     foreach ($csv as $key => $value) {
-        array_push($x, $value[0]);
+        array_push($x, getInfo($value[0], "title"));
         array_push($y, $value[1]);
     }
     $width = 500;

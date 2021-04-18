@@ -6,20 +6,20 @@
                 <div>
                     <div>
                         <label for="movie">Films</label>
-                        <input id="movie" type='radio' name="type" value="movie" <?php if(isset($_POST["type"]) && $_POST["type"] == "movie"){echo "checked";}?>/>
+                        <input id="movie" type='radio' name="type" value="movie" <?php if(isset($_POST["type"]) && $_POST["type"] == "movie"){echo "checked=\"true\"";}?>/>
                         <label for="both">Films &amp; Séries</label>
-                        <input id="both" type='radio' name="type" value="both" <?php if(!isset($_POST["type"]) || $_POST["type"] == "both"){echo "checked";}?>/>
+                        <input id="both" type='radio' name="type" value="both" <?php if(!isset($_POST["type"]) || $_POST["type"] == "both"){echo "checked=\"true\"";}?>/>
                         <label for="tv">Séries</label>
-                        <input id="tv" type='radio' name="type" value="tv" <?php if(isset($_POST["type"]) && $_POST["type"] == "tv"){echo "checked";}?>/>
+                        <input id="tv" type='radio' name="type" value="tv" <?php if(isset($_POST["type"]) && $_POST["type"] == "tv"){echo "checked=\"true\"";}?>/>
                     </div>
                 </div>
                 <div>
-                    <input class="button" type="submit" value="Appliquer les filtres">
+                    <input class="button" type="submit" value="Appliquer les filtres"/>
                 </div>
             </fieldset>
         </form>
-        <fieldset class='results'>
+        <fieldset class="results">
             <legend>Résultat</legend>
-            <?php echo search_results($_GET["search"]); ?>
+<?php echo search_results($_GET["search"]); ?>
         </fieldset>
     </section>

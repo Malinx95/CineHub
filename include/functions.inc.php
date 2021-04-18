@@ -7,10 +7,10 @@ function nasa() { //retourne img
     $obj = json_decode($json);
     $url = $obj->{'url'};
     if(strpos($url, "youtube") != false){
-        return "<embed class='nasa' type=\"video/webm\" src='$url' autoplay/>";
+        return "<embed class='nasa' type=\"video/webm\" src='$url' autoplay/>\n";
     }
     else{
-        return "<img class=\"nasa\" src=\"$url\" alt=\"image nasa\"/>";
+        return "<img class=\"nasa\" src=\"$url\" alt=\"image nasa\"/>\n";
     }
 }
 
@@ -65,6 +65,8 @@ function search($json, $query, $type, $expand=false){
             }
             else{
                 $date = $result["release_date"];
+                $date = explode("-", $date);
+                $date = $date[2] . "/" . $date[1] . "/" . $date[0];
             }
         }
         else{
@@ -74,6 +76,8 @@ function search($json, $query, $type, $expand=false){
             }
             else{
                 $date = $result["first_air_date"];
+                $date = explode("-", $date);
+                $date = $date[2] . "/" . $date[1] . "/" . $date[0];
             }
         }
         $poster = $result["poster_path"];
@@ -83,10 +87,10 @@ function search($json, $query, $type, $expand=false){
         else{
             $poster = "https://image.tmdb.org/t/p/original" . $poster;
         }
-        $out .= "\t\t\t\t\t<a href='voir.php?id=" . $result["id"] . "&type=$type&from=search&query=" . $query . "'>\n";
+        $out .= "\t\t\t\t\t<a href=\"voir.php?id=" . $result["id"] . "&type=$type&from=search&query=" . $query . "\">\n";
         $out .= "\t\t\t\t\t\t<article>\n";
         $out .= "\t\t\t\t\t\t\t<h3>" . $title . "</h3>\n";
-        $out .= "\t\t\t\t\t\t\t<img class='thumbnail' src='$poster' alt='poster " . $title . "'/>\n";
+        $out .= "\t\t\t\t\t\t\t<img class=\"thumbnail\" src=\"$poster\" alt=\"poster " . $title . "\"/>\n";
         $out .= "\t\t\t\t\t\t\t<p>" . $date . "</p>\n";
         $out .= "\t\t\t\t\t\t</article>\n";
         $out .= "\t\t\t\t\t</a>\n";
@@ -97,6 +101,8 @@ function search($json, $query, $type, $expand=false){
 }
 
 function search_results($query){
+    $query = str_replace("&", "%26", $query);
+    $query = str_replace("+", "%2B", $query);
     $query = str_replace(" ", "+", $query);
     $movie = getJSON("https://api.themoviedb.org/3/search/movie?api_key=" . KEY . "&query=" . $query)["results"];
     $tv = getJSON("https://api.themoviedb.org/3/search/tv?api_key=" . KEY . "&query=" . $query)["results"];
@@ -332,7 +338,8 @@ function getInfo($id, $info, $type="movie"){
             if(empty($date)){
                 return "Date indisponible";
             }
-            return $date;
+            $date = explode("-", $date);
+            return $date[2] . "/" . $date[1] . "/" . $date[0];
 
         case "producers":
             $url = "https://api.themoviedb.org/3/$type/$id?api_key=" . KEY . "&language=fr";
@@ -427,24 +434,24 @@ function generateTopText($csv, $i, $type){
 function svgGraph($fichier){
     $csv = getTop($fichier, 10);
     $ligne = 15;
-    $str = "\t<figure>\n";
+    $str = "\t\t\t<figure>\n";
     if(stripos($fichier, "movie") != false){
-        $str = "<figcaption>Top film</figcaption>\n";
+        $str .= "\t\t\t\t<figcaption>Top film</figcaption>\n";
     }
     else{
-        $str = "\t\t<figcaption>Top serie</figcaption>\n";
+        $str .= "\t\t\t\t<figcaption>Top serie</figcaption>\n";
     }
-    $str .= "\t\t<svg style=\"height: 200px; width: 500px\">\n";
-    $str .= "\t\t\t<rect width=\"500\" height=\"200\" stroke=\"black\" stroke-width=\"5\" style=\"fill:rgb(255,255,255)\" />\n";
-    $str .= "\t\t\t<line x1=\"" . $ligne . "%\" y1=\"0%\" x2=\"" . $ligne . "%\" y2=\"100%\" stroke=\"black\" stroke-width=\"2\" />\n";
+    $str .= "\t\t\t\t<svg style=\"height: 200px; width: 500px\">\n";
+    $str .= "\t\t\t\t\t<rect width=\"500\" height=\"200\" stroke=\"black\" stroke-width=\"5\" style=\"fill:rgb(255,255,255)\" />\n";
+    $str .= "\t\t\t\t\t<line x1=\"" . $ligne . "%\" y1=\"0%\" x2=\"" . $ligne . "%\" y2=\"100%\" stroke=\"black\" stroke-width=\"2\" />\n";
     $max = $csv[0][1];
     foreach ($csv as $key => $value) {
-        $str .= "\t\t\t<text x=\"2%\" y=\"" . ((($key+1)*8)+3.5) . "%\">" . $csv[$key][0] . "</text>\n";
-        $str .= "\t\t\t<text x=\"" . ((80/$max*$csv[$key][1])+$ligne) . "%\" y=\"" . ((($key+1)*8)+3.5) . "%\">" . $csv[$key][1] . "</text>\n";
-        $str.= "\t\t\t<rect x=\"" . $ligne . "%\" y=\"" . ($key+1)*8 . "%\" width=\"" . 80/$max*$csv[$key][1] . "%\" height=\"2%\" style=\"fill:rgb(255,0,0)\" />\n";
+        $str .= "\t\t\t\t\t<text x=\"2%\" y=\"" . ((($key+1)*8)+3.5) . "%\">" . $csv[$key][0] . "</text>\n";
+        $str .= "\t\t\t\t\t<text x=\"" . ((80/$max*$csv[$key][1])+$ligne) . "%\" y=\"" . ((($key+1)*8)+3.5) . "%\">" . $csv[$key][1] . "</text>\n";
+        $str.= "\t\t\t\t\t<rect x=\"" . $ligne . "%\" y=\"" . ($key+1)*8 . "%\" width=\"" . 80/$max*$csv[$key][1] . "%\" height=\"2%\" style=\"fill:rgb(255,0,0)\" />\n";
     }
-    $str .= "\t\t</svg>\n";
-    $str .= "\t</figure>\n";
+    $str .= "\t\t\t\t</svg>\n";
+    $str .= "\t\t\t</figure>\n";
     return $str;
 }
 /*

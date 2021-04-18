@@ -17,7 +17,7 @@ include 'include/functions.inc.php';
     </section>
     <section id="more">
         <h2>Informations</h2>
-        <div class="center">
+        <div class="center accueil">
             <h3>Présentation</h3>
             <p>Ce site à été crée dans le cadre de l'Unité d'Enseignement Developpement Web 2020-2021.</p>
             <p>Réalisé par Maxime Grodet &amp; Antoine Qiu en L2 Informatique, groupe C.</p>

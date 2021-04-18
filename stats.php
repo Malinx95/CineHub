@@ -29,12 +29,12 @@ include 'include/functions.inc.php';
     <section id="more">
         <h2>Graphiques</h2>
         <div class="center">
-            <?php
-            echo svgGraph("stats/movie_hits.csv");
-            echo svgGraph("stats/tv_hits.csv");
-            echo "<img src='include/graph1.php' />\n";
-            echo "<img src='include/graph2.php' />\n";
-            ?>
+<?php
+echo svgGraph("stats/movie_hits.csv");
+echo svgGraph("stats/tv_hits.csv");
+echo "\t\t\t<img src=\"include/graph1.php\" alt=\"graph1\"/>\n";
+echo "\t\t\t<img src=\"include/graph2.php\" alt=\"graph2\"/>\n";
+?>
         </div>
     </section>
 <?php

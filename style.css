@@ -204,7 +204,7 @@ h1{
     transform: translate(-50%, -50%);
 }
 
-.center p{
+.accueil p{
     margin: 2%
 }
 #more .center{
@@ -270,6 +270,11 @@ h1{
 
 legend{
     font-weight: bold;
+}
+
+.top legend {
+    color: white;
+    padding-bottom: 10%;
 }
 .scroll{
     width: 88vw;

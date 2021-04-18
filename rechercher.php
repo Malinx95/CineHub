@@ -8,19 +8,19 @@ include 'include/functions.inc.php';
 }*/
 ?>
     <section id="card">
-        <h2>Rechercher</h2>
+        <h2>Barre de recherche</h2>
         <div class="center">
             <form method="get" action="#more">
                 <div>
-                    <input class="searchbar" type="text" name="search" placeholder="rechercher un film ou une série" <?php if(isset($_GET["search"]) && !empty($_GET["search"])){echo "value='", $_GET['search'], "'";} ?>/>
+                    <input class="searchbar" type="text" name="search" placeholder="rechercher un film ou une série" <?php if(isset($_GET["search"]) && !empty($_GET["search"])){echo "value=\"", $_GET["search"], "\"";} ?>/>
                 </div>
                 <div>
-                    <input class="searchbutton button" type="submit" value="Rechercher">
+                    <input class="searchbutton button" type="submit" value="Rechercher"/>
                 </div>
             </form>
         </div>
-        <?php if(isset($_GET["search"]) && !empty($_GET["search"])){echo"<a class='morebutton button' href='#more'>Voir plus</a>\n";}?>
-        <img class="bg" src="https://stationf.co/wp-content/uploads/2019/06/hero-home-page.jpg" alt="bg"/>
+        <?php if(isset($_GET["search"]) && !empty($_GET["search"])){echo"<a class='morebutton button' href='#more'>Voir plus</a>\n";}else{echo"\n";}?>
+    <img class="bg" src="https://stationf.co/wp-content/uploads/2019/06/hero-home-page.jpg" alt="bg"/>
     </section>
     <?php
     if(isset($_GET["search"]) && !empty($_GET["search"])){

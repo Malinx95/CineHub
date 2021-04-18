@@ -26,7 +26,7 @@
     <meta name='date' content='28/03/2021'/>
     <meta name='keywords' content='CineHub'/>
     <link rel="stylesheet" href="style.css"/>
-    <link rel="icon" href="ressources/logo/logo.png">
+    <link rel="icon" href="ressources/logo/logo.png"/>
 </head>
 <body>
     <header id="header">
