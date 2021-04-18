@@ -207,8 +207,14 @@ h1{
 }
 
 .accueil p{
-    margin: 2%
+    margin: 2%;
+    color: white;
 }
+
+#more .accueil p{
+    color: black;
+}
+
 #more .center{
     top: 40%;
 }
@@ -256,10 +262,7 @@ h1{
 
 .results{
     width: 90vw;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 5vh;
-    margin-bottom: 5vh;
+    margin: 5vh auto;
     border: none;
     border-radius: 25px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
@@ -343,7 +346,6 @@ legend{
 
 .ranking fieldset{
     border-radius: 25px;
-    border: thin solid;
     width: 30%;
     text-align: center;
     border: none;
@@ -383,6 +385,14 @@ legend{
     height: 10%;
 }
 
+.top h3{
+    margin: 0;
+}
+
+.ranking legend{
+    color: black;
+}
+
 .nasa{
     height: 20vh;
 }
@@ -418,7 +428,7 @@ legend{
     left: 0;
     top: 0;
     z-index: -1;
-    filter: /*blur(5px)*/ brightness(0.5);
+    filter: blur(5px) brightness(0.5);
 }
 
 .title{
@@ -430,18 +440,23 @@ legend{
     width: 4%;
     display: flex;
     align-items: center;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .theme input[type="submit"]{
-    height: 60%;
-    width: 60%;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 4vh;
+    width: 4vh;
     color: inherit;
     border: none;
     padding: 0;
     font: inherit;
     cursor: pointer;
     outline: inherit;
-    /* background-image: url(ressources/images/moon.png); */
     background-size: 100% 100%;
     background-position: center center;
     background-color: transparent;
