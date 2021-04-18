@@ -1,11 +1,31 @@
 <?php
     if(empty($_COOKIE["theme"])){
-        setcookie("theme", "light", time()+60*60*24*30, $_SERVER['PHP_SELF']);
+        setcookie("theme", "light", time()+60*30);
+        $txt = "dark";
+        $img = "moon";
     }
     if(isset($_GET["theme"])){
-        setcookie("theme", $_GET["theme"], time()+60*60*24*30, $_SERVER['PHP_SELF']);
+        setcookie("theme", $_GET["theme"], time()+60*30);
         $page = basename($_SERVER['PHP_SELF']);
         header("Location: $page");
+        if($_GET["theme"] == "dark"){
+            $txt = "light";
+            $img = "sun";
+        }
+        else{
+            $txt = "dark";
+            $img = "moon";
+        }
+    }
+    if(isset($_COOKIE["theme"])){
+        if($_COOKIE["theme"] == "dark"){
+            $txt = "light";
+            $img = "sun";
+        }
+        else{
+            $txt = "dark";
+            $img = "moon";
+        }
     }
 
     if(!file_exists("stats/hits.txt")){ 
@@ -45,27 +65,34 @@
         echo "<link rel=\"stylesheet\" href=\"light.css\"/>";
     }
     ?>
-    <link rel="stylesheet" href="dark.css"/>
+    <!-- <link rel="stylesheet" href="dark.css"/> -->
     <link rel="icon" href="ressources/logo/logo.png">
 </head>
 <body>
     <header id="header">
         <h1><?php echo$title?></h1>
         <nav>
+            
             <a class="smalllogo" href="index.php">
                 <img src="ressources/logo/logo2.png" alt="logo"/>
                 <p>CineHub</p>
             </a>
-            <?php
+
+            <form class="theme" method="get">
+                <input type="hidden" name="theme" value="<?php echo $txt ?>" />
+                <input type="submit" value=" " style="background-image: url(ressources/images/<?php echo $img ?>.png);" />
+            </form>
+
+            <!-- <?php
             echo "<form method=\"get\">\n";
             if($_COOKIE["theme"] == "light"){
-                echo "\t\t<input type=\"submit\" name=\"theme\" value=\"dark\"/>\n";
+                echo "\t\t<input type=\"image\" name=\"theme\" value=\"dark\"/>\n";
             }
             else{
-                echo "\t\t<input type=\"submit\" name=\"theme\" value=\"light\"/>\n";
+                echo "\t\t<input type=\"image\" name=\"theme\" value=\"light\"/>\n";
             }
             echo "\t</form>\n";
-            ?>
+            ?> -->
             <ul>
                 <?php
                 if($current==0){
