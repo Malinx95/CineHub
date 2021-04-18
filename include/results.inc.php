@@ -5,12 +5,12 @@
                 <legend>Filtres</legend>
                 <div>
                     <div>
-                        <label>option 1</label>
-                        <input type='checkbox'>
-                    </div>
-                    <div>
-                        <label>option 2</label>
-                        <input type='checkbox'>
+                        <label for="movie">Films</label>
+                        <input id="movie" type='radio' name="type" value="movie" <?php if(isset($_POST["type"]) && $_POST["type"] == "movie"){echo "checked";}?>/>
+                        <label for="both">Films &amp; Séries</label>
+                        <input id="both" type='radio' name="type" value="both" <?php if(!isset($_POST["type"]) || $_POST["type"] == "both"){echo "checked";}?>/>
+                        <label for="tv">Séries</label>
+                        <input id="tv" type='radio' name="type" value="tv" <?php if(isset($_POST["type"]) && $_POST["type"] == "tv"){echo "checked";}?>/>
                     </div>
                 </div>
                 <div>
@@ -20,23 +20,6 @@
         </form>
         <fieldset class='results'>
             <legend>Résultat</legend>
-            <fieldset>
-                <legend>Films</legend>
-                <div class="scroll">
-                    <?php
-                    include_once 'include/functions.inc.php';
-                    echo search_results($_GET["search"], "movie");
-                    ?>
-                </div>
-            </fieldset>
-            <fieldset>
-                <legend>Séries</legend>
-                <div class="scroll">
-                    <?php
-                    include_once 'include/functions.inc.php';
-                    echo search_results($_GET["search"], "tv");
-                    ?>
-                </div>
-            </fieldset>
+            <?php echo search_results($_GET["search"]); ?>
         </fieldset>
     </section>
