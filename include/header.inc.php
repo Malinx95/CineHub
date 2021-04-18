@@ -1,5 +1,34 @@
 <?php
-    if(!file_exists("stats/hits.txt")){ 
+    if(empty($_COOKIE["theme"])){
+        setcookie("theme", "light", time()+60*30);
+        $txt = "dark";
+        $img = "moon";
+    }
+    if(isset($_GET["theme"])){
+        setcookie("theme", $_GET["theme"], time()+60*30);
+        $page = basename($_SERVER['PHP_SELF']);
+        header("Location: $page");
+        if($_GET["theme"] == "dark"){
+            $txt = "light";
+            $img = "sun";
+        }
+        else{
+            $txt = "dark";
+            $img = "moon";
+        }
+    }
+    if(isset($_COOKIE["theme"])){
+        if($_COOKIE["theme"] == "dark"){
+            $txt = "light";
+            $img = "sun";
+        }
+        else{
+            $txt = "dark";
+            $img = "moon";
+        }
+    }
+
+    if(!file_exists("stats/hits.txt")){
         $compteur=fopen("stats/hits.txt","w");
         $hit=1;
         setcookie("visit","ok",time()+60*30);
@@ -25,7 +54,18 @@
     <meta name='author' content='Maxime Grodet &amp; Antoine Qiu'/>
     <meta name='date' content='28/03/2021'/>
     <meta name='keywords' content='CineHub'/>
-    <link rel="stylesheet" href="style.css"/>
+    <?php
+    if(isset($_GET["theme"])){
+        echo "<link rel=\"stylesheet\" href=\"" . $_GET["theme"] . ".css\"/>";
+    }
+    elseif(isset($_COOKIE["theme"])) {
+        echo "<link rel=\"stylesheet\" href=\"" . $_COOKIE["theme"] . ".css\"/>";
+    }
+    else {
+        echo "<link rel=\"stylesheet\" href=\"light.css\"/>";
+    }
+    ?>
+    <!-- <link rel="stylesheet" href="dark.css"/> -->
     <link rel="icon" href="ressources/logo/logo.png"/>
 </head>
 <body>
@@ -36,6 +76,21 @@
                 <img src="ressources/logo/logo2.png" alt="logo"/>
                 <p>CineHub</p>
             </a>
+
+            <form class="theme" method="get">
+                <input type="hidden" name="theme" value="<?php echo $txt ?>" />
+                <input type="submit" value=" " style="background-image: url(ressources/images/<?php echo $img ?>.png);" />
+            </form>
+            <!-- <?php
+            echo "<form method=\"get\">\n";
+            if($_COOKIE["theme"] == "light"){
+                echo "\t\t<input type=\"image\" name=\"theme\" value=\"dark\"/>\n";
+            }
+            else{
+                echo "\t\t<input type=\"image\" name=\"theme\" value=\"light\"/>\n";
+            }
+            echo "\t</form>\n";
+            ?> -->
             <ul>
                 <?php
                 if($current==0){

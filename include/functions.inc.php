@@ -416,7 +416,7 @@ function getTop($fichier, $size){
 
 function generateTopText($csv, $i, $type){
     if(isset($csv[$i])){
-        $str = "\t\t\t\t\t\t\t<p>" . getInfo($csv[$i][0], "title", $type) . "</p>\n";
+        $str = "\t\t\t\t\t\t\t<h3>" . getInfo($csv[$i][0], "title", $type) . "</h3>\n";
         $str .= "\t\t\t\t\t\t\t<img class='thumbnailtop' src='" . getInfo($csv[$i][0], "poster", $type) . "' alt='poster " . getInfo($csv[$i][0], "title", $type) . "'/>\n";
         $str .= "\t\t\t\t\t\t\t<p> Avec " . $csv[$i][1] . " consultations !</p>\n";
         return $str;
