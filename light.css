@@ -584,7 +584,7 @@ legend{
     margin-left: 1%;
     margin-right: 1%;
     display: grid;
-    background: white;
+    background: #FEDB63;
 }
 
 .last_tv a:hover, .last_movie a:hover{
@@ -598,7 +598,7 @@ legend{
 }
 
 .last_tv h3, .last_movie h3{
-    color: black;
+    /* color: black; */
     white-space: initial;
     height: 44px;
 }

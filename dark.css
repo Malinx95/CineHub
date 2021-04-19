@@ -76,3 +76,7 @@ p{
 .minicv figcaption{
     color: white;
 }
+
+.last_tv a, .last_movie a{
+    background: #4a4a4a;
+}
