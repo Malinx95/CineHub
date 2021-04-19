@@ -1,12 +1,12 @@
 <?php
     if(empty($_COOKIE["theme"])){
-        setcookie("theme", "light", time()+60*30);
+        setcookie("theme", "light", time()+60*60*24*365);
         $txt = "dark";
         $img = "moon";
     }
     if(isset($_GET["theme"])){
-        setcookie("theme", $_GET["theme"], time()+60*30);
-        $page = basename($_SERVER['PHP_SELF']);
+        setcookie("theme", $_GET["theme"], time()+60*60*24*365);
+        $page = basename($_SERVER["PHP_SELF"]);
         header("Location: $page");
         if($_GET["theme"] == "dark"){
             $txt = "light";
@@ -51,9 +51,9 @@
     <title>CineHub - <?php echo$title?></title>
     <meta charset="utf-8"/>
     <meta name="description" content="Projet DevWeb"/>
-    <meta name='author' content='Maxime Grodet &amp; Antoine Qiu'/>
-    <meta name='date' content='28/03/2021'/>
-    <meta name='keywords' content='CineHub'/>
+    <meta name="author" content="Maxime Grodet &amp; Antoine Qiu"/>
+    <meta name="date" content="28/03/2021"/>
+    <meta name="keywords" content="CineHub"/>
     <?php
     if(isset($_GET["theme"])){
         echo "<link rel=\"stylesheet\" href=\"" . $_GET["theme"] . ".css\"/>";
@@ -90,45 +90,51 @@
                 if($current==0){
                     if(isset($_GET["from"]) && !empty($_GET["from"])){
                         if($_GET["from"] == "stats"){
-                            echo "<li><a class='active' href='stats.php'>Retour</a></li>\n";
+                            echo "<li><a class=\"active\" href=\"stats.php\">Retour</a></li>\n";
                         }
                         else if($_GET["from"] == "search"){
-                            echo "<li><a class='active' href='rechercher.php?search=", $_GET["query"], "#more'>Retour</a></li>\n";
+                            if(isset($_GET["query"]) && !empty($_GET["query"])){
+                                echo "<li><a class=\"active\" href=\"rechercher.php?search=", $_GET["query"], "#more\">Retour</a></li>\n";
+                            }
+                            else{
+                                echo "<li><a class=\"active\" href=\"rechercher.php\">Retour</a></li>\n";
+                            }
                         }
                     }
-                    /*
-                    else if(isset($_COOKIE["last"]) && !empty($_COOKIE["last"])){
-                        echo "<li><a class='active' href='rechercher.php?search=", $_COOKIE["last"], "#more'>Retour</a></li>\n";
-                    }
-                    */
                     else{
-                        echo "<li><a class='active' href='rechercher.php'>Retour</a></li>\n";
+                        echo "<li><a class=\"active\" href=\"rechercher.php\">Retour</a></li>\n";
+                    }
+                    if($_GET["type"] == "movie"){
+                        setcookie("last_movie", $_GET["id"].";".date("d/m/Y").";".date("H:i"), time()+60*60*24*365);
+                    }
+                    else{
+                        setcookie("last_tv", $_GET["id"].";".date("d/m/Y").";".date("H:i"), time()+60*60*24*365);
                     }
                 }
                 else{
                     echo "<li><a ";
                     if($current == 1){
-                        echo "class='active'";
+                        echo "class=\"active\"";
                     }
-                    echo " href='index.php'>Accueil</a></li>\n";
+                    echo " href=\"index.php\">Accueil</a></li>\n";
 
                     echo "\t\t\t\t<li><a ";
                     if($current == 2){
-                        echo "class='active'";
+                        echo "class=\"active\"";
                     }
-                    echo " href='rechercher.php'>Rechercher</a></li>\n";
+                    echo " href=\"rechercher.php\">Rechercher</a></li>\n";
 
                     echo "\t\t\t\t<li><a ";
                     if($current == 3){
-                        echo "class='active'";
+                        echo "class=\"active\"";
                     }
-                    echo " href='credits.php'>Crédits</a></li>\n";
+                    echo " href=\"credits.php\">Crédits</a></li>\n";
 
                     echo "\t\t\t\t<li><a ";
                     if($current == 4){
-                        echo "class='active'";
+                        echo "class=\"active\"";
                     }
-                    echo " href='stats.php'>Statistiques</a></li>\n";
+                    echo " href=\"stats.php\">Statistiques</a></li>\n";
                 }
                 ?>
             </ul>
