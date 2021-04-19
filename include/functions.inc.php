@@ -468,5 +468,41 @@ function jpgraphBar($fichier){
 }
 */
 
+function last(){
+    $out = "";
 
+    if(isset($_COOKIE["last_movie"]) && !empty($_COOKIE["last_movie"])){
+        $last = explode(";", $_COOKIE["last_movie"]);
+        $id = $last[0];
+        $date = $last[1];
+        $time = $last[2];
+        $out .= "\t\t<div class=\"last_movie\">\n";
+        $out .= "\t\t\t<h2>Dernier film visité</h2>\n";
+        $out .= "\t\t\t<a href=\"voir.php?id=$id&type=movie&from=search\">\n";
+        $out .= "\t\t\t\t<article>\n";
+        $out .= "\t\t\t\t\t<h3>" . getInfo($id, "title", "movie") . "</h3>";
+        $out .= "\t\t\t\t\t<img class=\"thumbnail\" src=\"" . getInfo($id, "poster", "movie") . "\" alt=\"poster " . getInfo($id, "title", "movie") . "\"/>\n";
+        $out .= "\t\t\t\t\t<p>Visité le $date à $time</p>\n";
+        $out .= "\t\t\t\t</article>\n";
+        $out .= "\t\t\t</a>\n";
+        $out .= "\t\t</div>\n";
+    }
+    if(isset($_COOKIE["last_tv"]) && !empty($_COOKIE["last_tv"])){
+        $last = explode(";", $_COOKIE["last_tv"]);
+        $id = $last[0];
+        $date = $last[1];
+        $time = $last[2];
+        $out .= "\t\t<div class=\"last_tv\">\n";
+        $out .= "\t\t\t<h2>Dernière série visitée</h2>\n";
+        $out .= "\t\t\t<a href=\"voir.php?id=$id&type=tv&from=search\">\n";
+        $out .= "\t\t\t\t<article>\n";
+        $out .= "\t\t\t\t\t<h3>" . getInfo($id, "title", "tv") . "</h3>";
+        $out .= "\t\t\t\t\t<img class=\"thumbnail\" src=\"" . getInfo($id, "poster", "tv") . "\" alt=\"poster " . getInfo($id, "title", "tv") . "\"/>\n";
+        $out .= "\t\t\t\t\t<p>Visité le $date à $time</p>\n";
+        $out .= "\t\t\t\t</article>\n";
+        $out .= "\t\t\t</a>\n";
+        $out .= "\t\t</div>\n";
+    }
+        return $out;
+}
 ?>
