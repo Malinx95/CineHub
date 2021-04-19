@@ -4,6 +4,10 @@
     background: #3b3a38;
 }
 
+body{
+    background-color: #3b3a38;
+}
+
 h1{
     color: #FDDC49;
     text-shadow: 2px 2px 2px black;
@@ -13,12 +17,24 @@ h2, h3{
     color: #FDDC49;
 }
 
+p{
+    color: white;
+}
+
 #header nav{
     background-color: #FDDC49;
 }
 
+#header p{
+    color: black;
+}
+
 #footer{
     background-color: #FDDC49;
+}
+
+#footer p{
+    color: black;
 }
 
 .button{
@@ -33,10 +49,26 @@ h2, h3{
     color: white;
 }
 
+#more a{
+    color: white;
+}
+
 .scroll::-webkit-scrollbar-thumb {
     background-color: #FDDC49;
 }
 
 .ranking legend{
     color: white;
+}
+
+.top fieldset{
+    background: #3b3a38;
+}
+
+.minicv p{
+    color: black;
+}
+
+.cv p{
+    color: black;
 }

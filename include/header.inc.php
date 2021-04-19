@@ -76,21 +76,15 @@
                 <img src="ressources/logo/logo2.png" alt="logo"/>
                 <p>CineHub</p>
             </a>
-
-            <form class="theme" method="get">
-                <input type="hidden" name="theme" value="<?php echo $txt ?>" />
-                <input type="submit" value=" " style="background-image: url(ressources/images/<?php echo $img ?>.png);" />
-            </form>
-            <!-- <?php
-            echo "<form method=\"get\">\n";
-            if($_COOKIE["theme"] == "light"){
-                echo "\t\t<input type=\"image\" name=\"theme\" value=\"dark\"/>\n";
+            <?php
+            $page = basename($_SERVER['PHP_SELF']);
+            if(strstr($page, "voir") == false){
+                echo "<form class=\"theme\" method=\"get\">\n";
+                echo "\t\t\t\t<input type=\"hidden\" name=\"theme\" value=\"$txt\" />\n";
+                echo "\t\t\t\t<input type=\"submit\" value=\" \" style=\"background-image: url(ressources/images/$img.png);\" />\n";
+                echo "\t\t\t</form>\n";
             }
-            else{
-                echo "\t\t<input type=\"image\" name=\"theme\" value=\"light\"/>\n";
-            }
-            echo "\t</form>\n";
-            ?> -->
+            ?>
             <ul>
                 <?php
                 if($current==0){
