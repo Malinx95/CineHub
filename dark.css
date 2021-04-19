@@ -65,10 +65,14 @@ p{
     background: #3b3a38;
 }
 
-.minicv p{
-    color: black;
+.cv div{
+    background: #4a4a4a;
 }
 
-.cv p{
-    color: black;
+.minicv {
+    background: #4a4a4a;
+}
+
+.minicv figcaption{
+    color: white;
 }
