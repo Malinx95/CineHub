@@ -4,11 +4,11 @@
         $txt = "dark";
         $img = "moon";
     }
-    if(isset($_GET["theme"])){
-        setcookie("theme", $_GET["theme"], time()+60*60*24*365);
-        $page = basename($_SERVER["PHP_SELF"]);
+    if(isset($_POST["theme"])){
+        setcookie("theme", $_POST["theme"], time()+60*60*24*365);
+        $page = basename($_SERVER["REQUEST_URI"]);
         header("Location: $page");
-        if($_GET["theme"] == "dark"){
+        if($_POST["theme"] == "dark"){
             $txt = "light";
             $img = "sun";
         }
@@ -55,8 +55,8 @@
     <meta name="date" content="28/03/2021"/>
     <meta name="keywords" content="CineHub"/>
     <?php
-    if(isset($_GET["theme"])){
-        echo "<link rel=\"stylesheet\" href=\"" . $_GET["theme"] . ".css\"/>";
+    if(isset($_POST["theme"])){
+        echo "<link rel=\"stylesheet\" href=\"" . $_POST["theme"] . ".css\"/>";
     }
     elseif(isset($_COOKIE["theme"])) {
         echo "<link rel=\"stylesheet\" href=\"" . $_COOKIE["theme"] . ".css\"/>";
@@ -77,13 +77,10 @@
                 <p>CineHub</p>
             </a>
             <?php
-            $page = basename($_SERVER['PHP_SELF']);
-            if(strstr($page, "voir") == false){
-                echo "<form class=\"theme\" method=\"get\">\n";
-                echo "\t\t\t\t<input type=\"hidden\" name=\"theme\" value=\"$txt\" />\n";
-                echo "\t\t\t\t<input type=\"submit\" value=\" \" style=\"background-image: url(ressources/images/$img.png);\" />\n";
-                echo "\t\t\t</form>\n";
-            }
+            echo "<form class=\"theme\" method=\"post\">\n";
+            echo "\t\t\t\t<input type=\"hidden\" name=\"theme\" value=\"$txt\" />\n";
+            echo "\t\t\t\t<input type=\"submit\" value=\" \" style=\"background-image: url(ressources/images/$img.png);\" />\n";
+            echo "\t\t\t</form>\n";
             ?>
             <ul>
                 <?php
