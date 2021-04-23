@@ -1,5 +1,9 @@
 @import url("light.css") all;
 
+html::-webkit-scrollbar-thumb {
+    background-color: #FDDC49;
+}
+
 #more{
     background: #3b3a38;
 }
@@ -53,10 +57,6 @@ p{
     color: white;
 }
 
-.scroll::-webkit-scrollbar-thumb {
-    background-color: #FDDC49;
-}
-
 .ranking legend{
     color: white;
 }
@@ -79,4 +79,16 @@ p{
 
 .last_tv a, .last_movie a{
     background: #4a4a4a;
+}
+
+.infos{
+    background: #4a4a4a;
+}
+
+.infos li{
+    color: white;
+}
+
+.pop{
+    background: #3b3a38;
 }

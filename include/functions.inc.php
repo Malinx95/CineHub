@@ -262,7 +262,7 @@ function getInfo($id, $info, $type="movie"){
             if(empty($origin)){
                 return "Origine indisponible";
             }
-            return $origin;
+            return ucfirst(Locale::getDisplayLanguage($origin, "fr"));
 
         case "directors":
             $url = "https://api.themoviedb.org/3/$type/$id/credits?api_key=" . KEY . "&language=fr";
@@ -273,10 +273,10 @@ function getInfo($id, $info, $type="movie"){
             $out = "";
             foreach($json["crew"] as $crew){
                 if($crew["job"] == "Director"){
-                    $out .= $crew["name"] . ", ";
+                    $out .= "<li><p>" . $crew["name"] . "<div class=\"pop\">" . getPerson($crew["id"]) . "</div></p></li>";
                 }
             }
-            return substr($out, 0, strlen($out)-2);
+            return $out;
 
         case "time":
             $url = "https://api.themoviedb.org/3/$type/$id?api_key=" . KEY . "&language=fr";
@@ -301,7 +301,6 @@ function getInfo($id, $info, $type="movie"){
                 return substr($out, 0, strlen($out)-2);
             }
 
-
         case "actors":
             $url = "https://api.themoviedb.org/3/$type/$id/credits?api_key=" . KEY . "&language=fr";
             $json = getJSON($url);
@@ -309,12 +308,13 @@ function getInfo($id, $info, $type="movie"){
                 return "Acteurs indisponibles";
             }
             $out = "";
-            foreach($json["cast"] as $crew){
-                if($crew["known_for_department"] == "Acting"){
-                    $out .= $crew["name"] . ", ";
+            $crew = $json["cast"];
+            for($i=0 ; $i<5 ; $i++){
+                if(!empty($crew[$i]) && $crew[$i]["known_for_department"] == "Acting"){
+                    $out .= "<li><p>" . $crew[$i]["name"] . "<div class=\"pop\">" . getPerson($crew[$i]["id"]) . "</div></p></li>";
                 }
             }
-            return substr($out, 0, strlen($out)-2);
+            return $out;
 
         case "genres":
             $url = "https://api.themoviedb.org/3/$type/$id?api_key=" . KEY . "&language=fr";
@@ -366,6 +366,25 @@ function getInfo($id, $info, $type="movie"){
                 return "Page officielle indisponible";
             }
     }
+}
+
+function getPerson($id){
+    $details = getJSON("https://api.themoviedb.org/3/person/$id?api_key=" . KEY . "&language=fr");
+    //$img = getJSON("https://api.themoviedb.org/3/person/$id/images?api_key=" . KEY);
+    $out = "<div>";
+    $out .= "<h3>" . $details["name"] . "</h3>";
+    //$out .= "<img scr=\"https://image.tmdb.org/t/p/original" . $img["profiles"]["file_path"] . "\" alt=\"photo " . $details["name"] . "\"/>";
+    $out .= "<img src=\"ressources/images/no-image.png\" alt\"img\"/>";
+    $out .= "</div>";
+    $out .= "<div class=\"persondesc\">";
+    $out .= "<h4>Date de naissance</h4>";
+    $out .= "<p>" . $details["birthday"] . "</p>";
+    $out .= "<h4>Profession</h4>";
+    $out .= "<p>" . $details["known_for_department"] . "</p>";
+    $out .= "<h4>Biographie</h4>";
+    $out .= "<p>" . $details["biography"] . "</p>";
+    $out .= "</div>";
+    return $out;
 }
 
 function rankingTop($fichier, $type){

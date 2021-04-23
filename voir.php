@@ -39,25 +39,29 @@ hits();
     </section>
     <section id="more">
         <h2>Plus d'informations</h2>
-        <div class="center">
+        <div class="center infos">
             <?php
             if(isset($id) && isset($type)){
-                echo "<h3>Origine</h3>\n";
-                echo "\t\t\t<p>", getInfo($id, "origin", $type), "</p>\n";
-                echo "\t\t\t<h3>Réalisateurs</h3>\n";
-                echo "\t\t\t<p>" . getInfo($id, "directors", $type) . "</p>\n";
-                echo "\t\t\t<h3>Durée</h3>\n";
-                echo "\t\t\t<p>", getInfo($id, "time", $type), "</p>\n";
-                echo "\t\t\t<h3>Acteurs</h3>\n";
-                echo "\t\t\t<p>". getInfo($id, "actors", $type) . "</p>\n";
-                echo "\t\t\t<h3>Genres</h3>\n";
-                echo "\t\t\t<p>", getInfo($id, "genres", $type), "</p>\n";
-                echo "\t\t\t<h3>Date de sortie</h3>\n";
-                echo "\t\t\t<p>", getInfo($id, "date", $type), "</p>\n";
-                echo "\t\t\t<h3>Producteurs</h3>\n";
-                echo "\t\t\t<p>", getInfo($id, "producers", $type), "</p>\n";
-                echo "\t\t\t<h3>Page officielle</h3>\n";
-                echo "\t\t\t<p>", getInfo($id, "site", $type), "</p>\n";
+                echo "<div>\n";
+                echo "\t\t\t\t<h3>Langue originale</h3>\n";
+                echo "\t\t\t\t<p>", getInfo($id, "origin", $type), "</p>\n";
+                echo "\t\t\t\t<h3>Réalisateurs</h3>\n";
+                echo "\t\t\t\t<ul>" . getInfo($id, "directors", $type) . "</ul>\n";
+                echo "\t\t\t\t<h3>Durée</h3>\n";
+                echo "\t\t\t\t<p>", getInfo($id, "time", $type), "</p>\n";
+                echo "\t\t\t\t<h3>Acteurs</h3>\n";
+                echo "\t\t\t\t<ul>". getInfo($id, "actors", $type) . "</ul>\n";
+                echo "\t\t\t</div>\n";
+                echo "\t\t\t<div>\n";
+                echo "\t\t\t\t<h3>Genres</h3>\n";
+                echo "\t\t\t\t<p>", getInfo($id, "genres", $type), "</p>\n";
+                echo "\t\t\t\t<h3>Date de sortie</h3>\n";
+                echo "\t\t\t\t<p>", getInfo($id, "date", $type), "</p>\n";
+                echo "\t\t\t\t<h3>Producteurs</h3>\n";
+                echo "\t\t\t\t<p>", getInfo($id, "producers", $type), "</p>\n";
+                echo "\t\t\t\t<h3>Page officielle</h3>\n";
+                echo "\t\t\t\t<p>", getInfo($id, "site", $type), "</p>\n";
+                echo "\t\t\t</div>\n";
             }
             else{
                 echo "<h3>error</h3>\n";
