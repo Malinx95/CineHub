@@ -61,6 +61,10 @@ p{
     color: white;
 }
 
+.scroll::-webkit-scrollbar-thumb {
+    background-color: #FDDC49;
+}
+
 .top fieldset{
     background: #3b3a38;
 }
