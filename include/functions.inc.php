@@ -370,11 +370,16 @@ function getInfo($id, $info, $type="movie"){
 
 function getPerson($id){
     $details = getJSON("https://api.themoviedb.org/3/person/$id?api_key=" . KEY . "&language=fr");
-    //$img = getJSON("https://api.themoviedb.org/3/person/$id/images?api_key=" . KEY);
+    $img = getJSON("https://api.themoviedb.org/3/person/$id/images?api_key=" . KEY)["profiles"][0]["file_path"];
+    if(!empty($img)){
+        $img = "https://image.tmdb.org/t/p/original" . $img;
+    }
+    else{
+        $img = "ressources/images/no-image.png";
+    }
     $out = "<div>";
     $out .= "<h3>" . $details["name"] . "</h3>";
-    //$out .= "<img scr=\"https://image.tmdb.org/t/p/original" . $img["profiles"]["file_path"] . "\" alt=\"photo " . $details["name"] . "\"/>";
-    $out .= "<img src=\"ressources/images/no-image.png\" alt\"img\"/>";
+    $out .= "<img src=\"$img\" alt=\"photo " . $details["name"] . "\"/>";
     $out .= "</div>";
     $out .= "<div class=\"persondesc\">";
     $out .= "<h4>Date de naissance</h4>";
@@ -382,7 +387,11 @@ function getPerson($id){
     $out .= "<h4>Profession</h4>";
     $out .= "<p>" . $details["known_for_department"] . "</p>";
     $out .= "<h4>Biographie</h4>";
-    $out .= "<p>" . $details["biography"] . "</p>";
+    $bio = $details["biography"];
+    if(empty($bio)){
+        $bio = "Biographie indisponible";
+    }
+    $out .= "<p>" . $bio . "</p>";
     $out .= "</div>";
     return $out;
 }

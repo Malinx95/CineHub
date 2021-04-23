@@ -668,7 +668,7 @@ legend{
     padding-right: 1%;
     transform: translateY(-50%);
     display: grid;
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: 1fr 3fr;
     grid-template-rows: 1fr;
     overflow: hidden;
 }
@@ -676,6 +676,11 @@ legend{
 .pop div {
     width: 100%;
 }
+
+.pop img{
+    width: 100%;
+}
+
 .infos li:hover .pop{
     right: 2%;
     transition: 0.25s;
