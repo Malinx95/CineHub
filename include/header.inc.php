@@ -1,4 +1,5 @@
 <?php
+    session_start();
     if(empty($_COOKIE["theme"])){
         setcookie("theme", "light", time()+60*60*24*365);
         $txt = "dark";
