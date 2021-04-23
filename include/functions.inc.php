@@ -7,7 +7,7 @@ function nasa() { //retourne img
     $obj = json_decode($json);
     $url = $obj->{'url'};
     if(strpos($url, "youtube") != false){
-        return "<embed class='nasa' type=\"video/webm\" src='$url' autoplay/>\n";
+        return "<iframe class=\"nasa\" src=\"$url&autoplay=1&mute=1\"/>";
     }
     else{
         return "<img class=\"nasa\" src=\"$url\" alt=\"image nasa\"/>\n";
