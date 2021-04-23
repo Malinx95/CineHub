@@ -16,7 +16,7 @@ include 'include/functions.inc.php';
                 <?php echo rankingTop("stats/tv_hits.csv", "tv");?>
             </fieldset>
         </div>
-        <?php echo "<p>Nombre de magnifique visiteur : $hit</p>\n";?>
+        <?php echo "<p>Nombre de magnifiques visiteurs : $hit</p>\n";?>
         <a class="morebutton button" href="#more">Voir plus</a>
         <img class="bg" src="https://stationf.co/wp-content/uploads/2019/06/hero-home-page.jpg" alt="bg"/>
     </section>
