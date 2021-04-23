@@ -20,7 +20,7 @@ hits();
             echo "\t\t\t<img class=\"poster\" src=\"", getInfo($id, "poster", $type), "\" alt=\"poster ", getInfo($id, "title", $type), "\"/>\n";
             echo "\t\t\t<p>", getInfo($id, "rating", $type), "</p>\n";
             echo "\t\t\t<h3>Synopsis</h3>\n";
-            echo "\t\t\t<p>", getInfo($id, "overview", $type), "</p>\n";
+            echo "\t\t\t<p class=\"synopsis\">", getInfo($id, "overview", $type), "</p>\n";
             echo "\t\t</div>\n";
         }
         else{

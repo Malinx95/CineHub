@@ -7,7 +7,7 @@ function nasa() { //retourne img
     $obj = json_decode($json);
     $url = $obj->{'url'};
     if(strpos($url, "youtube") != false){
-        return "<iframe class=\"nasa\" src=\"$url&autoplay=1&mute=1\"/>";
+        return "<embed class=\"nasa\" type=\"video/webm\" src=\"$url\"/>\n";
     }
     else{
         return "<img class=\"nasa\" src=\"$url\" alt=\"image nasa\"/>\n";
@@ -370,20 +370,39 @@ function getInfo($id, $info, $type="movie"){
 
 function getPerson($id){
     $details = getJSON("https://api.themoviedb.org/3/person/$id?api_key=" . KEY . "&language=fr");
-    $img = getJSON("https://api.themoviedb.org/3/person/$id/images?api_key=" . KEY)["profiles"][0]["file_path"];
+    $img = getJSON("https://api.themoviedb.org/3/person/$id/images?api_key=" . KEY)["profiles"];
     if(!empty($img)){
-        $img = "https://image.tmdb.org/t/p/original" . $img;
+        $img = "https://image.tmdb.org/t/p/original" . $img[0]["file_path"];
     }
     else{
         $img = "ressources/images/no-image.png";
     }
+    $place = $details["place_of_birth"];
+    $dead = $details["deathday"];
+    $date = $details["birthday"];
+    if(!empty($date)){
+        $date = explode("-", $date);
+        $date = $date[2] . "/" . $date[1] . "/" . $date[0];
+    }
+    else{
+        $date = "Date de naissance indisponible";
+    }
+
     $out = "<div>";
     $out .= "<h3>" . $details["name"] . "</h3>";
     $out .= "<img src=\"$img\" alt=\"photo " . $details["name"] . "\"/>";
     $out .= "</div>";
     $out .= "<div class=\"persondesc\">";
     $out .= "<h4>Date de naissance</h4>";
-    $out .= "<p>" . $details["birthday"] . "</p>";
+    $out .= "<p>" . $date . "</p>";
+    if(!empty($place)){
+        $out .= "<h4>Lieu de naissance</h4>";
+        $out .= "<p>$place</p>";
+    }
+    if(!empty($dead)){
+        $out .= "<h4>Date de décès</h4>";
+        $out .= "<p>$dead</p>";
+    }
     $out .= "<h4>Profession</h4>";
     $out .= "<p>" . $details["known_for_department"] . "</p>";
     $out .= "<h4>Biographie</h4>";

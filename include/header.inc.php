@@ -53,7 +53,7 @@
     <meta charset="utf-8"/>
     <meta name="description" content="Projet DevWeb"/>
     <meta name="author" content="Maxime Grodet &amp; Antoine Qiu"/>
-    <meta name="date" content="28/03/2021"/>
+    <meta name="date" content="24/04/2021"/>
     <meta name="keywords" content="CineHub"/>
     <?php
     if(isset($_POST["theme"])){

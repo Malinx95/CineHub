@@ -68,14 +68,14 @@ h1{
 
 #header nav{
     background-color: #f28d4a;
-    height: 5%;
+    height: 5vh;
 }
 
 #header nav ul{
+    height: 5vh;
     padding: 0px;
     margin: 0px;
     display:inline-block;
-    height: 5vh;
     margin-right: 1%;
 }
 
@@ -205,6 +205,7 @@ h1{
     transition: 0.25s;
     border: none;
     background: white;
+    cursor: pointer;
 }
 
 .button:hover{
@@ -292,7 +293,6 @@ legend{
 
 .top legend {
     color: white;
-    padding-bottom: 10%;
 }
 .scroll{
     width: 88vw;
@@ -341,7 +341,7 @@ legend{
 }
 
 .thumbnailtop{
-    height: 150px;
+    width: 10vh;
 }
 
 .poster{
@@ -349,8 +349,6 @@ legend{
 }
 
 .ranking{
-    width: 100%;
-    height: 65vh;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -359,12 +357,11 @@ legend{
 .ranking fieldset{
     border-radius: 25px;
     width: 30%;
-    text-align: center;
     border: none;
 }
 
 .top {
-    height: 50%;
+    margin-top: 1%;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -373,7 +370,6 @@ legend{
 .top fieldset{
     padding: 0;
     width: 100%;
-    height: 100%;
     border: none;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
     transition: 0.25s;
@@ -381,8 +377,7 @@ legend{
 }
 
 .top a{
-    width: 45%;
-    height: 95%;
+    width: 15vh;
     text-decoration: none;
     color: black;
 }
@@ -393,12 +388,13 @@ legend{
 }
 
 .top a p{
-    margin: 0;
+    margin: 5%;
     height: 10%;
 }
 
 .top h3{
-    margin: 0;
+    margin: 5%;
+    margin-top: 0;
     height: 44px;
 }
 
@@ -408,11 +404,14 @@ legend{
 
 .nasa{
     height: 20vh;
-    border: 0;
 }
 
 .voir{
     font-size: 125%;
+}
+
+.voir:hover{
+    transform: scale(2);
 }
 
 .long{
@@ -688,7 +687,7 @@ legend{
 }
 
 .infos li:hover .persondesc{
-    animation: scrolling 20s linear infinite;
+    animation: scrolling 15s linear infinite;
 }
 
 @keyframes scrolling {
@@ -702,4 +701,10 @@ legend{
 
 .persondesc{
     overflow-y: hidden;
+}
+
+.synopsis{
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
 }

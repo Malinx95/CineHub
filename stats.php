@@ -9,20 +9,14 @@ include 'include/functions.inc.php';
         <div class="center ranking">
             <fieldset>
                 <legend>Top des films les plus consultés</legend>
-                <?php
-                    echo rankingTop("stats/movie_hits.csv", "movie");
-                ?>
+                <?php echo rankingTop("stats/movie_hits.csv", "movie");?>
             </fieldset>
             <fieldset>
                 <legend>Top des series les plus consultés</legend>
-                <?php
-                    echo rankingTop("stats/tv_hits.csv", "tv");
-                ?>
+                <?php echo rankingTop("stats/tv_hits.csv", "tv");?>
             </fieldset>
         </div>
-        <?php
-        echo "<p>Nombre de magnifique visiteur : $hit</p>\n"
-        ?>
+        <?php echo "<p>Nombre de magnifique visiteur : $hit</p>\n";?>
         <a class="morebutton button" href="#more">Voir plus</a>
         <img class="bg" src="https://stationf.co/wp-content/uploads/2019/06/hero-home-page.jpg" alt="bg"/>
     </section>
