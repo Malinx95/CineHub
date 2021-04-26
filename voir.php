@@ -46,9 +46,19 @@ hits();
                 echo "<div>\n";
                 echo "\t\t\t\t<h3>Langue originale</h3>\n";
                 echo "\t\t\t\t<p>", $infos[5], "</p>\n";
-                echo "\t\t\t\t<h3>Réalisateurs</h3>\n";
+                if($type == "movie"){
+                    echo "\t\t\t\t<h3>Réalisateurs</h3>\n";
+                }
+                else{
+                    echo "\t\t\t\t<h3>Créateurs</h3>\n";
+                }
                 echo "\t\t\t\t<ul>" . $infos[6] . "</ul>\n";
-                echo "\t\t\t\t<h3>Durée</h3>\n";
+                if($type == "movie"){
+                    echo "\t\t\t\t<h3>Durée</h3>\n";
+                }
+                else{
+                    echo "\t\t\t\t<h3>Durée des épisodes</h3>\n";
+                }
                 echo "\t\t\t\t<p>", $infos[7], "</p>\n";
                 echo "\t\t\t\t<h3>Acteurs</h3>\n";
                 echo "\t\t\t\t<ul>". $infos[8] . "</ul>\n";

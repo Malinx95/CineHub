@@ -90,19 +90,19 @@
                 if($current==0){
                     if(isset($_GET["from"]) && !empty($_GET["from"])){
                         if($_GET["from"] == "stats"){
-                            echo "<li><a class=\"active\" href=\"stats.php\">Retour</a></li>\n";
+                            echo "<li><a href=\"stats.php\">Retour</a></li>\n";
                         }
                         else if($_GET["from"] == "search"){
                             if(isset($_GET["query"]) && !empty($_GET["query"])){
-                                echo "<li><a class=\"active\" href=\"rechercher.php?search=", $_GET["query"], "#more\">Retour</a></li>\n";
+                                echo "<li><a href=\"rechercher.php?search=", $_GET["query"], "#more\">Retour</a></li>\n";
                             }
                             else{
-                                echo "<li><a class=\"active\" href=\"rechercher.php\">Retour</a></li>\n";
+                                echo "<li><a href=\"rechercher.php\">Retour</a></li>\n";
                             }
                         }
                     }
                     else{
-                        echo "<li><a class=\"active\" href=\"rechercher.php\">Retour</a></li>\n";
+                        echo "<li><a href=\"rechercher.php\">Retour</a></li>\n";
                     }
                     if($_GET["type"] == "movie"){
                         setcookie("last_movie", $_GET["id"].";".date("d/m/Y").";".date("H:i"), time()+60*60*24*365);
