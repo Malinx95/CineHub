@@ -8,6 +8,9 @@
     if(isset($_POST["theme"])){
         setcookie("theme", $_POST["theme"], time()+60*60*24*365);
         $page = basename($_SERVER["REQUEST_URI"]);
+        if($page == "projet"){
+            $page = "index.php";
+        }
         header("Location: $page");
         if($_POST["theme"] == "dark"){
             $txt = "light";
