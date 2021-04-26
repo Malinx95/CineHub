@@ -69,7 +69,6 @@
         echo "<link rel=\"stylesheet\" href=\"light.css\"/>";
     }
     ?>
-    <!-- <link rel="stylesheet" href="dark.css"/> -->
     <link rel="icon" href="ressources/logo/logo.png"/>
 </head>
 <body>
@@ -77,7 +76,7 @@
         <h1><?php echo$title?></h1>
         <nav>
             <a class="smalllogo" href="index.php">
-                <img src="ressources/logo/logo2.png" alt="logo"/>
+                <img src="ressources/logo/logo.png" alt="logo"/>
                 <p>CineHub</p>
             </a>
             <?php

@@ -106,6 +106,8 @@ h1{
 
 .biglogo{
     height: 20vh;
+    border-radius: 25%;
+    background: #FDDC49;
 }
 
 .smalllogo{
@@ -118,13 +120,13 @@ h1{
 
 .smalllogo img{
     filter: drop-shadow(0 1px 3px rgba(0,0,0,0.12)) drop-shadow(0 1px 2px rgba(0,0,0,0.24));
+    animation: roll 0.75s infinite;
     transition: 0.25s;
 }
 
 .smalllogo img:hover{
-    filter: drop-shadow(0 14px 28px rgba(0,0,0,0.25)) drop-shadow(0 10px 10px rgba(0,0,0,0.22));
-    animation: roll 0.75s infinite;
-
+    filter:  drop-shadow(0 14px 28px rgba(0,0,0,0.25)) drop-shadow(0 10px 10px rgba(0,0,0,0.22));
+    animation: scaling 0.75s infinite;
     transition: 0.25s;
 }
 
@@ -143,6 +145,18 @@ h1{
     }
 }
 
+@keyframes scaling {
+    0% {
+        transform: scale(1);
+    }
+    50%{
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
 .smalllogo p{
     font-size: 150%;
     font-weight: bold;
@@ -157,12 +171,7 @@ h1{
     transition: 0.25s;
 }
 
-.biglogo{
-    border-radius: 25%;
-}
-
 .active{
-    /* color: #fedb63 !important; */
     text-shadow: black 0px 7px 10px !important;
 }
 
@@ -261,7 +270,6 @@ h1{
 
 .filtres div div{
     display: inline-block;
-    /* width: 5vw; */
     padding: 1%;
     border-radius: 25px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
@@ -393,8 +401,7 @@ legend{
 }
 
 .top h3{
-    margin: 5%;
-    margin-top: 0;
+    margin: 0 5% 5%;
     height: 44px;
 }
 
@@ -441,7 +448,7 @@ legend{
     left: 0;
     top: 0;
     z-index: -1;
-    filter: /*blur(5px)*/ brightness(0.5);
+    filter: blur(5px) brightness(0.5);
 }
 
 .title{
@@ -473,6 +480,13 @@ legend{
     background-size: 100% 100%;
     background-position: center center;
     background-color: transparent;
+    filter: drop-shadow(0 1px 3px rgba(0,0,0,0.12)) drop-shadow(0 1px 2px rgba(0,0,0,0.24));
+    transition: 0.25s;
+}
+
+.theme input[type="submit"]:hover {
+    filter:  drop-shadow(0 14px 28px rgba(0,0,0,0.25)) drop-shadow(0 10px 10px rgba(0,0,0,0.22));
+    transition: 0.25s;
 }
 
 .expand{
@@ -541,23 +555,28 @@ legend{
     padding-top: initial !important;
 }
 
-.left{
-    grid-column: 1;
-    margin-left: 5vh;
-}
-
-.middle{
-    grid-column: 2;
-}
-
-.middle ul{
+.cv ul{
     list-style-type: none;
     padding: 0;
 }
 
+.left{
+    grid-column: 1;
+    margin-left: 5vw;
+}
+
+.middle{
+    grid-column: 2;
+    width: 20vw;
+}
+
 .right{
     grid-column: 3;
-    margin-right: 5vh;
+    margin-right: 5vw;
+}
+
+.right, .left{
+    width: 30vw;
 }
 
 .cv div{
@@ -649,7 +668,9 @@ legend{
     transition: 0.25s;
 }
 
-.infos div {width: 50%;}
+.infos div {
+    width: 50%;
+}
 
 .infos:hover{
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
@@ -718,4 +739,24 @@ legend{
 .graphs img{
     height: 70vh;
     width: 35vh;
+}
+
+.visits{
+    color: black;
+    border-radius: 25px;
+    background: #FEDB63;
+    position: relative;
+    display: initial;
+    padding: 1%;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: 0.25s;
+}
+
+.visits:hover{
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    transition: 0.25s;
+}
+
+.tmdb{
+    height: 5vh;
 }

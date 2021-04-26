@@ -17,7 +17,7 @@ h1{
     text-shadow: 2px 2px 2px black;
 }
 
-h2, h3{
+h2, h3, h4{
     color: #FDDC49;
 }
 
@@ -103,4 +103,9 @@ p{
 
 .results{
     color: white;
+}
+
+.visits{
+    color: white;
+    background: #3b3a38;
 }
