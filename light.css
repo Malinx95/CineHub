@@ -692,7 +692,7 @@ legend{
 
 @keyframes scrolling {
     0% {
-        transform: translateY(100%);
+        transform: translateY(10%);
     }
     100% {
         transform: translateY(-100%);
@@ -700,7 +700,6 @@ legend{
 }
 
 .persondesc{
-    overflow-y: hidden;
     margin-left: 1%;
 }
 
@@ -708,4 +707,15 @@ legend{
     width: 90%;
     margin-left: auto;
     margin-right: auto;
+}
+
+.graphs{
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.graphs img{
+    height: 70vh;
+    width: 35vh;
 }

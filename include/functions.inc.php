@@ -199,173 +199,152 @@ function getJSON($url){
     return json_decode($json, true);
 }
 
-function getInfo($id, $info, $type="movie"){
-    switch ($info){
-        case "backdrop":
-            $url = "https://api.themoviedb.org/3/$type/$id?api_key=" . KEY . "&language=fr";
-            $json = getJSON($url);
-            $backdrop = $json["backdrop_path"];
-            if(!empty($backdrop)){
-                return "https://image.tmdb.org/t/p/original$backdrop";
-            }
-            else{
-                return "ressources/images/no-image.png";
-            }
-        case "title":
-            $url = "https://api.themoviedb.org/3/$type/$id?api_key=" . KEY . "&language=fr";
-            $json = getJSON($url);
-            if($type == "movie"){
-                $title = $json["original_title"];
-            }
-            else{
-                $title = $json["original_name"];
-            }
-            if(empty($title)){
-                return "Titre indisponible";
-            }
-            return $title;
-
-        case "poster":
-            $url = "https://api.themoviedb.org/3/$type/$id?api_key=" . KEY . "&language=fr";
-            $json = getJSON($url);
-            $poster = $json["poster_path"];
-            if(!empty($poster)){
-                return "https://image.tmdb.org/t/p/original$poster";
-            }
-            else{
-                return "ressources/images/no-image.png";
-            }
-
-        case "overview":
-            $url = "https://api.themoviedb.org/3/$type/$id?api_key=" . KEY . "&language=fr";
-            $json = getJSON($url);
-            $overview = $json["overview"];
-            if(empty($overview)){
-                return "Synopsys indisponible";
-            }
-            return $overview;
-
-        case "rating":
-            $url = "https://api.themoviedb.org/3/$type/$id?api_key=" . KEY . "&language=fr";
-            $json = getJSON($url);
-            $average = $json["vote_average"];
-            $count = $json["vote_count"];
-            if(empty($average) || empty($count)){
-                return "Note indisponible";
-            }
-            return $average . "/10 (" . $count . " votes)";
-
-        case "origin":
-            $url = "https://api.themoviedb.org/3/$type/$id?api_key=" . KEY . "&language=fr";
-            $json = getJSON($url);
-            $origin = $json["original_language"];
-            if(empty($origin)){
-                return "Origine indisponible";
-            }
-            return ucfirst(Locale::getDisplayLanguage($origin, "fr"));
-
-        case "directors":
-            $url = "https://api.themoviedb.org/3/$type/$id/credits?api_key=" . KEY . "&language=fr";
-            $json = getJSON($url);
-            if(empty($json["crew"])){
-                return "Réalisateurs indisponibles";
-            }
-            $out = "";
-            foreach($json["crew"] as $crew){
-                if($crew["job"] == "Director"){
-                    $out .= "<li><p>" . $crew["name"] . "<div class=\"pop\">" . getPerson($crew["id"]) . "</div></p></li>";
-                }
-            }
-            return $out;
-
-        case "time":
-            $url = "https://api.themoviedb.org/3/$type/$id?api_key=" . KEY . "&language=fr";
-            $json = getJSON($url);
-            if($type == "movie"){
-                $time = $json["runtime"];
-                if(empty($time)){
-                    return "Durée indisponible";
-                }
-                $h = explode(".", $time/60)[0];
-                $m = $time - $h*60;
-                return $h . "h" . $m . "m";
-            }
-            else{
-                if(empty($json["episode_run_time"])){
-                    return "Durée indisponible";
-                }
-                $out = "";
-                foreach($json["episode_run_time"] as $time){
-                    $out .= $time . "m, ";
-                }
-                return substr($out, 0, strlen($out)-2);
-            }
-
-        case "actors":
-            $url = "https://api.themoviedb.org/3/$type/$id/credits?api_key=" . KEY . "&language=fr";
-            $json = getJSON($url);
-            if(empty($json["cast"])){
-                return "Acteurs indisponibles";
-            }
-            $out = "";
-            $crew = $json["cast"];
-            for($i=0 ; $i<5 ; $i++){
-                if(!empty($crew[$i]) && $crew[$i]["known_for_department"] == "Acting"){
-                    $out .= "<li><p>" . $crew[$i]["name"] . "<div class=\"pop\">" . getPerson($crew[$i]["id"]) . "</div></p></li>";
-                }
-            }
-            return $out;
-
-        case "genres":
-            $url = "https://api.themoviedb.org/3/$type/$id?api_key=" . KEY . "&language=fr";
-            $json = getJSON($url);
-            if(empty($json["genres"])){
-                return "Genres indisponibles";
-            }
-            $out = "";
-            foreach($json["genres"] as $genre){
-                $out .= $genre["name"] . ", ";
-            }
-            return substr($out, 0, strlen($out)-2);
-
-        case "date":
-            $url = "https://api.themoviedb.org/3/$type/$id?api_key=" . KEY . "&language=fr";
-            $json = getJSON($url);
-            if($type == "movie"){
-                $date = $json["release_date"];
-            }
-            else{
-                $date = $json["first_air_date"];
-            }
-            if(empty($date)){
-                return "Date indisponible";
-            }
-            $date = explode("-", $date);
-            return $date[2] . "/" . $date[1] . "/" . $date[0];
-
-        case "producers":
-            $url = "https://api.themoviedb.org/3/$type/$id?api_key=" . KEY . "&language=fr";
-            $json = getJSON($url);
-            if(empty($json["production_companies"])){
-                return "Producteurs indisponibles";
-            }
-            $out = "";
-            foreach($json["production_companies"] as $producer){
-                $out .= $producer["name"] . ", ";
-            }
-            return substr($out, 0, strlen($out)-2);
-
-        case "site":
-            $url = "https://api.themoviedb.org/3/$type/$id?api_key=" . KEY . "&language=fr";
-            $json = getJSON($url);
-            $homepage = $json["homepage"];
-            if(!empty($homepage)){
-                return "<a href=\"$homepage\">$homepage</a>";
-            }
-            else{
-                return "Page officielle indisponible";
-            }
+function getInfos($id, $infos, $type="movie"){
+    $out = array();
+    $details = getJSON("https://api.themoviedb.org/3/$type/$id?api_key=" . KEY . "&language=fr");
+    if(in_array("directors", $infos) || in_array("actors", $infos)){
+        $credits = getJSON("https://api.themoviedb.org/3/$type/$id/credits?api_key=" . KEY . "&language=fr");
     }
+    foreach($infos as $info){
+        switch ($info) {
+            case "backdrop":
+                $backdrop = $details["backdrop_path"];
+                if (!empty($backdrop)) {
+                    array_push($out, "https://image.tmdb.org/t/p/original$backdrop");
+                } else {
+                    array_push($out, "ressources/images/no-image.png");
+                }
+                break;
+            case "title":
+                if ($type == "movie") {
+                    $title = $details["original_title"];
+                } else {
+                    $title = $details["original_name"];
+                }
+                if (empty($title)) {
+                    array_push($out, "Titre indisponible");
+                }
+                array_push($out, $title);
+                break;
+            case "poster":
+                $poster = $details["poster_path"];
+                if (!empty($poster)) {
+                    array_push($out, "https://image.tmdb.org/t/p/original$poster");
+                } else {
+                    array_push($out, "ressources/images/no-image.png");
+                }
+                break;
+            case "overview":
+                $overview = $details["overview"];
+                if (empty($overview)) {
+                    array_push($out, "Synopsys indisponible");
+                }
+                array_push($out, $overview);
+                break;
+            case "rating":
+                $average = $details["vote_average"];
+                $count = $details["vote_count"];
+                if (empty($average) || empty($count)) {
+                    array_push($out, "Note indisponible");
+                }
+                array_push($out, $average . "/10 (" . $count . " votes)");
+                break;
+            case "origin":
+                $origin = $details["original_language"];
+                if (empty($origin)) {
+                    array_push($out, "Origine indisponible");
+                }
+                array_push($out, ucfirst(Locale::getDisplayLanguage($origin, "fr")));
+                break;
+            case "directors":
+                if (empty($credits["crew"])) {
+                    array_push($out, "Réalisateurs indisponibles");
+                }
+                $str = "";
+                foreach ($credits["crew"] as $crew) {
+                    if ($crew["job"] == "Director") {
+                        $str .= "<li><p>" . $crew["name"] . "<div class=\"pop\">" . getPerson($crew["id"]) . "</div></p></li>";
+                    }
+                }
+                array_push($out, $str);
+                break;
+            case "time":
+                if ($type == "movie") {
+                    $time = $details["runtime"];
+                    if (empty($time)) {
+                        array_push($out, "Durée indisponible");
+                    }
+                    $h = explode(".", $time / 60)[0];
+                    $m = $time - $h * 60;
+                    array_push($out, $h . "h" . $m . "m");
+                } else {
+                    if (empty($details["episode_run_time"])) {
+                        array_push($out, "Durée indisponible");
+                    }
+                    $str = "";
+                    foreach ($details["episode_run_time"] as $time) {
+                        $str .= $time . "m, ";
+                    }
+                    array_push($out, substr($str, 0, strlen($str) - 2));
+                }
+                break;
+            case "actors":
+                if (empty($credits["cast"])) {
+                    array_push($out, "Acteurs indisponibles");
+                }
+                $str = "";
+                $crew = $credits["cast"];
+                for ($i = 0; $i < 5; $i++) {
+                    if (!empty($crew[$i]) && $crew[$i]["known_for_department"] == "Acting") {
+                        $str .= "<li><p>" . $crew[$i]["name"] . "<div class=\"pop\">" . getPerson($crew[$i]["id"]) . "</div></p></li>";
+                    }
+                }
+                array_push($out, $str);
+                break;
+            case "genres":
+                if (empty($details["genres"])) {
+                    array_push($out, "Genres indisponibles");
+                }
+                $str = "";
+                foreach ($details["genres"] as $genre) {
+                    $str .= $genre["name"] . ", ";
+                }
+                array_push($out, substr($str, 0, strlen($str) - 2));
+                break;
+            case "date":
+                if ($type == "movie") {
+                    $date = $details["release_date"];
+                } else {
+                    $date = $details["first_air_date"];
+                }
+                if (empty($date)) {
+                    array_push($out, "Date indisponible");
+                }
+                $date = explode("-", $date);
+                array_push($out, $date[2] . "/" . $date[1] . "/" . $date[0]);
+                break;
+            case "producers":
+                if (empty($details["production_companies"])) {
+                    array_push($out, "Producteurs indisponibles");
+                }
+                $str = "";
+                foreach ($details["production_companies"] as $producer) {
+                    $str .= $producer["name"] . ", ";
+                }
+                array_push($out, substr($str, 0, strlen($str) - 2));
+                break;
+            case "site":
+                $homepage = $details["homepage"];
+                if (!empty($homepage)) {
+                    array_push($out, "<a href=\"$homepage\">$homepage</a>");
+                }
+                else {
+                    array_push($out, "Page officielle indisponible");
+                }
+                break;
+        }
+    }
+    return $out;
 }
 
 function getPerson($id){
@@ -464,9 +443,10 @@ function getTop($fichier, $size){
 }
 
 function generateTopText($csv, $i, $type){
+    $infos = getInfos($csv[$i][0], array("title", "poster"), $type);
     if(isset($csv[$i])){
-        $str = "\t\t\t\t\t\t\t<h3>" . getInfo($csv[$i][0], "title", $type) . "</h3>\n";
-        $str .= "\t\t\t\t\t\t\t<img class='thumbnailtop' src='" . getInfo($csv[$i][0], "poster", $type) . "' alt='poster " . getInfo($csv[$i][0], "title", $type) . "'/>\n";
+        $str = "\t\t\t\t\t\t\t<h3>" . $infos[0] . "</h3>\n";
+        $str .= "\t\t\t\t\t\t\t<img class='thumbnailtop' src='" . $infos[1] . "' alt='poster " . $infos[0] . "'/>\n";
         $str .= "\t\t\t\t\t\t\t<p> Avec " . $csv[$i][1] . " consultations !</p>\n";
         return $str;
     }
@@ -525,12 +505,13 @@ function last(){
         $id = $last[0];
         $date = $last[1];
         $time = $last[2];
+        $infos = getInfos($id, array("title", "poster"), "movie");
         $out .= "\t\t<div class=\"last_movie\">\n";
         $out .= "\t\t\t<h2>Dernier film visité</h2>\n";
         $out .= "\t\t\t<a href=\"voir.php?id=$id&type=movie&from=search\">\n";
         $out .= "\t\t\t\t<article>\n";
-        $out .= "\t\t\t\t\t<h3>" . getInfo($id, "title", "movie") . "</h3>";
-        $out .= "\t\t\t\t\t<img class=\"thumbnail\" src=\"" . getInfo($id, "poster", "movie") . "\" alt=\"poster " . getInfo($id, "title", "movie") . "\"/>\n";
+        $out .= "\t\t\t\t\t<h3>" . $infos[0] . "</h3>";
+        $out .= "\t\t\t\t\t<img class=\"thumbnail\" src=\"" . $infos[1] . "\" alt=\"poster " . $infos[0] . "\"/>\n";
         $out .= "\t\t\t\t\t<p>Visité le $date à $time</p>\n";
         $out .= "\t\t\t\t</article>\n";
         $out .= "\t\t\t</a>\n";
@@ -541,12 +522,13 @@ function last(){
         $id = $last[0];
         $date = $last[1];
         $time = $last[2];
+        $infos = getInfos($id, array("title", "poster"), "tv");
         $out .= "\t\t<div class=\"last_tv\">\n";
         $out .= "\t\t\t<h2>Dernière série visitée</h2>\n";
         $out .= "\t\t\t<a href=\"voir.php?id=$id&type=tv&from=search\">\n";
         $out .= "\t\t\t\t<article>\n";
-        $out .= "\t\t\t\t\t<h3>" . getInfo($id, "title", "tv") . "</h3>";
-        $out .= "\t\t\t\t\t<img class=\"thumbnail\" src=\"" . getInfo($id, "poster", "tv") . "\" alt=\"poster " . getInfo($id, "title", "tv") . "\"/>\n";
+        $out .= "\t\t\t\t\t<h3>" . $infos[0] . "</h3>";
+        $out .= "\t\t\t\t\t<img class=\"thumbnail\" src=\"" . $infos[1] . "\" alt=\"poster " . $infos[0] . "\"/>\n";
         $out .= "\t\t\t\t\t<p>Visité le $date à $time</p>\n";
         $out .= "\t\t\t\t</article>\n";
         $out .= "\t\t\t</a>\n";

@@ -1,49 +1,40 @@
-<?php // content="text/plain; charset=utf-8"
-require_once '../ressources/jpgraph/jpgraph.php';
-require_once '../ressources/jpgraph/jpgraph_bar.php';
+<?php
+include_once '../ressources/jpgraph/jpgraph.php';
+include_once '../ressources/jpgraph/jpgraph_bar.php';
+include_once '../include/functions.inc.php';
 
-$data1y=array(47,80,40,116);
-$data2y=array(61,30,82,105);
-$data3y=array(115,50,70,93);
+$csv = getTop('../stats/tv_hits.csv', 10);
+$x = array();
+$y = array();
+foreach ($csv as $key => $value) {
+    array_push($x, getInfos($value[0], array("title"), "tv")[0]);
+    array_push($y, $value[1]);
+}
+$width = 500;
+$height = 1000;
 
-
-// Create the graph. These two calls are always required
-$graph = new Graph(350,200,'auto');
-$graph->SetScale("textlin");
-
-$theme_class=new UniversalTheme;
-$graph->SetTheme($theme_class);
-
-$graph->yaxis->SetTickPositions(array(0,30,60,90,120,150), array(15,45,75,105,135));
-$graph->SetBox(false);
-
-$graph->ygrid->SetFill(false);
-$graph->xaxis->SetTickLabels(array('A','B','C','D'));
-$graph->yaxis->HideLine(false);
-$graph->yaxis->HideTicks(false,false);
-
-// Create the bar plots
-$b1plot = new BarPlot($data1y);
-$b2plot = new BarPlot($data2y);
-$b3plot = new BarPlot($data3y);
-
-// Create the grouped bar plot
-$gbplot = new GroupBarPlot(array($b1plot,$b2plot,$b3plot));
-// ...and add it to the graPH
-$graph->Add($gbplot);
-
-
-$b1plot->SetColor("white");
-$b1plot->SetFillColor("#cc1111");
-
-$b2plot->SetColor("white");
-$b2plot->SetFillColor("#11cccc");
-
-$b3plot->SetColor("white");
-$b3plot->SetFillColor("#1111cc");
-
-$graph->title->Set("Bar Plots");
-
-// Display the graph
+$graph = new Graph($width, $height, 'auto');
+$graph -> SetScale('textlin');
+$graph->Set90AndMargin(100,20,50,30);
+$graph->SetShadow();
+$graph->title->Set('Top 10 séries');
+//$graph->title->SetFont(FF_VERDANA,FS_BOLD,14);
+$graph->xaxis->SetTickLabels($x);
+//$graph->xaxis->SetFont(FF_VERDANA,FS_NORMAL,12);
+$graph->xaxis->SetLabelMargin(5);
+$graph->xaxis->SetLabelAlign('right','center');
+$graph->yaxis->scale->SetGrace(20);
+//$graph->yaxis->Hide();
+$bplot = new BarPlot($y);
+$bplot->SetFillColor('orange');
+$bplot->SetShadow();
+$bplot->value->Show();
+$bplot->value->SetFont(FF_ARIAL,FS_BOLD,12);
+$bplot->value->SetAlign('left','center');
+$bplot->value->SetColor('black','darkred');
+$bplot->value->SetFormat('%.1f mkr');
+$graph->Add($bplot);
 $graph->Stroke();
+
+
 ?>
