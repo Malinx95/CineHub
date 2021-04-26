@@ -223,6 +223,7 @@ function getInfos($id, $infos, $type="movie"){
                 }
                 if (empty($title)) {
                     array_push($out, "Titre indisponible");
+                    break;
                 }
                 array_push($out, $title);
                 break;
@@ -238,6 +239,7 @@ function getInfos($id, $infos, $type="movie"){
                 $overview = $details["overview"];
                 if (empty($overview)) {
                     array_push($out, "Synopsys indisponible");
+                    break;
                 }
                 array_push($out, $overview);
                 break;
@@ -246,6 +248,7 @@ function getInfos($id, $infos, $type="movie"){
                 $count = $details["vote_count"];
                 if (empty($average) || empty($count)) {
                     array_push($out, "Note indisponible");
+                    break;
                 }
                 array_push($out, $average . "/10 (" . $count . " votes)");
                 break;
@@ -253,33 +256,52 @@ function getInfos($id, $infos, $type="movie"){
                 $origin = $details["original_language"];
                 if (empty($origin)) {
                     array_push($out, "Origine indisponible");
+                    break;
                 }
                 array_push($out, ucfirst(Locale::getDisplayLanguage($origin, "fr")));
                 break;
             case "directors":
-                if (empty($credits["crew"])) {
-                    array_push($out, "Réalisateurs indisponibles");
-                }
-                $str = "";
-                foreach ($credits["crew"] as $crew) {
-                    if ($crew["job"] == "Director") {
-                        $str .= "<li><p>" . $crew["name"] . "<div class=\"pop\">" . getPerson($crew["id"]) . "</div></p></li>";
+                if($type == "movie"){
+                    if (empty($credits["crew"])) {
+                        array_push($out, "Réalisateurs indisponibles");
+                        break;
                     }
+                    $str = "";
+                    foreach ($credits["crew"] as $crew) {
+                        if ($crew["job"] == "Director") {
+                            $str .= "<li><p>" . $crew["name"] . "<div class=\"pop\">" . getPerson($crew["id"]) . "</div></p></li>";
+                        }
+                    }
+                    array_push($out, $str);
                 }
-                array_push($out, $str);
+                else{
+                    if(empty($details["created_by"])){
+                        array_push($out, "Créateurs indisponible.");
+                        break;
+                    }
+                    $str = "";
+                    foreach($details["created_by"] as $creator){
+                        $str .= "<li><p>" . $creator["name"] . "<div class=\"pop\">" . getPerson($creator["id"]) . "</div></p></li>";
+                    }
+                    array_push($out, $str);
+                }
+
                 break;
             case "time":
                 if ($type == "movie") {
                     $time = $details["runtime"];
                     if (empty($time)) {
                         array_push($out, "Durée indisponible");
+                        break;
                     }
                     $h = explode(".", $time / 60)[0];
                     $m = $time - $h * 60;
                     array_push($out, $h . "h" . $m . "m");
-                } else {
+                }
+                else {
                     if (empty($details["episode_run_time"])) {
                         array_push($out, "Durée indisponible");
+                        break;
                     }
                     $str = "";
                     foreach ($details["episode_run_time"] as $time) {
@@ -291,6 +313,7 @@ function getInfos($id, $infos, $type="movie"){
             case "actors":
                 if (empty($credits["cast"])) {
                     array_push($out, "Acteurs indisponibles");
+                    break;
                 }
                 $str = "";
                 $crew = $credits["cast"];
@@ -304,6 +327,7 @@ function getInfos($id, $infos, $type="movie"){
             case "genres":
                 if (empty($details["genres"])) {
                     array_push($out, "Genres indisponibles");
+                    break;
                 }
                 $str = "";
                 foreach ($details["genres"] as $genre) {
@@ -319,6 +343,7 @@ function getInfos($id, $infos, $type="movie"){
                 }
                 if (empty($date)) {
                     array_push($out, "Date indisponible");
+                    break;
                 }
                 $date = explode("-", $date);
                 array_push($out, $date[2] . "/" . $date[1] . "/" . $date[0]);
@@ -326,6 +351,7 @@ function getInfos($id, $infos, $type="movie"){
             case "producers":
                 if (empty($details["production_companies"])) {
                     array_push($out, "Producteurs indisponibles");
+                    break;
                 }
                 $str = "";
                 foreach ($details["production_companies"] as $producer) {
