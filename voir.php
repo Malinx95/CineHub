@@ -1,7 +1,7 @@
 <?php
 $current = 0;
 include 'include/functions.inc.php';
-if(isset($_GET["id"]) && isset($_GET["type"])){
+if(isset($_GET["id"]) && isset($_GET["type"]) && ($_GET["type"] == "movie" || $_GET["type"] == "tv")){
     $id = $_GET["id"];
     $type = $_GET["type"];
     $infos = getInfos($id, array("title", "poster", "rating", "overview", "backdrop", "origin", "directors", "time", "actors", "genres", "date", "producers", "site"), $type);
@@ -32,9 +32,6 @@ hits();
         <?php
         if(isset($id) && isset($type)){
             echo "<img class=\"bg\" src=\"" . $infos[4] . "\" alt=\"bg\"/>\n";
-        }
-        else{
-            echo "error";
         }
         ?>
     </section>

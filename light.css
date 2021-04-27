@@ -767,3 +767,8 @@ legend{
 .tmdb{
     height: 5vh;
 }
+
+.stick{
+    position: absolute;
+    bottom: 0;
+}

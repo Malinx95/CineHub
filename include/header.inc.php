@@ -56,7 +56,7 @@
     <meta charset="utf-8"/>
     <meta name="description" content="Projet DevWeb"/>
     <meta name="author" content="Maxime Grodet &amp; Antoine Qiu"/>
-    <meta name="date" content="24/04/2021"/>
+    <meta name="date" content="27/04/2021"/>
     <meta name="keywords" content="CineHub"/>
     <?php
     if(isset($_POST["theme"])){
@@ -104,11 +104,14 @@
                     else{
                         echo "<li><a href=\"rechercher.php\">Retour</a></li>\n";
                     }
-                    if($_GET["type"] == "movie"){
-                        setcookie("last_movie", $_GET["id"].";".date("d/m/Y").";".date("H:i"), time()+60*60*24*365);
-                    }
-                    else{
-                        setcookie("last_tv", $_GET["id"].";".date("d/m/Y").";".date("H:i"), time()+60*60*24*365);
+
+                    if(isset($_GET["type"]) && !empty($_GET["type"])){
+                        if($_GET["type"] == "movie"){
+                            setcookie("last_movie", $_GET["id"].";".date("d/m/Y").";".date("H:i"), time()+60*60*24*365);
+                        }
+                        else{
+                            setcookie("last_tv", $_GET["id"].";".date("d/m/Y").";".date("H:i"), time()+60*60*24*365);
+                        }
                     }
                 }
                 else{
