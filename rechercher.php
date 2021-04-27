@@ -20,7 +20,7 @@ include 'include/functions.inc.php';
             </form>
         </div>
 <?php echo last(); ?>
-        <?php if(isset($_GET["search"]) && !empty($_GET["search"])){echo"<a class='morebutton button' href='#more'>Voir plus</a>\n";}else{echo"\n";}?>
+<?php if(isset($_GET["search"]) && !empty($_GET["search"])){echo"\t\t<a class='morebutton button' href='#more'>Voir plus</a>\n";}?>
         <img class="bg" src="ressources/images/bg-cinema.jpg" alt="bg"/>
     </section>
     <?php

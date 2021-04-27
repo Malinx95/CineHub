@@ -12,7 +12,6 @@ include 'include/functions.inc.php';
                     <figcaption>Photo Maxime</figcaption>
                     <img src="ressources/images/no-image.png" alt="photo Maxime"/>
                 </figure>
-
                 <div>
                     <h3>Maxime Grodet</h3>
                     <h4>Présentation</h4>
@@ -20,7 +19,6 @@ include 'include/functions.inc.php';
                 </div>
             </div>
             <div class="minicv antoine">
-
                 <figure>
                     <figcaption>Photo Antoine</figcaption>
                     <img src="ressources/images/no-image.png" alt="photo Antoine"/>
@@ -31,8 +29,6 @@ include 'include/functions.inc.php';
                     <p>Né en 2001 à Pontoise, j'ai toujours été très curieux et interessé par la technologie, l'informatique, le multimédia et les jeux vidéos.</p>
                     <p>Je suis actuellement en 2ème année de Licence Informatique à CY Cergy Paris Université.</p>
                 </div>
-
-
             </div>
         </div>
         <a class="morebutton button" href="#more">Voir plus</a>

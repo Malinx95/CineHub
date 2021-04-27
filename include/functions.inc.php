@@ -80,6 +80,7 @@ function search($json, $query, $type, $expand=false){
                 $date = $date[2] . "/" . $date[1] . "/" . $date[0];
             }
         }
+        $title = str_replace("&", "&amp;", $title);
         $poster = $result["poster_path"];
         if(empty($poster)){
             $poster = "ressources/images/no-image.png";
@@ -263,25 +264,25 @@ function getInfos($id, $infos, $type="movie"){
             case "directors":
                 if($type == "movie"){
                     if (empty($credits["crew"])) {
-                        array_push($out, "Réalisateurs indisponibles");
+                        array_push($out, "<li><p>Réalisateurs indisponibles</p></li>");
                         break;
                     }
                     $str = "";
                     foreach ($credits["crew"] as $crew) {
                         if ($crew["job"] == "Director") {
-                            $str .= "<li><p>" . $crew["name"] . "<div class=\"pop\">" . getPerson($crew["id"]) . "</div></p></li>";
+                            $str .= "<li><p>" . $crew["name"] . "</p>" . "<div class=\"pop\">" . getPerson($crew["id"]) . "</div></li>";
                         }
                     }
                     array_push($out, $str);
                 }
                 else{
                     if(empty($details["created_by"])){
-                        array_push($out, "Créateurs indisponible.");
+                        array_push($out, "<li><p>Créateurs indisponible</p></li>");
                         break;
                     }
                     $str = "";
                     foreach($details["created_by"] as $creator){
-                        $str .= "<li><p>" . $creator["name"] . "<div class=\"pop\">" . getPerson($creator["id"]) . "</div></p></li>";
+                        $str .= "<li><p>" . $creator["name"] . "</p>" . "<div class=\"pop\">" . getPerson($creator["id"]) . "</div></li>";
                     }
                     array_push($out, $str);
                 }
@@ -312,14 +313,14 @@ function getInfos($id, $infos, $type="movie"){
                 break;
             case "actors":
                 if (empty($credits["cast"])) {
-                    array_push($out, "Acteurs indisponibles");
+                    array_push($out, "<li><p>Acteurs indisponibles</p></li>");
                     break;
                 }
                 $str = "";
                 $crew = $credits["cast"];
                 for ($i = 0; $i < 5; $i++) {
                     if (!empty($crew[$i]) && $crew[$i]["known_for_department"] == "Acting") {
-                        $str .= "<li><p>" . $crew[$i]["name"] . "<div class=\"pop\">" . getPerson($crew[$i]["id"]) . "</div></p></li>";
+                        $str .= "<li><p>" . $crew[$i]["name"] . "</p>" . "<div class=\"pop\">" . getPerson($crew[$i]["id"]) . "</div></li>";
                     }
                 }
                 array_push($out, $str);
@@ -333,6 +334,7 @@ function getInfos($id, $infos, $type="movie"){
                 foreach ($details["genres"] as $genre) {
                     $str .= $genre["name"] . ", ";
                 }
+                $str = str_replace("&", "&amp;", $str);
                 array_push($out, substr($str, 0, strlen($str) - 2));
                 break;
             case "date":
@@ -423,13 +425,13 @@ function getPerson($id){
 function rankingTop($fichier, $type){
     $csv = getTop($fichier, 3);
 
-    $str = "\t<div class=\"top\">\n";
-    $str .= "\t\t\t\t\t\t<a href =\"voir.php?id=" . $csv[0][0] . "&type=" . $type . "&from=stats\">\n";
-    $str .= "\t\t\t\t\t\t\t<fieldset>\n";
-    $str .= "\t\t\t\t\t\t\t\t<legend>Top 1</legend>\n";
+    $str = "<div class=\"top\">\n";
+    $str .= "\t\t\t\t\t<a href =\"voir.php?id=" . $csv[0][0] . "&type=" . $type . "&from=stats\">\n";
+    $str .= "\t\t\t\t\t\t<fieldset>\n";
+    $str .= "\t\t\t\t\t\t\t<legend>Top 1</legend>\n";
     $str .= generateTopText($csv, 0, $type);
-    $str .= "\t\t\t\t\t\t\t</fieldset>\n";
-    $str .= "\t\t\t\t\t\t</a>\n";
+    $str .= "\t\t\t\t\t\t</fieldset>\n";
+    $str .= "\t\t\t\t\t</a>\n";
 
     $str .= "\t\t\t\t</div>\n";
     $str .= "\t\t\t\t<div class=\"top\">\n";
@@ -536,7 +538,7 @@ function last(){
         $out .= "\t\t\t<h2>Dernier film visité</h2>\n";
         $out .= "\t\t\t<a href=\"voir.php?id=$id&type=movie&from=search\">\n";
         $out .= "\t\t\t\t<article>\n";
-        $out .= "\t\t\t\t\t<h3>" . $infos[0] . "</h3>";
+        $out .= "\t\t\t\t\t<h3>" . $infos[0] . "</h3>\n";
         $out .= "\t\t\t\t\t<img class=\"thumbnail\" src=\"" . $infos[1] . "\" alt=\"poster " . $infos[0] . "\"/>\n";
         $out .= "\t\t\t\t\t<p>Visité le $date à $time</p>\n";
         $out .= "\t\t\t\t</article>\n";
@@ -553,7 +555,7 @@ function last(){
         $out .= "\t\t\t<h2>Dernière série visitée</h2>\n";
         $out .= "\t\t\t<a href=\"voir.php?id=$id&type=tv&from=search\">\n";
         $out .= "\t\t\t\t<article>\n";
-        $out .= "\t\t\t\t\t<h3>" . $infos[0] . "</h3>";
+        $out .= "\t\t\t\t\t<h3>" . $infos[0] . "</h3>\n";
         $out .= "\t\t\t\t\t<img class=\"thumbnail\" src=\"" . $infos[1] . "\" alt=\"poster " . $infos[0] . "\"/>\n";
         $out .= "\t\t\t\t\t<p>Visité le $date à $time</p>\n";
         $out .= "\t\t\t\t</article>\n";

@@ -6,11 +6,11 @@
                 <div>
                     <div>
                         <label for="movie">Films</label>
-                        <input id="movie" type='radio' name="type" value="movie" <?php if(isset($_POST["type"]) && $_POST["type"] == "movie"){echo "checked=\"true\"";}?>/>
+                        <input id="movie" type='radio' name="type" value="movie" <?php if(isset($_POST["type"]) && $_POST["type"] == "movie"){echo "checked=\"checked\"";}?>/>
                         <label for="both">Films &amp; Séries</label>
-                        <input id="both" type='radio' name="type" value="both" <?php if(!isset($_POST["type"]) || $_POST["type"] == "both"){echo "checked=\"true\"";}?>/>
+                        <input id="both" type='radio' name="type" value="both" <?php if(!isset($_POST["type"]) || $_POST["type"] == "both"){echo "checked=\"checked\"";}?>/>
                         <label for="tv">Séries</label>
-                        <input id="tv" type='radio' name="type" value="tv" <?php if(isset($_POST["type"]) && $_POST["type"] == "tv"){echo "checked=\"true\"";}?>/>
+                        <input id="tv" type='radio' name="type" value="tv" <?php if(isset($_POST["type"]) && $_POST["type"] == "tv"){echo "checked=\"checked\"";}?>/>
                     </div>
                 </div>
                 <div>
