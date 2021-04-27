@@ -58,6 +58,9 @@ function search($json, $query, $type, $expand=false){
         $out .= "\t\t\t\t<div class=\"scroll\">\n";
     }
     foreach ($json as $result) {
+        if(empty($result["poster_path"])){
+            continue;
+        }
         if($type == "movie"){
             $title = $result["original_title"];
             if(empty($result["release_date"])){
