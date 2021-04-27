@@ -260,6 +260,7 @@ h1{
 }
 
 .filtres fieldset{
+    background: white;
     border-radius: 25px;
     border: none;
     box-shadow:0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
@@ -275,6 +276,7 @@ h1{
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
     text-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
     transition: 0.25s;
+    margin-bottom: 1%;
 }
 
 .filtres div div:hover{
@@ -283,6 +285,7 @@ h1{
 }
 
 .results{
+    background: white;
     width: 90vw;
     margin: 5vh auto;
     border: none;
@@ -448,7 +451,7 @@ legend{
     left: 0;
     top: 0;
     z-index: -1;
-    filter: brightness(0.5);
+    filter: brightness(1);
 }
 
 .title{

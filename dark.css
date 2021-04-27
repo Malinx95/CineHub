@@ -109,3 +109,15 @@ p{
     color: white;
     background: #3b3a38;
 }
+
+.bg{
+    filter: brightness(0.5);
+}
+
+.filtres fieldset{
+    background: #4a4a4a;
+}
+
+.results{
+    background: #4a4a4a;
+}
