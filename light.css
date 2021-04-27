@@ -499,7 +499,6 @@ legend{
 }
 
 .minicv{
-    display: grid;
     width: 35vw;
     border-radius: 25px;
     background: white;
@@ -540,6 +539,7 @@ legend{
 .minicv div{
     text-align: left;
     grid-column: 2;
+    padding: 10px;
 }
 
 .minicv p {
@@ -584,6 +584,7 @@ legend{
     border-radius: 25px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
     transition: 0.25s;
+    padding: 10px;
 }
 
 .cv div:hover{
