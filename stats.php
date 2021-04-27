@@ -18,7 +18,7 @@ include 'include/functions.inc.php';
         </div>
         <?php echo "<p class=\"visits\">Nombre de magnifiques visiteurs : $hit</p>\n";?>
         <a class="morebutton button" href="#more">Voir plus</a>
-        <img class="bg" src="https://stationf.co/wp-content/uploads/2019/06/hero-home-page.jpg" alt="bg"/>
+        <img class="bg" src="ressources/images/bg-cinema.jpg" alt="bg"/>
     </section>
     <section id="more">
         <h2>Graphiques</h2>

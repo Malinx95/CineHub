@@ -13,7 +13,7 @@ include 'include/functions.inc.php';
             <a class="voir button" href="rechercher.php">Voir les films et séries</a>
         </div>
         <a class="morebutton button" href="#more">Voir plus</a>
-        <img class="bg" src="https://stationf.co/wp-content/uploads/2019/06/hero-home-page.jpg" alt="bg"/>
+        <img class="bg" src="ressources/images/bg-cinema.jpg" alt="bg"/>
     </section>
     <section id="more">
         <h2>Informations</h2>

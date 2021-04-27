@@ -448,7 +448,7 @@ legend{
     left: 0;
     top: 0;
     z-index: -1;
-    filter: blur(5px) brightness(0.5);
+    filter: brightness(0.5);
 }
 
 .title{

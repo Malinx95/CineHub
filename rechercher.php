@@ -21,7 +21,7 @@ include 'include/functions.inc.php';
         </div>
 <?php echo last(); ?>
         <?php if(isset($_GET["search"]) && !empty($_GET["search"])){echo"<a class='morebutton button' href='#more'>Voir plus</a>\n";}else{echo"\n";}?>
-        <img class="bg" src="https://stationf.co/wp-content/uploads/2019/06/hero-home-page.jpg" alt="bg"/>
+        <img class="bg" src="ressources/images/bg-cinema.jpg" alt="bg"/>
     </section>
     <?php
     if(isset($_GET["search"]) && !empty($_GET["search"])){
