@@ -238,7 +238,6 @@ function getInfos($id, $infos, $type="movie"){
                     array_push($out, "Titre indisponible");
                     break;
                 }
-                $title = str_replace("&", "&amp;", $title);
                 array_push($out, $title);
                 break;
             case "poster":
@@ -347,7 +346,6 @@ function getInfos($id, $infos, $type="movie"){
                 foreach ($details["genres"] as $genre) {
                     $str .= $genre["name"] . ", ";
                 }
-                $str = str_replace("&", "&amp;", $str);
                 array_push($out, substr($str, 0, strlen($str) - 2));
                 break;
             case "date":
@@ -383,6 +381,11 @@ function getInfos($id, $infos, $type="movie"){
                     array_push($out, "Page officielle indisponible");
                 }
                 break;
+        }
+    }
+    for($i=0 ; $i<sizeof($out) ; $i++){
+        if(strpos("$out[$i]", "http") == false){
+            $out[$i] = str_replace("&", "&amp;", $out[$i]);
         }
     }
     return $out;
