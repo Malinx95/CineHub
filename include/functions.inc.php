@@ -238,6 +238,7 @@ function getInfos($id, $infos, $type="movie"){
                     array_push($out, "Titre indisponible");
                     break;
                 }
+                $title = str_replace("&", "&amp;", $title);
                 array_push($out, $title);
                 break;
             case "poster":
@@ -276,25 +277,25 @@ function getInfos($id, $infos, $type="movie"){
             case "directors":
                 if($type == "movie"){
                     if (empty($credits["crew"])) {
-                        array_push($out, "<li><p>Réalisateurs indisponibles</p></li>");
+                        array_push($out, "\t\t\t\t\t<li>\n\t\t\t\t\t\t<p>Réalisateurs indisponibles</p>\n\t\t\t\t\t</li>\n");
                         break;
                     }
                     $str = "";
                     foreach ($credits["crew"] as $crew) {
                         if ($crew["job"] == "Director") {
-                            $str .= "<li><p>" . $crew["name"] . "</p>" . "<div class=\"pop\">" . getPerson($crew["id"]) . "</div></li>";
+                            $str .= "\t\t\t\t\t<li>\n\t\t\t\t\t\t<p>" . $crew["name"] . "</p>\n" . "\t\t\t\t\t\t<div class=\"pop\">\n" . getPerson($crew["id"]) . "\t\t\t\t\t\t</div>\n\t\t\t\t\t</li>\n";
                         }
                     }
                     array_push($out, $str);
                 }
                 else{
                     if(empty($details["created_by"])){
-                        array_push($out, "<li><p>Créateurs indisponible</p></li>");
+                        array_push($out, "\t\t\t\t\t<li>\n\t\t\t\t\t\t<p>Créateurs indisponible</p>\n\t\t\t\t\t</li>\n");
                         break;
                     }
                     $str = "";
                     foreach($details["created_by"] as $creator){
-                        $str .= "<li><p>" . $creator["name"] . "</p>" . "<div class=\"pop\">" . getPerson($creator["id"]) . "</div></li>";
+                        $str .= "\t\t\t\t\t<li>\n\t\t\t\t\t\t<p>" . $creator["name"] . "</p>\n" . "\t\t\t\t\t\t<div class=\"pop\">\n" . getPerson($creator["id"]) . "\t\t\t\t\t\t</div>\n\t\t\t\t\t</li>\n";
                     }
                     array_push($out, $str);
                 }
@@ -325,14 +326,14 @@ function getInfos($id, $infos, $type="movie"){
                 break;
             case "actors":
                 if (empty($credits["cast"])) {
-                    array_push($out, "<li><p>Acteurs indisponibles</p></li>");
+                    array_push($out, "\t\t\t\t\t<li>\n\t\t\t\t\t\t<p>Acteurs indisponibles</p>\n\t\t\t\t\t</li>\n");
                     break;
                 }
                 $str = "";
                 $crew = $credits["cast"];
                 for ($i = 0; $i < 5; $i++) {
                     if (!empty($crew[$i]) && $crew[$i]["known_for_department"] == "Acting") {
-                        $str .= "<li><p>" . $crew[$i]["name"] . "</p>" . "<div class=\"pop\">" . getPerson($crew[$i]["id"]) . "</div></li>";
+                        $str .= "\t\t\t\t\t<li>\n\t\t\t\t\t\t<p>" . $crew[$i]["name"] . "</p>\n" . "\t\t\t\t\t\t<div class=\"pop\">\n" . getPerson($crew[$i]["id"]) . "\t\t\t\t\t\t</div>\n\t\t\t\t\t</li>\n";
                     }
                 }
                 array_push($out, $str);
@@ -407,30 +408,30 @@ function getPerson($id){
         $date = "Date de naissance indisponible";
     }
 
-    $out = "<div>";
-    $out .= "<h3>" . $details["name"] . "</h3>";
-    $out .= "<img src=\"$img\" alt=\"photo " . $details["name"] . "\"/>";
-    $out .= "</div>";
-    $out .= "<div class=\"persondesc\">";
-    $out .= "<h4>Date de naissance</h4>";
-    $out .= "<p>" . $date . "</p>";
+    $out = "\t\t\t\t\t\t\t<div>\n";
+    $out .= "\t\t\t\t\t\t\t\t<h3>" . $details["name"] . "</h3>\n";
+    $out .= "\t\t\t\t\t\t\t\t<img src=\"$img\" alt=\"photo " . $details["name"] . "\"/>\n";
+    $out .= "\t\t\t\t\t\t\t</div>\n";
+    $out .= "\t\t\t\t\t\t\t<div class=\"persondesc\">\n";
+    $out .= "\t\t\t\t\t\t\t\t<h4>Date de naissance</h4>\n";
+    $out .= "\t\t\t\t\t\t\t\t<p>" . $date . "</p>\n";
     if(!empty($place)){
-        $out .= "<h4>Lieu de naissance</h4>";
-        $out .= "<p>$place</p>";
+        $out .= "\t\t\t\t\t\t\t\t<h4>Lieu de naissance</h4>\n";
+        $out .= "\t\t\t\t\t\t\t\t<p>$place</p>\n";
     }
     if(!empty($dead)){
-        $out .= "<h4>Date de décès</h4>";
-        $out .= "<p>$dead</p>";
+        $out .= "\t\t\t\t\t\t\t\t<h4>Date de décès</h4>\n";
+        $out .= "\t\t\t\t\t\t\t\t<p>$dead</p>\n";
     }
-    $out .= "<h4>Profession</h4>";
-    $out .= "<p>" . $details["known_for_department"] . "</p>";
-    $out .= "<h4>Biographie</h4>";
+    $out .= "\t\t\t\t\t\t\t\t<h4>Profession</h4>\n";
+    $out .= "\t\t\t\t\t\t\t\t<p>" . $details["known_for_department"] . "</p>\n";
+    $out .= "\t\t\t\t\t\t\t\t<h4>Biographie</h4>\n";
     $bio = $details["biography"];
     if(empty($bio)){
         $bio = "Biographie indisponible";
     }
-    $out .= "<p>" . $bio . "</p>";
-    $out .= "</div>";
+    $out .= "\t\t\t\t\t\t\t\t<p>" . $bio . "</p>\n";
+    $out .= "\t\t\t\t\t\t\t</div>\n";
     return $out;
 }
 
