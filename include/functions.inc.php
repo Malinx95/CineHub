@@ -384,7 +384,7 @@ function getInfos($id, $infos, $type="movie"){
         }
     }
     for($i=0 ; $i<sizeof($out) ; $i++){
-        if(strpos("$out[$i]", "http") == false){
+        if(strpos($out[$i], "http") == false){
             $out[$i] = str_replace("&", "&amp;", $out[$i]);
         }
     }
