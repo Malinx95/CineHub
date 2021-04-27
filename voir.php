@@ -52,7 +52,7 @@ hits();
                 else{
                     echo "\t\t\t\t<h3>Créateurs</h3>\n";
                 }
-                echo "\t\t\t\t<ul>" . $infos[6] . "</ul>\n";
+                echo "\t\t\t\t<ul>\n" . $infos[6] . "\t\t\t\t</ul>\n";
                 if($type == "movie"){
                     echo "\t\t\t\t<h3>Durée</h3>\n";
                 }
@@ -61,7 +61,7 @@ hits();
                 }
                 echo "\t\t\t\t<p>", $infos[7], "</p>\n";
                 echo "\t\t\t\t<h3>Acteurs</h3>\n";
-                echo "\t\t\t\t<ul>". $infos[8] . "</ul>\n";
+                echo "\t\t\t\t<ul>\n". $infos[8] . "\t\t\t\t</ul>\n";
                 echo "\t\t\t</div>\n";
                 echo "\t\t\t<div>\n";
                 echo "\t\t\t\t<h3>Genres</h3>\n";
