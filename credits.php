@@ -8,21 +8,13 @@ include 'include/functions.inc.php';
         <h2>Auteurs</h2>
         <div class="center">
             <div class="minicv maxime">
-                <figure>
-                    <figcaption>Photo Maxime</figcaption>
-                    <img src="ressources/images/no-image.png" alt="photo Maxime"/>
-                </figure>
                 <div>
                     <h3>Maxime Grodet</h3>
                     <h4>Présentation</h4>
-                    <p>Petite intro blabla blabla blabla blabla blabla blabla blabla blabla blabla blabla blabla blabla blabla blabla blabla</p>
+                    <p>Je suis passionné par les ordinateurs et les nouvelles technologies dès mon plus jeune âge. J’ai toujours été en avance dans les matières technologiques et après le BAC S, j'ai poursuivi mes études en intégrant l'Université de Cergy-Pontoise afin d'y effectuer une licence en informatique.</p>
                 </div>
             </div>
             <div class="minicv antoine">
-                <figure>
-                    <figcaption>Photo Antoine</figcaption>
-                    <img src="ressources/images/no-image.png" alt="photo Antoine"/>
-                </figure>
                 <div>
                     <h3>Antoine Qiu</h3>
                     <h4>Présentation</h4>
@@ -41,12 +33,16 @@ include 'include/functions.inc.php';
                 <h3>CV - Maxime Grodet</h3>
                 <h4>Parcours scolaire</h4>
                 <ul>
-                    <li><p>diplôme</p></li>
-                    <li><p>diplôme</p></li>
+                    <li><p>2015-2018 : Baccalauréat Scientifique science de l'ingénieur</p></li>
+                    <li><p>2018-2019 : CMI SIC</p></li>
+                    <li><p>2019-présent : Licence Informatique</p></li>
                 </ul>
                 <h4>Expériences</h4>
                 <ul>
-                    <li><p>expérience</p></li>
+                    <li><p>fév . 2015 : Stage d'observation</p></li>
+                    <li><p>étés 2016, 2017 et 2018 : CDD d'un mois au centre Pompidou en tant qu’agent d’accueil et de surveillance</p></li>
+                    <li><p>juin 2019 : stage de cmi au centre de recherche ETIS de l’université de Cergy sur la création d’une interface web pour contrôler une tête robotique</p></li>
+                    <li><p> juillet-août 2020 : Intérimaire dans une station d’autoroute Total en tant que Hôte de caisse</p></li>
                 </ul>
             </div>
             <div class="middle">
@@ -64,6 +60,9 @@ include 'include/functions.inc.php';
                     </li>
                     <li>
                         <p>Icônes réalisés par <a href="https://www.flaticon.com/authors/those-icons">Those Icons</a> sur <a href="https://www.flaticon.com/">https://www.flaticon.com</a></p>
+                    </li>
+                    <li>
+                        <p>Photo de fond prise par Felix Mooneeram sur le site <a href="https://unsplash.com/photos/evlkOfkQ5rE">unsplash</a></p>
                     </li>
                 </ul>
             </div>
