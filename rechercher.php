@@ -1,11 +1,9 @@
 <?php
 $title = "Rechercher";
 $current = 2;
+$desc = "Page de recherche.";
 include_once 'include/header.inc.php';
 include 'include/functions.inc.php';
-/*if(isset($_GET["search"]) && !empty($_GET["search"])) {
-    setcookie("last", $_GET["search"], time() + 60*60*24*365);
-}*/
 ?>
     <section id="card">
         <h2>Barre de recherche</h2>

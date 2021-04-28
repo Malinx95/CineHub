@@ -233,9 +233,9 @@ function getInfos($id, $infos, $type="movie"){
                 break;
             case "title":
                 if ($type == "movie") {
-                    $title = $details["original_title"];
+                    $title = $details["title"];
                 } else {
-                    $title = $details["original_name"];
+                    $title = $details["name"];
                 }
                 if (empty($title)) {
                     array_push($out, "Titre indisponible");

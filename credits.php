@@ -1,6 +1,7 @@
 <?php
 $title = "Crédits";
 $current = 3;
+$desc = "Crédits et remerciements.";
 include_once 'include/header.inc.php';
 include 'include/functions.inc.php';
 ?>
@@ -63,6 +64,9 @@ include 'include/functions.inc.php';
                     </li>
                     <li>
                         <p>Photo de fond prise par Felix Mooneeram sur le site <a href="https://unsplash.com/photos/evlkOfkQ5rE">unsplash</a></p>
+                    </li>
+                    <li>
+                        <p>Remerciements à Monsieur Marc Lemaire pour nous avoir guidé durant tout le long de ce semestre.</p>
                     </li>
                 </ul>
             </div>

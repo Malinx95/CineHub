@@ -10,6 +10,7 @@ if(isset($_GET["id"]) && isset($_GET["type"]) && ($_GET["type"] == "movie" || $_
 else{
     $title = "error";
 }
+$desc = $infos[3];
 include_once 'include/header.inc.php';
 hits();
 ?>

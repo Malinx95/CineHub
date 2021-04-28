@@ -54,7 +54,7 @@
 <head>
     <title>CineHub - <?php echo$title?></title>
     <meta charset="utf-8"/>
-    <meta name="description" content="Projet DevWeb"/>
+    <meta name="description" content="<?php echo$desc?>"/>
     <meta name="author" content="Maxime Grodet &amp; Antoine Qiu"/>
     <meta name="date" content="27/04/2021"/>
     <meta name="keywords" content="CineHub"/>

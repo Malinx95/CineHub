@@ -1,6 +1,7 @@
 <?php
 $title = "Accueil";
 $current = 1;
+$desc = "Page d'accueil.";
 include_once 'include/header.inc.php';
 include 'include/functions.inc.php';
 ?>
