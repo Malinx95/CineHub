@@ -455,7 +455,7 @@ function rankingTop($fichier, $type){
     $csv = getTop($fichier, 3);
 
     $str = "<div class=\"top\">\n";
-    if($csv != null){
+    if($csv != null && isset($csv[0][0])){
         $str .= "\t\t\t\t\t<a href =\"voir.php?id=" . $csv[0][0] . "&type=" . $type . "&from=stats\">\n";
     }
     else{
@@ -469,7 +469,7 @@ function rankingTop($fichier, $type){
 
     $str .= "\t\t\t\t</div>\n";
     $str .= "\t\t\t\t<div class=\"top\">\n";
-    if($csv != null){
+    if($csv != null && isset($csv[1][0])){
         $str .= "\t\t\t\t\t<a href =\"voir.php?id=" . $csv[1][0] . "&type=" . $type . "&from=stats\">\n";
     }
     else{
@@ -482,7 +482,7 @@ function rankingTop($fichier, $type){
     $str .= "\t\t\t\t\t\t</fieldset>\n";
     $str .= "\t\t\t\t\t</a>\n";
 
-    if($csv != null){
+    if($csv != null && isset($csv[2][0])){
         $str .= "\t\t\t\t\t<a href =\"voir.php?id=" . $csv[2][0] . "&type=" . $type . "&from=stats\">\n";
     }
     else{
