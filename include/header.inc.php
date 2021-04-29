@@ -1,9 +1,9 @@
 <?php
     session_start();
     if(empty($_COOKIE["theme"])){
-        setcookie("theme", "light", time()+60*60*24*365);
-        $txt = "dark";
-        $img = "moon";
+        setcookie("theme", "dark", time()+60*60*24*365);
+        $txt = "light";
+        $img = "sun";
     }
     if(isset($_POST["theme"])){
         setcookie("theme", $_POST["theme"], time()+60*60*24*365);
@@ -66,7 +66,7 @@
         echo "<link rel=\"stylesheet\" href=\"" . $_COOKIE["theme"] . ".css\"/>";
     }
     else {
-        echo "<link rel=\"stylesheet\" href=\"light.css\"/>";
+        echo "<link rel=\"stylesheet\" href=\"dark.css\"/>";
     }
     ?>
     <link rel="icon" href="ressources/logo/logo.png"/>
@@ -105,7 +105,7 @@
                         echo "<li><a href=\"rechercher.php\">Retour</a></li>\n";
                     }
 
-                    if(isset($_GET["type"]) && !empty($_GET["type"])){
+                    if(isset($_GET["type"]) && isset($_GET["id"]) && !empty($_GET["id"]) && ($_GET["type"] == "tv" || $_GET["type"] == "movie")){
                         if($_GET["type"] == "movie"){
                             setcookie("last_movie", $_GET["id"].";".date("d/m/Y").";".date("H:i"), time()+60*60*24*365);
                         }
