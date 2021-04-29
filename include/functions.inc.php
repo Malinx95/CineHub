@@ -532,7 +532,7 @@ function generateTopText($csv, $i, $type){
             return "Pas de film consulté.";
         }
         else{
-            return "Pas de série consulté.";
+            return "Pas de série consultée.";
         }
     }
 }
