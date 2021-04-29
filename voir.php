@@ -1,7 +1,7 @@
 <?php
 $current = 0;
 include 'include/functions.inc.php';
-if(isset($_GET["id"]) && isset($_GET["type"]) && ($_GET["type"] == "movie" || $_GET["type"] == "tv")){
+if(isset($_GET["id"]) && !empty($_GET["id"]) && isset($_GET["type"]) && ($_GET["type"] == "movie" || $_GET["type"] == "tv")){
     $id = $_GET["id"];
     $type = $_GET["type"];
     $infos = getInfos($id, array("title", "poster", "rating", "overview", "backdrop", "origin", "directors", "time", "actors", "genres", "date", "producers", "site"), $type);
@@ -10,13 +10,17 @@ if(isset($_GET["id"]) && isset($_GET["type"]) && ($_GET["type"] == "movie" || $_
 else{
     $title = "error";
 }
-$desc = $infos[3];
+if(isset($info)){
+    $desc = $infos[3];
+}
 include_once 'include/header.inc.php';
-hits();
+if(isset($id) && !empty($id) && isset($type) && !empty($type)){
+    hits();
+}
 ?>
     <section id="card">
         <?php
-        if(isset($id) && isset($type)){
+        if(isset($id) && !empty($id) && isset($type) && !empty($type)){
             echo "<h2>Résumé</h2>\n";
             echo "\t\t<div class=\"center\">\n";
             echo "\t\t\t<img class=\"poster\" src=\"", $infos[1], "\" alt=\"poster ", $infos[0], "\"/>\n";
@@ -31,7 +35,7 @@ hits();
         ?>
         <a class="morebutton button" href="#more">Voir plus</a>
         <?php
-        if(isset($id) && isset($type)){
+        if(isset($id) && !empty($id) && isset($type) && !empty($type)){
             echo "<img class=\"bg\" src=\"" . $infos[4] . "\" alt=\"bg\"/>\n";
         }
         ?>
@@ -40,7 +44,7 @@ hits();
         <h2>Plus d'informations</h2>
         <div class="center infos">
             <?php
-            if(isset($id) && isset($type)){
+            if(isset($id) && !empty($id) && isset($type) && !empty($type)){
                 echo "<div>\n";
                 echo "\t\t\t\t<h3>Langue originale</h3>\n";
                 echo "\t\t\t\t<p>", $infos[5], "</p>\n";
