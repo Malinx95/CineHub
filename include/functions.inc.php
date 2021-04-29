@@ -442,10 +442,16 @@ function getPerson($id){
 }
 
 function rankingTop($fichier, $type){
+
     $csv = getTop($fichier, 3);
 
     $str = "<div class=\"top\">\n";
-    $str .= "\t\t\t\t\t<a href =\"voir.php?id=" . $csv[0][0] . "&type=" . $type . "&from=stats\">\n";
+    if($csv != null){
+        $str .= "\t\t\t\t\t<a href =\"voir.php?id=" . $csv[0][0] . "&type=" . $type . "&from=stats\">\n";
+    }
+    else{
+        $str .= "\t\t\t\t\t<a href =\"\">\n";
+    }
     $str .= "\t\t\t\t\t\t<fieldset>\n";
     $str .= "\t\t\t\t\t\t\t<legend>Top 1</legend>\n";
     $str .= generateTopText($csv, 0, $type);
@@ -454,7 +460,12 @@ function rankingTop($fichier, $type){
 
     $str .= "\t\t\t\t</div>\n";
     $str .= "\t\t\t\t<div class=\"top\">\n";
-    $str .= "\t\t\t\t\t<a href =\"voir.php?id=" . $csv[1][0] . "&type=" . $type . "&from=stats\">\n";
+    if($csv != null){
+        $str .= "\t\t\t\t\t<a href =\"voir.php?id=" . $csv[1][0] . "&type=" . $type . "&from=stats\">\n";
+    }
+    else{
+        $str .= "\t\t\t\t\t<a href =\"\">\n";
+    }
 
     $str .= "\t\t\t\t\t\t<fieldset>\n";
     $str .= "\t\t\t\t\t\t\t<legend>Top 2</legend>\n";
@@ -462,7 +473,12 @@ function rankingTop($fichier, $type){
     $str .= "\t\t\t\t\t\t</fieldset>\n";
     $str .= "\t\t\t\t\t</a>\n";
 
-    $str .= "\t\t\t\t\t<a href =\"voir.php?id=" . $csv[2][0] . "&type=" . $type . "&from=stats\">\n";
+    if($csv != null){
+        $str .= "\t\t\t\t\t<a href =\"voir.php?id=" . $csv[2][0] . "&type=" . $type . "&from=stats\">\n";
+    }
+    else{
+        $str .= "\t\t\t\t\t<a href =\"\">\n";
+    }
 
     $str .= "\t\t\t\t\t\t<fieldset>\n";
     $str .= "\t\t\t\t\t\t\t<legend>Top 3</legend>\n";
@@ -475,14 +491,19 @@ function rankingTop($fichier, $type){
 }
 
 function getTop($fichier, $size){
-    $csv = array_chunk(str_getcsv(substr(str_replace("\n", ";", file_get_contents($fichier)), 0, -1) , ";"), 2); // recupere le contenue du fichier sous forme de tableau
-    if(isset($csv[0][1])){
-        $keys = array();
-    foreach($csv as $key => $value) {
-        array_push($keys, $value[1]);
-    }
-    array_multisort($keys, SORT_DESC, $csv, SORT_DESC);
-    return(array_slice($csv, 0, $size));
+    if(file_exists($fichier)){
+        $csv = array_chunk(str_getcsv(substr(str_replace("\n", ";", file_get_contents($fichier)), 0, -1) , ";"), 2); // recupere le contenue du fichier sous forme de tableau
+        if(isset($csv[0][1])){
+            $keys = array();
+        foreach($csv as $key => $value) {
+            array_push($keys, $value[1]);
+        }
+        array_multisort($keys, SORT_DESC, $csv, SORT_DESC);
+        return(array_slice($csv, 0, $size));
+        }
+        else{
+            return null;
+        }
     }
     else{
         return null;
@@ -490,8 +511,8 @@ function getTop($fichier, $size){
 }
 
 function generateTopText($csv, $i, $type){
-    $infos = getInfos($csv[$i][0], array("title", "poster"), $type);
-    if(isset($csv[$i])){
+    if($csv != null && isset($csv[$i])){
+        $infos = getInfos($csv[$i][0], array("title", "poster"), $type);
         $str = "\t\t\t\t\t\t\t<h3>" . $infos[0] . "</h3>\n";
         $str .= "\t\t\t\t\t\t\t<img class='thumbnailtop' src='" . $infos[1] . "' alt='poster " . $infos[0] . "'/>\n";
         $str .= "\t\t\t\t\t\t\t<p> Avec " . $csv[$i][1] . " consultations !</p>\n";
