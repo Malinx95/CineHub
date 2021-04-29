@@ -109,6 +109,7 @@ function search_results($query){
     $query = str_replace("+", "%2B", $query);
     $query = str_replace(" ", "+", $query);
     $query = str_replace("%", "%25", $query);
+    $query = str_replace("#", "%23", $query);
     $movie = getJSON("https://api.themoviedb.org/3/search/movie?api_key=" . KEY . "&query=" . $query)["results"];
     $tv = getJSON("https://api.themoviedb.org/3/search/tv?api_key=" . KEY . "&query=" . $query)["results"];
     $out = "";
