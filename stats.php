@@ -33,7 +33,7 @@ if(file_exists("stats/movie_hits.csv")){
 else{
     echo "\t\t\t<p>Aucune données à afficher</p>\n";
 }
-if(file_exists("stats/tv.csv")){
+if(file_exists("stats/tv_hits.csv")){
     echo "\t\t\t<img src=\"include/graph2.php\" alt=\"graph2\"/>\n";
 }
 else{
