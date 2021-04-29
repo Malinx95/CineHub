@@ -27,8 +27,18 @@ include 'include/functions.inc.php';
 <?php
 //echo svgGraph("stats/movie_hits.csv");
 //echo svgGraph("stats/tv_hits.csv");
-echo "\t\t\t<img src=\"include/graph1.php\" alt=\"graph1\"/>\n";
-echo "\t\t\t<img src=\"include/graph2.php\" alt=\"graph2\"/>\n";
+if(file_exists("stats/movie_hits.csv")){
+    echo "\t\t\t<img src=\"include/graph1.php\" alt=\"graph1\"/>\n";
+}
+else{
+    echo "\t\t\t<p>Aucune données à afficher</p>\n";
+}
+if(file_exists("stats/tv.csv")){
+    echo "\t\t\t<img src=\"include/graph2.php\" alt=\"graph2\"/>\n";
+}
+else{
+    echo "\t\t\t<p>Aucune données à afficher</p>\n";
+}
 ?>
         </div>
     </section>
