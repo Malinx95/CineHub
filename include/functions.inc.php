@@ -415,6 +415,13 @@ function getPerson($id){
     else{
         $date = "Date de naissance indisponible";
     }
+    if(!empty($dead)){
+        $dead = explode("-", $dead);
+        $dead = $dead[2] . "/" . $dead[1] . "/" . $dead[0];
+    }
+    else{
+        $date = "Date de naissance indisponible";
+    }
 
     $out = "\t\t\t\t\t\t\t<div>\n";
     $out .= "\t\t\t\t\t\t\t\t<h3>" . $details["name"] . "</h3>\n";
