@@ -10,6 +10,7 @@ include 'include/functions.inc.php';
         <div class="center ranking">
             <fieldset>
                 <legend>Top des films les plus consultés</legend>
+                <!-- genere le top 3 -->
                 <?php echo rankingTop("stats/movie_hits.csv", "movie");?>
             </fieldset>
             <fieldset>

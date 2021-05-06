@@ -30,19 +30,6 @@ function geo() { //retourne geolocalisation
     return $out;
 }
 
-/*
-function tmdb($type, $query) { //requete api the movie database
-    $query = str_replace(" ", "+", $query);
-    $key = "?api_key=a22fd943c9bbecd346f31c75d2bd3969";
-    $url = "https://api.themoviedb.org/3/search/" . $type . $key . "&query=" . $query;
-    //echo "<a href=\"", $url, "\">request</a>\n";
-    $json = file_get_contents($url);
-    $obj = json_decode($json, true);
-    $result = $obj["results"];
-    return $result;
-}
-*/
-
 function search($json, $query, $type, $expand=false){
     $out = "\t\t\t<fieldset>\n";
     if($type == "movie"){
@@ -129,55 +116,26 @@ function search_results($query){
     return $out;
 }
 
-/*
-function details($id, $movie = true){
-    $key = "?api_key=a22fd943c9bbecd346f31c75d2bd3969";
-    if($_GET["type"] == "movie"){
-        $url = "https://api.themoviedb.org/3/movie/" . $id . $key . "&language=fr";
-    }
-    if($_GET["type"] == "tv"){
-        $url = "https://api.themoviedb.org/3/tv/" . $id . $key . "&language=fr";
-    }
-    //echo $url;
-    $json = file_get_contents($url);
-    $obj = json_decode($json, true);
-    return $obj;
-}
-
-function detailsTop($id, $movie){
-    $key = "?api_key=a22fd943c9bbecd346f31c75d2bd3969";
-    if($movie == "movie"){
-        $url = "https://api.themoviedb.org/3/movie/" . $id . $key . "&language=fr";
-    }
-    if($movie == "tv"){
-        $url = "https://api.themoviedb.org/3/tv/" . $id . $key . "&language=fr";
-    }
-    //echo $url;
-    $json = file_get_contents($url);
-    $obj = json_decode($json, true);
-    return $obj;
-}
-*/
-
+// fonction qui gere les hits pour les films et séries
 function hits(){
     if(isset($_GET["id"])){
         $id = $_GET["id"];
         $go = true;
-        if ($_GET["type"] == "movie") {
+        if ($_GET["type"] == "movie") { // choisie le type
             $fichier = "stats/movie_hits.csv";
             $last = "last_movie";
         } else {
             $fichier = "stats/tv_hits.csv";
             $last = "last_tv";
         }
-        if(isset($_COOKIE[$last])){
+        if(isset($_COOKIE[$last])){ // recupere l'id du dernier
             $explode = explode(";", $_COOKIE[$last]);
             $last_id = $explode[0];
             if($id == $last_id){
                 $go = false;
             }
         }
-        if($go == true){
+        if($go == true){ // ajoute ou incremente
             if (!file_exists($fichier)) {
                 $compteur = fopen($fichier, "w");
                 $hit = array($id, "1");
@@ -450,10 +408,12 @@ function getPerson($id){
     return $out;
 }
 
+// fonction qui gere l'affichage des top dans la page stats
 function rankingTop($fichier, $type){
 
-    $csv = getTop($fichier, 3);
+    $csv = getTop($fichier, 3); // recupere le tableau du top 3
 
+    // affiche le top
     $str = "<div class=\"top\">\n";
     if($csv != null && isset($csv[0][0])){
         $str .= "\t\t\t\t\t<a href =\"voir.php?id=" . $csv[0][0] . "&type=" . $type . "&from=stats\">\n";
@@ -499,6 +459,7 @@ function rankingTop($fichier, $type){
     return $str;
 }
 
+// fonction qui traite un fichier csv hits et return un tableau de taille size
 function getTop($fichier, $size){
     if(file_exists($fichier)){
         $csv = array_chunk(str_getcsv(substr(str_replace("\n", ";", file_get_contents($fichier)), 0, -1) , ";"), 2); // recupere le contenue du fichier sous forme de tableau
@@ -519,6 +480,7 @@ function getTop($fichier, $size){
     }
 }
 
+// fonction qui genere les element du top
 function generateTopText($csv, $i, $type){
     if($csv != null && isset($csv[$i])){
         $infos = getInfos($csv[$i][0], array("title", "poster"), $type);
@@ -537,6 +499,7 @@ function generateTopText($csv, $i, $type){
     }
 }
 
+// fonction qui genere un graph svg depuis un top
 function svgGraph($fichier){
     $csv = getTop($fichier, 10);
     $ligne = 15;
@@ -560,19 +523,6 @@ function svgGraph($fichier){
     $str .= "\t\t\t</figure>\n";
     return $str;
 }
-/*
-function jpgraphBar($fichier){
-    $csv = getTop($fichier, 10);
-    $x = array();
-    $y = array();
-    foreach ($csv as $key => $value) {
-        array_push($x, $value[0]);
-        array_push($y, $value[1]);
-    }
-    $width = 500;
-    $height = 200;
-}
-*/
 
 function last(){
     $out = "";

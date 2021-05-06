@@ -1,6 +1,7 @@
 <?php
     session_start();
-    if(empty($_COOKIE["theme"])){
+    // -- code qui gere le changement de theme
+    if(empty($_COOKIE["theme"])){ // theme par defaut
         setcookie("theme", "dark", time()+60*60*24*365);
         $txt = "light";
         $img = "sun";
@@ -32,7 +33,8 @@
         }
     }
 
-    if(!file_exists("stats/hits.txt")){
+    // -- code qui gere la construction et l'incrementation du fichier hits --
+    if(!file_exists("stats/hits.txt")){ // cree hits si il existe pas
         $compteur=fopen("stats/hits.txt","w");
         $hit=1;
         setcookie("visit","ok",time()+60*30);
@@ -40,7 +42,7 @@
     else{
         $compteur=fopen("stats/hits.txt","r+");
         $hit=fgets($compteur,255);
-        if(empty($_COOKIE["visit"])){
+        if(empty($_COOKIE["visit"])){ // si pas de cookie visite, cree et incremente
             setcookie("visit","ok",time()+60*30);
             $hit++;
         }
@@ -58,6 +60,8 @@
     <meta name="author" content="Maxime Grodet &amp; Antoine Qiu"/>
     <meta name="date" content="29/04/2021"/>
     <meta name="keywords" content="CineHub"/>
+    
+    <!-- code qui selectionne le fichier css pour le theme -->
     <?php
     if(isset($_POST["theme"])){
         echo "<link rel=\"stylesheet\" href=\"" . $_POST["theme"] . ".css\"/>";
@@ -66,9 +70,10 @@
         echo "<link rel=\"stylesheet\" href=\"" . $_COOKIE["theme"] . ".css\"/>";
     }
     else {
-        echo "<link rel=\"stylesheet\" href=\"dark.css\"/>";
+        echo "<link rel=\"stylesheet\" href=\"dark.css\"/>"; // theme par defaut
     }
     ?>
+
     <link rel="icon" href="ressources/logo/logo.png"/>
 </head>
 <body>
@@ -79,13 +84,17 @@
                 <img src="ressources/logo/logo.png" alt="logo"/>
                 <p>CineHub</p>
             </a>
+
+            <!-- code qui gere le bouton pour le theme -->
             <?php
             echo "<form class=\"theme\" method=\"post\">\n";
             echo "\t\t\t\t<input type=\"hidden\" name=\"theme\" value=\"$txt\" />\n";
             echo "\t\t\t\t<input type=\"submit\" value=\" \" style=\"background-image: url(ressources/images/$img.png);\" />\n";
             echo "\t\t\t</form>\n";
             ?>
+
             <ul>
+                <!-- code qui gere l'affichage de la navbar -->
                 <?php
                 if($current==0){
                     if(isset($_GET["from"]) && !empty($_GET["from"])){
