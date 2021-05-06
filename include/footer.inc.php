@@ -3,7 +3,7 @@
         <p><a class="credits" href="credits.php">Crédits</a></p>
         <p>Version du 29/04/2021</p>
 <?php
-if($current == 2){
+if($current == 2){ //si dans la page recherche, affiche le bouton up uniquement s'il y a une recherche
     if(isset($_GET["search"]) && !empty($_GET["search"])){
         echo "\t\t<a class=\"up button\" href=\"#header\">UP</a>\n";
     }

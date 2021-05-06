@@ -1,7 +1,7 @@
 <?php
 $current = 0;
 include 'include/functions.inc.php';
-if(isset($_GET["id"]) && !empty($_GET["id"]) && isset($_GET["type"]) && ($_GET["type"] == "movie" || $_GET["type"] == "tv")){
+if(isset($_GET["id"]) && !empty($_GET["id"]) && isset($_GET["type"]) && ($_GET["type"] == "movie" || $_GET["type"] == "tv")){ //verif si les information get sont valides
     $id = $_GET["id"];
     $type = $_GET["type"];
     $infos = getInfos($id, array("title", "poster", "rating", "overview", "backdrop", "origin", "directors", "time", "actors", "genres", "date", "producers", "site"), $type);

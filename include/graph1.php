@@ -1,4 +1,5 @@
 <?php
+//graphique top 10 films
 include_once '../ressources/jpgraph/jpgraph.php';
 include_once '../ressources/jpgraph/jpgraph_bar.php';
 include_once '../include/functions.inc.php';

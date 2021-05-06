@@ -96,12 +96,12 @@
             <ul>
                 <!-- code qui gere l'affichage de la navbar -->
                 <?php
-                if($current==0){
+                if($current==0){ //si page voir.php
                     if(isset($_GET["from"]) && !empty($_GET["from"])){
-                        if($_GET["from"] == "stats"){
+                        if($_GET["from"] == "stats"){ //si viens de stats, renvoie vers stats
                             echo "<li><a href=\"stats.php\">Retour</a></li>\n";
                         }
-                        else if($_GET["from"] == "search"){
+                        else if($_GET["from"] == "search"){ //si viens de recherche alors renvoie vers recherche
                             if(isset($_GET["query"]) && !empty($_GET["query"])){
                                 echo "<li><a href=\"rechercher.php?search=", $_GET["query"], "#more\">Retour</a></li>\n";
                             }
@@ -110,10 +110,10 @@
                             }
                         }
                     }
-                    else{
+                    else{ //par defaut
                         echo "<li><a href=\"rechercher.php\">Retour</a></li>\n";
                     }
-
+                    //definit les cookies de dernier film/serie consultée
                     if(isset($_GET["type"]) && isset($_GET["id"]) && !empty($_GET["id"]) && ($_GET["type"] == "tv" || $_GET["type"] == "movie")){
                         if($_GET["type"] == "movie"){
                             setcookie("last_movie", $_GET["id"].";".date("d/m/Y").";".date("H:i"), time()+60*60*24*365);

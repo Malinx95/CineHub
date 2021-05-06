@@ -1,12 +1,12 @@
 <?php
-define("KEY", "a22fd943c9bbecd346f31c75d2bd3969");
+define("KEY", "a22fd943c9bbecd346f31c75d2bd3969"); //key api tmdb
 
-function nasa() { //retourne img
+function nasa() { //retourne video/image nasa
     $url = "https://api.nasa.gov/planetary/apod?api_key=5aX68ZvOKjY5HvFA4IQbZ6QVnkcUOvhQMc8bEfbs&date=";//.date('Y-m-d');
     $json = file_get_contents($url);
     $obj = json_decode($json);
     $url = $obj->{'url'};
-    if(strpos($url, "youtube") != false){
+    if(strpos($url, "youtube") != false){ //gestion image ou video
         return "<embed class=\"nasa\" type=\"video/webm\" src=\"$url\"/>\n";
     }
     else{
@@ -18,6 +18,7 @@ function geo() { //retourne geolocalisation
     $url = "http://www.geoplugin.net/xml.gp?ip=".$_SERVER['REMOTE_ADDR'];
     $xml = simplexml_load_file($url);
     $out = "";
+    //affiche que les donees disponibles
     if(!empty($xml->geoplugin_city)){
         $out = $out."Ville : ".$xml->geoplugin_city."\t";
     }
@@ -30,7 +31,7 @@ function geo() { //retourne geolocalisation
     return $out;
 }
 
-function search($json, $query, $type, $expand=false){
+function search($json, $query, $type, $expand=false){ //resultats de la recherche
     $out = "\t\t\t<fieldset>\n";
     if($type == "movie"){
         $out .= "\t\t\t\t<legend>Films</legend>\n";
@@ -44,8 +45,8 @@ function search($json, $query, $type, $expand=false){
     else{
         $out .= "\t\t\t\t<div class=\"scroll\">\n";
     }
-    foreach ($json as $result) {
-        if(empty($result["poster_path"])){
+    foreach ($json as $result) { //parcours de chaque resultat
+        if(empty($result["poster_path"])){ //si pas de poster alors on ne l'affiche pas
             continue;
         }
         if($type == "movie"){
@@ -56,7 +57,7 @@ function search($json, $query, $type, $expand=false){
             else{
                 $date = $result["release_date"];
                 $date = explode("-", $date);
-                $date = $date[2] . "/" . $date[1] . "/" . $date[0];
+                $date = $date[2] . "/" . $date[1] . "/" . $date[0]; //format fr
             }
         }
         else{
@@ -91,7 +92,8 @@ function search($json, $query, $type, $expand=false){
     return $out;
 }
 
-function search_results($query){
+function search_results($query){ //affichage de la recherche
+    //gestion de characteres invalides
     $query = str_replace("&", "%26", $query);
     $query = str_replace("+", "%2B", $query);
     $query = str_replace(" ", "+", $query);
@@ -170,20 +172,20 @@ function hits(){
     }
 }
 
-function getJSON($url){
+function getJSON($url){ //recupere l'objet json
     $json = file_get_contents($url);
     return json_decode($json, true);
 }
 
-function getInfos($id, $infos, $type="movie"){
+function getInfos($id, $infos, $type="movie"){ //recupere les infos d'un film ou d'une serie
     $out = array();
     $details = getJSON("https://api.themoviedb.org/3/$type/$id?api_key=" . KEY . "&language=fr");
-    if(in_array("directors", $infos) || in_array("actors", $infos)){
+    if(in_array("directors", $infos) || in_array("actors", $infos)){ //fait appel a l'api seulement si necessaire
         $credits = getJSON("https://api.themoviedb.org/3/$type/$id/credits?api_key=" . KEY . "&language=fr");
     }
-    foreach($infos as $info){
+    foreach($infos as $info){ //parcours des infos demandes
         switch ($info) {
-            case "backdrop":
+            case "backdrop": //image de fond
                 $backdrop = $details["backdrop_path"];
                 if (!empty($backdrop)) {
                     array_push($out, "https://image.tmdb.org/t/p/original$backdrop");
@@ -191,7 +193,7 @@ function getInfos($id, $infos, $type="movie"){
                     array_push($out, "ressources/images/no-image.png");
                 }
                 break;
-            case "title":
+            case "title": //titre
                 if ($type == "movie") {
                     $title = $details["title"];
                 } else {
@@ -203,7 +205,7 @@ function getInfos($id, $infos, $type="movie"){
                 }
                 array_push($out, $title);
                 break;
-            case "poster":
+            case "poster": //poster
                 $poster = $details["poster_path"];
                 if (!empty($poster)) {
                     array_push($out, "https://image.tmdb.org/t/p/original$poster");
@@ -211,7 +213,7 @@ function getInfos($id, $infos, $type="movie"){
                     array_push($out, "ressources/images/no-image.png");
                 }
                 break;
-            case "overview":
+            case "overview": //resume
                 $overview = $details["overview"];
                 if (empty($overview)) {
                     array_push($out, "Synopsys indisponible");
@@ -219,7 +221,7 @@ function getInfos($id, $infos, $type="movie"){
                 }
                 array_push($out, $overview);
                 break;
-            case "rating":
+            case "rating": //note
                 $average = $details["vote_average"];
                 $count = $details["vote_count"];
                 if (empty($average) || empty($count)) {
@@ -228,7 +230,7 @@ function getInfos($id, $infos, $type="movie"){
                 }
                 array_push($out, $average . "/10 (" . $count . " votes)");
                 break;
-            case "origin":
+            case "origin": //langue d'origine
                 $origin = $details["original_language"];
                 if (empty($origin)) {
                     array_push($out, "Origine indisponible");
@@ -236,7 +238,7 @@ function getInfos($id, $infos, $type="movie"){
                 }
                 array_push($out, $origin);
                 break;
-            case "directors":
+            case "directors": //realisateurs ou createurs
                 if($type == "movie"){
                     if (empty($credits["crew"])) {
                         array_push($out, "\t\t\t\t\t<li>\n\t\t\t\t\t\t<p>Réalisateurs indisponibles</p>\n\t\t\t\t\t</li>\n");
@@ -261,9 +263,8 @@ function getInfos($id, $infos, $type="movie"){
                     }
                     array_push($out, $str);
                 }
-
                 break;
-            case "time":
+            case "time": //duree
                 if ($type == "movie") {
                     $time = $details["runtime"];
                     if (empty($time)) {
@@ -286,7 +287,7 @@ function getInfos($id, $infos, $type="movie"){
                     array_push($out, substr($str, 0, strlen($str) - 2));
                 }
                 break;
-            case "actors":
+            case "actors": //acteurs
                 if (empty($credits["cast"])) {
                     array_push($out, "\t\t\t\t\t<li>\n\t\t\t\t\t\t<p>Acteurs indisponibles</p>\n\t\t\t\t\t</li>\n");
                     break;
@@ -300,7 +301,7 @@ function getInfos($id, $infos, $type="movie"){
                 }
                 array_push($out, $str);
                 break;
-            case "genres":
+            case "genres": //genres
                 if (empty($details["genres"])) {
                     array_push($out, "Genres indisponibles");
                     break;
@@ -311,7 +312,7 @@ function getInfos($id, $infos, $type="movie"){
                 }
                 array_push($out, substr($str, 0, strlen($str) - 2));
                 break;
-            case "date":
+            case "date": //date
                 if ($type == "movie") {
                     $date = $details["release_date"];
                 } else {
@@ -324,7 +325,7 @@ function getInfos($id, $infos, $type="movie"){
                 $date = explode("-", $date);
                 array_push($out, $date[2] . "/" . $date[1] . "/" . $date[0]);
                 break;
-            case "producers":
+            case "producers": //producteurs
                 if (empty($details["production_companies"])) {
                     array_push($out, "Producteurs indisponibles");
                     break;
@@ -335,7 +336,7 @@ function getInfos($id, $infos, $type="movie"){
                 }
                 array_push($out, substr($str, 0, strlen($str) - 2));
                 break;
-            case "site":
+            case "site": //page officielle
                 $homepage = $details["homepage"];
                 if (!empty($homepage)) {
                     array_push($out, "<a href=\"$homepage\">$homepage</a>");
@@ -348,13 +349,13 @@ function getInfos($id, $infos, $type="movie"){
     }
     for($i=0 ; $i<sizeof($out) ; $i++){
         if(strpos($out[$i], "http") == false){
-            $out[$i] = str_replace("&", "&amp;", $out[$i]);
+            $out[$i] = str_replace("&", "&amp;", $out[$i]); //validateur html
         }
     }
     return $out;
 }
 
-function getPerson($id){
+function getPerson($id){ //infos de personne (realisateur, createur, acteur, etc) qui s'affichent lorsqu'on passe la souris dessus
     $details = getJSON("https://api.themoviedb.org/3/person/$id?api_key=" . KEY . "&language=fr");
     $img = getJSON("https://api.themoviedb.org/3/person/$id/images?api_key=" . KEY)["profiles"];
     if(!empty($img)){
@@ -392,7 +393,7 @@ function getPerson($id){
         $out .= "\t\t\t\t\t\t\t\t<h4>Lieu de naissance</h4>\n";
         $out .= "\t\t\t\t\t\t\t\t<p>$place</p>\n";
     }
-    if(!empty($dead)){
+    if(!empty($dead)){ //affiche seulement si info dispo
         $out .= "\t\t\t\t\t\t\t\t<h4>Date de décès</h4>\n";
         $out .= "\t\t\t\t\t\t\t\t<p>$dead</p>\n";
     }
@@ -524,10 +525,9 @@ function svgGraph($fichier){
     return $str;
 }
 
-function last(){
+function last(){ //affiche le dernier film/derniere serie consultée
     $out = "";
-
-    if(isset($_COOKIE["last_movie"]) && !empty($_COOKIE["last_movie"])){
+    if(isset($_COOKIE["last_movie"]) && !empty($_COOKIE["last_movie"])){ //si cookie film non vide
         $last = explode(";", $_COOKIE["last_movie"]);
         $id = $last[0];
         $date = $last[1];
@@ -544,7 +544,7 @@ function last(){
         $out .= "\t\t\t</a>\n";
         $out .= "\t\t</div>\n";
     }
-    if(isset($_COOKIE["last_tv"]) && !empty($_COOKIE["last_tv"])){
+    if(isset($_COOKIE["last_tv"]) && !empty($_COOKIE["last_tv"])){ //si cookie serie non vide
         $last = explode(";", $_COOKIE["last_tv"]);
         $id = $last[0];
         $date = $last[1];
